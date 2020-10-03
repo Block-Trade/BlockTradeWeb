@@ -51,7 +51,15 @@ class Sidebar extends Component {
       <nav className='sidebar sidebar-offcanvas' id='sidebar'>
         <div className='text-center sidebar-brand-wrapper d-flex align-items-center'>
           <a className='sidebar-brand brand-logo' href='index.html'>
-            <img src={require('../../assets/images/logo.svg')} alt='logo' />
+            <img
+              src={require('../../assets/images/712160ae-335c-4b6d-90d6-4c818afb16b2.jpeg')}
+              alt='logo'
+              style={{
+                width: '100%',
+                height: '80%',
+                marginTop: '4rem',
+              }}
+            />
           </a>
           <a className='sidebar-brand brand-logo-mini pt-3' href='index.html'>
             <img
@@ -60,7 +68,7 @@ class Sidebar extends Component {
             />
           </a>
         </div>
-        <ul className='nav'>
+        <ul className='nav' style={{ marginTop: '100px' }}>
           <li className='nav-item nav-profile not-navigation-link'>
             <div className='nav-link'>
               <Dropdown>
@@ -126,7 +134,7 @@ class Sidebar extends Component {
                 </Dropdown.Menu>
               </Dropdown>
               <button className='btn btn-success btn-block'>
-                New Project <i className='mdi mdi-plus'></i>
+                New Trade <i className='mdi mdi-plus'></i>
               </button>
             </div>
           </li>
@@ -138,6 +146,36 @@ class Sidebar extends Component {
             <Link className='nav-link' to='/dashboard'>
               <i className='mdi mdi-television menu-icon'></i>
               <span className='menu-title'>Dashboard</span>
+            </Link>
+          </li>
+          <li
+            className={
+              this.isPathActive('/my-trade') ? 'nav-item active' : 'nav-item'
+            }
+          >
+            <Link className='nav-link' to='/dashboard'>
+              <i className='mdi mdi-television menu-icon'></i>
+              <span className='menu-title'>My Trade</span>
+            </Link>
+          </li>
+          <li
+            className={
+              this.isPathActive('/my-wallet') ? 'nav-item active' : 'nav-item'
+            }
+          >
+            <Link className='nav-link' to='/dashboard'>
+              <i className='mdi mdi-television menu-icon'></i>
+              <span className='menu-title'>My Wallet</span>
+            </Link>
+          </li>
+          <li
+            className={
+              this.isPathActive('/settings') ? 'nav-item active' : 'nav-item'
+            }
+          >
+            <Link className='nav-link' to='/dashboard'>
+              <i className='mdi mdi-television menu-icon'></i>
+              <span className='menu-title'>Settings</span>
             </Link>
           </li>
           <li
