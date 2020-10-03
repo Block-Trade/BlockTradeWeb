@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Collapse } from 'react-bootstrap';
 import { Dropdown } from 'react-bootstrap';
+import { Icon, InlineIcon } from '@iconify/react';
+import handshakeIcon from '@iconify/icons-mdi/handshake';
+import walletIcon from '@iconify/icons-entypo/wallet';
+import baselineDashboard from '@iconify/icons-ic/baseline-dashboard';
+import settingsSolid from '@iconify/icons-clarity/settings-solid';
 
 class Sidebar extends Component {
   state = {};
@@ -144,8 +149,15 @@ class Sidebar extends Component {
             }
           >
             <Link className='nav-link' to='/dashboard'>
-              <i className='mdi mdi-television menu-icon'></i>
-              <span className='menu-title'>Dashboard</span>
+              <Icon
+                icon={baselineDashboard}
+                color='#979797'
+                width='1.5rem'
+                height='1.5rem'
+              />
+              <span className='menu-title'>
+                &nbsp;&nbsp;&nbsp;&nbsp;Dashboard
+              </span>
             </Link>
           </li>
           <li
@@ -153,9 +165,16 @@ class Sidebar extends Component {
               this.isPathActive('/my-trade') ? 'nav-item active' : 'nav-item'
             }
           >
-            <Link className='nav-link' to='/dashboard'>
-              <i className='mdi mdi-television menu-icon'></i>
-              <span className='menu-title'>My Trade</span>
+            <Link className='nav-link' to='/my-trade'>
+              <Icon
+                icon={handshakeIcon}
+                width='1.5rem'
+                height='1.5rem'
+                color='#979797'
+              />
+              <span className='menu-title'>
+                &nbsp;&nbsp;&nbsp;&nbsp;My Trade
+              </span>
             </Link>
           </li>
           <li
@@ -163,9 +182,16 @@ class Sidebar extends Component {
               this.isPathActive('/my-wallet') ? 'nav-item active' : 'nav-item'
             }
           >
-            <Link className='nav-link' to='/dashboard'>
-              <i className='mdi mdi-television menu-icon'></i>
-              <span className='menu-title'>My Wallet</span>
+            <Link className='nav-link' to='/my-wallet'>
+              <Icon
+                icon={walletIcon}
+                color='#979797'
+                width='1.5rem'
+                height='1.5rem'
+              />
+              <span className='menu-title'>
+                &nbsp;&nbsp;&nbsp;&nbsp;My Wallet
+              </span>
             </Link>
           </li>
           <li
@@ -173,9 +199,16 @@ class Sidebar extends Component {
               this.isPathActive('/settings') ? 'nav-item active' : 'nav-item'
             }
           >
-            <Link className='nav-link' to='/dashboard'>
-              <i className='mdi mdi-television menu-icon'></i>
-              <span className='menu-title'>Settings</span>
+            <Link className='nav-link' to='/settings'>
+              <Icon
+                icon={settingsSolid}
+                color='#979797'
+                width='1.5rem'
+                height='1.5rem'
+              />
+              <span className='menu-title'>
+                &nbsp;&nbsp;&nbsp;&nbsp;Settings
+              </span>
             </Link>
           </li>
           <li

@@ -5,6 +5,25 @@ class Navbar extends Component {
   toggleOffcanvas() {
     document.querySelector('.sidebar-offcanvas').classList.toggle('active');
   }
+  renderSwitch(param) {
+    switch (param) {
+      case 'dashboard':
+        return 'Dashboard';
+      case 'my-wallet':
+        return 'MyWallet';
+      case 'my-trade':
+        return 'MyTrade';
+      case 'settings':
+        return 'Settings';
+      default:
+        return 'Dashboard';
+    }
+  }
+  returnParam(url) {
+    var arr = url.split('/');
+    console.log(arr[4]);
+    return arr[4];
+  }
   render() {
     return (
       <nav className='navbar col-lg-12 col-12 p-lg-0 fixed-top d-flex flex-row'>
@@ -26,37 +45,11 @@ class Navbar extends Component {
           >
             <i className='mdi mdi-menu'></i>
           </button>
-          <ul className='navbar-nav navbar-nav-left header-links'>
-            <li className='nav-item d-none d-md-flex'>
-              <a
-                href='!#'
-                onClick={(evt) => evt.preventDefault()}
-                className='nav-link'
-              >
-                Schedule <span className='badge badge-primary ml-1'>New</span>
-              </a>
-            </li>
-            <li className='nav-item active d-none d-xl-flex'>
-              <a
-                href='!#'
-                onClick={(evt) => evt.preventDefault()}
-                className='nav-link'
-              >
-                <i className='mdi mdi-elevation-rise'></i>Reports
-              </a>
-            </li>
-            <li className='nav-item d-none d-lg-flex'>
-              <a
-                href='!#'
-                onClick={(evt) => evt.preventDefault()}
-                className='nav-link'
-              >
-                <i className='mdi mdi-bookmark-plus-outline'></i>Score
-              </a>
-            </li>
-          </ul>
-          <ul className='navbar-nav navbar-nav-right ml-lg-auto'>
-            <li className='nav-item  nav-profile border-0 pl-4'>
+          <h3 style={{ marginLeft: 'auto' }}>
+            {this.renderSwitch(this.returnParam(window.location.href))}
+          </h3>
+          <ul className='navbar-nav navbar-nav-right ml-lg-auto '>
+            <li className='nav-item  nav-profile border-0 pl-4 d-none d-sm-block'>
               <Dropdown alignRight>
                 <Dropdown.Toggle className='nav-link count-indicator p-0 toggle-arrow-hide bg-transparent'>
                   <i className='mdi mdi-bell-outline'></i>
@@ -135,7 +128,7 @@ class Navbar extends Component {
                 </Dropdown.Menu>
               </Dropdown>
             </li>
-            <li className='nav-item  nav-profile border-0'>
+            <li className='nav-item  nav-profile border-0 d-none d-sm-block'>
               <Dropdown alignRight>
                 <Dropdown.Toggle className='nav-link count-indicator bg-transparent'>
                   <span className='profile-text'>Richard V.Welsh !</span>
