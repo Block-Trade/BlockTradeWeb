@@ -13,13 +13,10 @@ export const signup = (formData) => async dispatch => {
 
         dispatch({
             type: 'SIGNUP_SUCCESS',
-            payload: res.data
+            payload: res.data.message
         });
     } catch (err) {
-        dispatch({
-            type: 'SIGNUP_ERROR',
-            payload:err.response.data.msg
-        });
+        console.log(err);
     }
 }
 

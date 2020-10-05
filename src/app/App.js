@@ -5,6 +5,9 @@ import AppRoutes from './AppRoutes';
 import Navbar from './shared/Navbar';
 import Sidebar from './shared/Sidebar';
 import Footer from './shared/Footer';
+import configureStore from './store/configureStore';
+import { Provider } from 'react-redux';
+const store = configureStore();
 class App extends Component {
   state = {};
   componentDidMount() {
@@ -15,6 +18,7 @@ class App extends Component {
     let sidebarComponent = !this.state.isFullPageLayout ? <Sidebar /> : '';
     let footerComponent = !this.state.isFullPageLayout ? <Footer /> : '';
     return (
+      <Provider store={store}>
       <div className='container-scroller'>
         {navbarComponent}
         <div className='container-fluid page-body-wrapper'>
@@ -27,6 +31,7 @@ class App extends Component {
           </div>
         </div>
       </div>
+      </Provider>
     );
   }
 
