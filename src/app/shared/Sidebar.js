@@ -7,9 +7,34 @@ import handshakeIcon from '@iconify/icons-mdi/handshake';
 import walletIcon from '@iconify/icons-entypo/wallet';
 import baselineDashboard from '@iconify/icons-ic/baseline-dashboard';
 import settingsSolid from '@iconify/icons-clarity/settings-solid';
+import { Modal, Button } from 'react-bootstrap';
+
+const initialState = {
+  isOpen: false,
+  value: 'defaultvalue',
+};
 
 class Sidebar extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = initialState;
+  }
+
+  toggleModal = () => {
+    this.setState({
+      isOpen: !this.state.isOpen,
+    });
+  };
+
+  toggleModalClose = () => {
+    this.setState(initialState);
+  };
+
+  handleChange = (e) => {
+    this.setState({
+      value: e.target.value,
+    });
+  };
 
   toggleMenuState(menuState) {
     if (this.state[menuState]) {
@@ -138,9 +163,85 @@ class Sidebar extends Component {
                   </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-              <button className='btn btn-success btn-block'>
+              <button
+                className='btn btn-success btn-block'
+                onClick={this.toggleModal}
+              >
                 New Trade <i className='mdi mdi-plus'></i>
               </button>
+              <Modal
+                show={this.state.isOpen}
+                onClose={this.toggleModalClose}
+                aria-labelledby='contained-modal-title-vcenter'
+                centered
+              >
+                <Modal.Header
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Modal.Title id='contained-modal-title-vcenter'>
+                    Define your role !
+                  </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <img
+                    src={require('../../assets/images/importer.png')}
+                    alt='importer'
+                    style={{
+                      maxHeight: '12rem',
+                      maxWidth: '12rem',
+                      marginRight: '2rem',
+                      marginLeft: '0.7rem',
+                      cursor: 'pointer',
+                    }}
+                  />
+                  <img
+                    src={require('../../assets/images/exporter.png')}
+                    alt='exporter'
+                    style={{
+                      maxHeight: '12rem',
+                      maxWidth: '12rem',
+                      marginLeft: '2rem',
+                      cursor: 'pointer',
+                    }}
+                  />
+                  <div style={{ clear: 'both' }}>
+                    <h3
+                      style={{
+                        float: 'left',
+                        paddingLeft: '2rem',
+                        marginLeft: '1.5rem',
+                      }}
+                    >
+                      Importer
+                    </h3>
+                    <h3 style={{ float: 'right', paddingRight: '2.8rem' }}>
+                      Exporter
+                    </h3>
+                  </div>
+                </Modal.Body>
+                <Modal.Footer
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Button
+                    onClick={this.toggleModalClose}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    close
+                  </Button>
+                </Modal.Footer>
+              </Modal>
             </div>
           </li>
           <li
