@@ -16,7 +16,10 @@ export const signup = (formData) => async dispatch => {
             payload: res.data.message
         });
     } catch (err) {
-        console.log(err);
+        dispatch({
+            type: 'SIGNUP_ERROR',
+            payload: err.response.data.msg
+        });
     }
 }
 

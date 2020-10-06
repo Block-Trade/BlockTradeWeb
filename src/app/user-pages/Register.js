@@ -11,7 +11,7 @@ const Register = ({auth: {msg, error}, signup, clearError, clearMsg}) => {
     const [password, setPass] = useState('');
     const [show,setShow] = useState(false);
 
-    const onSubmit = (e) => {
+    const onSubmit =async  (e) => {
         e.preventDefault();
         if(name==''||username==''||password==''||email==''){
           alert("Please fill all the fields");
@@ -22,10 +22,11 @@ const Register = ({auth: {msg, error}, signup, clearError, clearMsg}) => {
             email,
             password
         }
-        signup(formData);
-        if(error || msg){
-          setShow(true);
+        await signup(formData);
+        if(error){
+          
         }
+        //setShow(true);
         //clearError();
         //clearMsg();
         //setTimeout(setShow(false),3000);
@@ -34,7 +35,6 @@ const Register = ({auth: {msg, error}, signup, clearError, clearMsg}) => {
     }
     return (
       <div>
-      
         <div className="d-flex align-items-center auth px-0">
           <div className="row w-100 mx-0">
             <div className="col-lg-4 mx-auto">
