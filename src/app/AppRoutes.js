@@ -2,6 +2,8 @@ import React, { Component, Suspense, lazy } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Spinner from '../app/shared/Spinner';
+import PrivateRouter from './routers/PrivateRouter';
+import PublicRouter from './routers/PublicRouter';
 
 const Dashboard = lazy(() => import('./dashboard/Dashboard'));
 
@@ -28,38 +30,37 @@ const BlankPage = lazy(() => import('./user-pages/BlankPage'));
 const Setting = lazy(() => import('./components/settings/settings'));
 const MyTrade = lazy(() => import('./components/mytrade/MyTrade'));
 const MyWallet = lazy(() => import('./components/mywallet/MyWallet'));
-
+const ActivateForm = lazy(() => import('./components/auth/Activate'));
 class AppRoutes extends Component {
   render() {
     return (
       <Suspense fallback={<Spinner />}>
         <Switch>
-          <Route exact path='/dashboard' component={Dashboard} />
-          <Route exact path='/settings' component={Setting} />
-          <Route exact path='/my-wallet' component={MyWallet} />
-          <Route exact path='/my-trade' component={MyTrade} />
-          <Route path='/basic-ui/buttons' component={Buttons} />
-          <Route path='/basic-ui/dropdowns' component={Dropdowns} />
-          <Route path='/basic-ui/typography' component={Typography} />
+          <PrivateRouter exact path='/dashboard' component={Dashboard} />
+          <PrivateRouter exact path='/settings' component={Setting} />
+          <PrivateRouter exact path='/my-wallet' component={MyWallet} />
+          <PrivateRouter exact path='/my-trade' component={MyTrade} />
+          <PublicRouter path='/basic-ui/buttons' component={Buttons} />
+          <PublicRouter path='/basic-ui/dropdowns' component={Dropdowns} />
+          <PublicRouter path='/basic-ui/typography' component={Typography} />
 
-          <Route
+          <PublicRouter
             path='/form-Elements/basic-elements'
             component={BasicElements}
           />
 
-          <Route path='/tables/basic-table' component={BasicTable} />
+          <PublicRouter path='/tables/basic-table' component={BasicTable} />
+          <PublicRouter path='/icons/font-awesome' component={FontAwesome} />
+          <PublicRouter path='/charts/chart-js' component={ChartJs} />
 
-          <Route path='/icons/font-awesome' component={FontAwesome} />
+          <PublicRouter path='/user-pages/login-1' component={Login} />
+          <PublicRouter path='/user-pages/register-1' component={Register1} />
+          <PublicRouter path='/activate/:token' component={ActivateForm} />
 
-          <Route path='/charts/chart-js' component={ChartJs} />
+          <PublicRouter path='/user-pages/error-404' component={Error404} />
+          <PublicRouter path='/user-pages/error-500' component={Error500} />
 
-          <Route path='/user-pages/login-1' component={Login} />
-          <Route path='/user-pages/register-1' component={Register1} />
-
-          <Route path='/user-pages/error-404' component={Error404} />
-          <Route path='/user-pages/error-500' component={Error500} />
-
-          <Route path='/user-pages/blank-page' component={BlankPage} />
+          <PublicRouter path='/user-pages/blank-page' component={BlankPage} />
 
           <Redirect to='/dashboard' />
         </Switch>
