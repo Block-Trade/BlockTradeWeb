@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Route, BrowserRouter as Router } from 'react-router-dom';
 import './App.scss';
 import AppRoutes from './AppRoutes';
 import Navbar from './shared/Navbar';
@@ -18,37 +18,38 @@ class App extends Component {
     let sidebarComponent = !this.state.isFullPageLayout ? <Sidebar /> : '';
     let footerComponent = !this.state.isFullPageLayout ? <Footer /> : '';
     return (
-      <Provider store={store}>
-      <div className='container-scroller'>
-        {navbarComponent}
-        <div className='container-fluid page-body-wrapper'>
-          {sidebarComponent}
-          <div className='main-panel'>
-            <div className='content-wrapper'>
-              <AppRoutes />
+      <div>
+        <Provider store={store}>
+          <div className='container-scroller'>
+            {navbarComponent}
+            <div className='container-fluid page-body-wrapper'>
+              {sidebarComponent}
+              <div className='main-panel'>
+                <div className='content-wrapper'>
+                  <AppRoutes />
+                </div>
+                {footerComponent}
+              </div>
             </div>
-            {footerComponent}
           </div>
-        </div>
+        </Provider>
       </div>
-      </Provider>
     );
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.location !== prevProps.location) {
-      this.onRouteChanged();
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.location !== prevProps.location) {
+  //     this.onRouteChanged();
+  //   }
+  // }
 
   onRouteChanged() {
     console.log('ROUTE CHANGED');
     window.scrollTo(0, 0);
     const fullPageLayoutRoutes = [
       '/user-pages/login-1',
-      '/user-pages/login-2',
       '/user-pages/register-1',
-      '/user-pages/register-2',
+      '/activate',
       '/user-pages/lockscreen',
       '/error-pages/error-404',
       '/error-pages/error-500',
@@ -56,6 +57,14 @@ class App extends Component {
     ];
     for (let i = 0; i < fullPageLayoutRoutes.length; i++) {
       if (this.props.location.pathname === fullPageLayoutRoutes[i]) {
+        this.setState({
+          isFullPageLayout: true,
+        });
+        document
+          .querySelector('.page-body-wrapper')
+          .classList.add('full-page-wrapper');
+        break;
+      } else if (this.props.location.pathname.split('/')[1] === 'activate') {
         this.setState({
           isFullPageLayout: true,
         });
