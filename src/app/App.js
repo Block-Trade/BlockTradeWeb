@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect,useState } from 'react';
 import { withRouter, Route, BrowserRouter as Router } from 'react-router-dom';
 import './App.scss';
 import AppRoutes from './AppRoutes';
@@ -7,43 +7,24 @@ import Sidebar from './shared/Sidebar';
 import Footer from './shared/Footer';
 import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
+
+
 const store = configureStore();
-class App extends Component {
-  state = {};
-  componentDidMount() {
-    this.onRouteChanged();
-  }
-  render() {
-    let navbarComponent = !this.state.isFullPageLayout ? <Navbar /> : '';
-    let sidebarComponent = !this.state.isFullPageLayout ? <Sidebar /> : '';
-    let footerComponent = !this.state.isFullPageLayout ? <Footer /> : '';
-    return (
-      <div>
-        <Provider store={store}>
-          <div className='container-scroller'>
-            {navbarComponent}
-            <div className='container-fluid page-body-wrapper'>
-              {sidebarComponent}
-              <div className='main-panel'>
-                <div className='content-wrapper'>
-                  <AppRoutes />
-                </div>
-                {footerComponent}
-              </div>
-            </div>
-          </div>
-        </Provider>
-      </div>
-    );
-  }
 
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.location !== prevProps.location) {
-  //     this.onRouteChanged();
-  //   }
-  // }
+const App = (props) => {
+  const [state,setState] = useState({});
 
-  onRouteChanged() {
+  let navbarComponent;
+  let sidebarComponent;
+  let footerComponent;
+  useEffect(()=>{
+    onRouteChanged();
+    navbarComponent = !state.isFullPageLayout ? <Navbar /> : '';
+    sidebarComponent = !state.isFullPageLayout ? <Sidebar /> : '';
+    footerComponent = !state.isFullPageLayout ? <Footer /> : '';
+  },[]);
+  
+  const onRouteChanged = () => {
     console.log('ROUTE CHANGED');
     window.scrollTo(0, 0);
     const fullPageLayoutRoutes = [
@@ -56,16 +37,16 @@ class App extends Component {
       '/general-pages/landing-page',
     ];
     for (let i = 0; i < fullPageLayoutRoutes.length; i++) {
-      if (this.props.location.pathname === fullPageLayoutRoutes[i]) {
-        this.setState({
+      if (props.location.pathname === fullPageLayoutRoutes[i]) {
+        setState({
           isFullPageLayout: true,
         });
         document
           .querySelector('.page-body-wrapper')
           .classList.add('full-page-wrapper');
         break;
-      } else if (this.props.location.pathname.split('/')[1] === 'activate') {
-        this.setState({
+      } else if (props.location.pathname.split('/')[1] === 'activate') {
+        setState({
           isFullPageLayout: true,
         });
         document
@@ -73,7 +54,7 @@ class App extends Component {
           .classList.add('full-page-wrapper');
         break;
       } else {
-        this.setState({
+        setState({
           isFullPageLayout: false,
         });
         document
@@ -81,7 +62,35 @@ class App extends Component {
           .classList.remove('full-page-wrapper');
       }
     }
+    
+    
   }
+  /*
+  componentDidUpdate(prevProps) {
+     if (this.props.location.pathname !== prevProps.location.pathname) {
+       this.onRouteChanged();
+    }
+  }
+*/
+return (
+  <div id="block-trade">
+    <Provider store={store}>
+      <div className='container-scroller'>
+        {navbarComponent}
+        <div className='container-fluid page-body-wrapper'>
+          {sidebarComponent}
+          <div className='main-panel'>
+            <div className='content-wrapper'>
+              <AppRoutes />
+            </div>
+            {footerComponent}
+          </div>
+        </div>
+      </div>
+    </Provider>
+  </div>
+);
+  
 }
 
 export default withRouter(App);

@@ -31,8 +31,7 @@ const Setting = lazy(() => import('./components/settings/settings'));
 const MyTrade = lazy(() => import('./components/mytrade/MyTrade'));
 const MyWallet = lazy(() => import('./components/mywallet/MyWallet'));
 const ActivateForm = lazy(() => import('./components/auth/Activate'));
-class AppRoutes extends Component {
-  render() {
+const AppRoutes = () => {
     return (
       <Suspense fallback={<Spinner />}>
         <Switch>
@@ -66,7 +65,7 @@ class AppRoutes extends Component {
         </Switch>
       </Suspense>
     );
-  }
+  
 }
 
 export default AppRoutes;

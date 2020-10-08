@@ -3,26 +3,29 @@ import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { loadUser, login, clearError, clearMsg } from '../actions/auth';
-const Login = ({ auth, history, loadUser, login, clearError, clearMsg }) => {
+
+const Login = ({ auth: { msg, error }, history, loadUser, login, clearError, clearMsg }) => {
   const [username, setUsername] = useState('');
   const [password, setPass] = useState('');
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (username === '' || password === '') {
       alert('fill all the fields');
     } else {
       const formData = { username, password };
-      login(formData);
-      if (auth.error === '') {
+      await login(formData);
+      
+      /*if (auth.error === '') {
         loadUser();
         history.push('/dashboard');
-      }
+      }*/
+      //await loadUser();
     }
   };
   return (
     <div>
-      {auth.error && <p>{auth.error}</p>}
+      
       <div className='d-flex align-items-center auth px-0'>
         <div className='row w-100 mx-0'>
           <div className='col-lg-4 mx-auto'>

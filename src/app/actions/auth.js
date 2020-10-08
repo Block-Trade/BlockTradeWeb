@@ -23,7 +23,7 @@ export const signup = (formData) => async (dispatch) => {
   }
 };
 
-export const activateUser = (token) => async (dispatch) => {
+export const activateUser = async (token) => async (dispatch) => {
   const headers = {
     'Content-Type': 'application/json',
   };
@@ -49,7 +49,7 @@ export const activateUser = (token) => async (dispatch) => {
   }
 };
 
-export const loadUser = async () => async (dispatch) => {
+export const loadUser = () => async (dispatch) => {
   // @todo - load token into global header
   if (localStorage.token) {
     setAuthToken(localStorage.token);
@@ -81,14 +81,11 @@ export const login = (formData) => async (dispatch) => {
     console.log(res);
     dispatch({
       type: 'LOGIN_SUCCESS',
-      payload: res.data,
+      payload: res.data
     });
+    await loadUser();
   } catch (err) {
-    // dispatch({
-    //   type: 'LOGIN_ERROR',
-    //   payload: err.response.data.msg,
-    // });
-    console.log('error');
+   
   }
 };
 
