@@ -1,4 +1,4 @@
-import React, { Component, useEffect,useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { withRouter, Route, BrowserRouter as Router } from 'react-router-dom';
 import './App.scss';
 import AppRoutes from './AppRoutes';
@@ -8,22 +8,21 @@ import Footer from './shared/Footer';
 import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
 
-
 const store = configureStore();
 
 const App = (props) => {
-  const [state,setState] = useState({});
+  const [state, setState] = useState({});
 
   let navbarComponent;
   let sidebarComponent;
   let footerComponent;
-  useEffect(()=>{
+  useEffect(() => {
     onRouteChanged();
     navbarComponent = !state.isFullPageLayout ? <Navbar /> : '';
     sidebarComponent = !state.isFullPageLayout ? <Sidebar /> : '';
     footerComponent = !state.isFullPageLayout ? <Footer /> : '';
-  },[]);
-  
+  }, []);
+
   const onRouteChanged = () => {
     console.log('ROUTE CHANGED');
     window.scrollTo(0, 0);
@@ -35,6 +34,7 @@ const App = (props) => {
       '/error-pages/error-404',
       '/error-pages/error-500',
       '/general-pages/landing-page',
+      '/user-pages/company-info',
     ];
     for (let i = 0; i < fullPageLayoutRoutes.length; i++) {
       if (props.location.pathname === fullPageLayoutRoutes[i]) {
@@ -62,9 +62,7 @@ const App = (props) => {
           .classList.remove('full-page-wrapper');
       }
     }
-    
-    
-  }
+  };
   /*
   componentDidUpdate(prevProps) {
      if (this.props.location.pathname !== prevProps.location.pathname) {
@@ -72,25 +70,24 @@ const App = (props) => {
     }
   }
 */
-return (
-  <div id="block-trade">
-    <Provider store={store}>
-      <div className='container-scroller'>
-        {navbarComponent}
-        <div className='container-fluid page-body-wrapper'>
-          {sidebarComponent}
-          <div className='main-panel'>
-            <div className='content-wrapper'>
-              <AppRoutes />
+  return (
+    <div id='block-trade'>
+      <Provider store={store}>
+        <div className='container-scroller'>
+          {navbarComponent}
+          <div className='container-fluid page-body-wrapper'>
+            {sidebarComponent}
+            <div className='main-panel'>
+              <div className='content-wrapper'>
+                <AppRoutes />
+              </div>
+              {footerComponent}
             </div>
-            {footerComponent}
           </div>
         </div>
-      </div>
-    </Provider>
-  </div>
-);
-  
-}
+      </Provider>
+    </div>
+  );
+};
 
 export default withRouter(App);

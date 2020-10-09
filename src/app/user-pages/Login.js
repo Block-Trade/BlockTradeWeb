@@ -4,7 +4,14 @@ import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { loadUser, login, clearError, clearMsg } from '../actions/auth';
 
-const Login = ({ auth: { msg, error }, history, loadUser, login, clearError, clearMsg }) => {
+const Login = ({
+  auth: { msg, error },
+  history,
+  loadUser,
+  login,
+  clearError,
+  clearMsg,
+}) => {
   const [username, setUsername] = useState('');
   const [password, setPass] = useState('');
 
@@ -15,7 +22,7 @@ const Login = ({ auth: { msg, error }, history, loadUser, login, clearError, cle
     } else {
       const formData = { username, password };
       await login(formData);
-      
+      history.push('/user-pages/company-info');
       /*if (auth.error === '') {
         loadUser();
         history.push('/dashboard');
@@ -25,7 +32,6 @@ const Login = ({ auth: { msg, error }, history, loadUser, login, clearError, cle
   };
   return (
     <div>
-      
       <div className='d-flex align-items-center auth px-0'>
         <div className='row w-100 mx-0'>
           <div className='col-lg-4 mx-auto'>

@@ -81,12 +81,28 @@ export const login = (formData) => async (dispatch) => {
     console.log(res);
     dispatch({
       type: 'LOGIN_SUCCESS',
-      payload: res.data
+      payload: res.data,
     });
     await loadUser();
-  } catch (err) {
-   
-  }
+  } catch (err) {}
+};
+
+export const companyInfo = (companyFormData) => async (dispatch) => {
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+
+  try {
+    const res = await axios.post('/companyInfo', companyFormData, {
+      headers: headers,
+    });
+
+    console.log(res);
+    dispatch({
+      type: 'COMPANY_INFO_LOADED',
+      payload: res.data,
+    });
+  } catch (err) {}
 };
 
 export const clearMsg = () => async (dispatch) => {
