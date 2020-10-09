@@ -21,13 +21,9 @@ const Login = ({
       alert('fill all the fields');
     } else {
       const formData = { username, password };
-      await login(formData);
-      history.push('/user-pages/company-info');
-      /*if (auth.error === '') {
-        loadUser();
-        history.push('/dashboard');
-      }*/
-      //await loadUser();
+      await login({ formData, loadUser });
+      // await loadUser();
+      // history.push('/dashboard');
     }
   };
   return (

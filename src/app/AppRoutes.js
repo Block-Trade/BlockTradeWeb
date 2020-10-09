@@ -31,7 +31,7 @@ const Setting = lazy(() => import('./components/settings/settings'));
 const MyTrade = lazy(() => import('./components/mytrade/MyTrade'));
 const MyWallet = lazy(() => import('./components/mywallet/MyWallet'));
 const ActivateForm = lazy(() => import('./components/auth/Activate'));
-const companyInfo = lazy(() => import('./user-pages/companyInfo'));
+const CompanyInfo = lazy(() => import('./user-pages/CompanyInfo'));
 const AppRoutes = () => {
   return (
     <Suspense fallback={<Spinner />}>
@@ -57,7 +57,7 @@ const AppRoutes = () => {
         <PublicRouter path='/user-pages/register-1' component={Register1} />
         <PrivateRouter
           path='/user-pages/company-info'
-          component={companyInfo}
+          component={CompanyInfo}
         />
         <PublicRouter path='/activate/:token' component={ActivateForm} />
 

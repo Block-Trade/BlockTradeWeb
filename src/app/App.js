@@ -7,7 +7,7 @@ import Sidebar from './shared/Sidebar';
 import Footer from './shared/Footer';
 import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
-
+import { loadUser } from './actions/auth';
 const store = configureStore();
 
 const App = (props) => {
@@ -17,6 +17,9 @@ const App = (props) => {
   let sidebarComponent;
   let footerComponent;
   useEffect(() => {
+    if (localStorage.token) {
+      loadUser();
+    }
     onRouteChanged();
     navbarComponent = !state.isFullPageLayout ? <Navbar /> : '';
     sidebarComponent = !state.isFullPageLayout ? <Sidebar /> : '';

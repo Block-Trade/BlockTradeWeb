@@ -52,11 +52,11 @@ export const activateUser = async (token) => async (dispatch) => {
 export const loadUser = () => async (dispatch) => {
   // @todo - load token into global header
   if (localStorage.token) {
-    setAuthToken(localStorage.token);
+    setAuthToken({ token: localStorage.token });
   }
   try {
     const res = await axios.get('/login');
-
+    console.log(res);
     dispatch({
       type: 'USER_LOADED',
       payload: res.data,
@@ -68,7 +68,7 @@ export const loadUser = () => async (dispatch) => {
   }
 };
 
-export const login = (formData) => async (dispatch) => {
+export const login = ({ formData, loadUser }) => async (dispatch) => {
   const headers = {
     'Content-Type': 'application/json',
   };
@@ -77,7 +77,6 @@ export const login = (formData) => async (dispatch) => {
     const res = await axios.post('/login', formData, {
       headers: headers,
     });
-
     console.log(res);
     dispatch({
       type: 'LOGIN_SUCCESS',
