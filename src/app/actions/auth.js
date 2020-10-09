@@ -51,16 +51,19 @@ export const activateUser = async (token) => async (dispatch) => {
 
 export const loadUser = () => async (dispatch) => {
   // @todo - load token into global header
+  console.log("Load user");
   if (localStorage.token) {
-    setAuthToken(localStorage.token);
+    console.log(localStorage.token);
+    setAuthToken({token:localStorage.token});
   }
   try {
     const res = await axios.get('/login');
-
+    console.log(res);
     dispatch({
       type: 'USER_LOADED',
       payload: res.data,
     });
+    
   } catch (err) {
     dispatch({
       type: 'AUTH_ERROR',
@@ -68,7 +71,7 @@ export const loadUser = () => async (dispatch) => {
   }
 };
 
-export const login = (formData) => async (dispatch) => {
+export const login = ({formData, loadUser}) => async (dispatch) => {
   const headers = {
     'Content-Type': 'application/json',
   };

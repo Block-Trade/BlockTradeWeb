@@ -7,11 +7,17 @@ import Sidebar from './shared/Sidebar';
 import Footer from './shared/Footer';
 import configureStore from './store/configureStore';
 import { Provider } from 'react-redux';
+import setAuthToken from './utils/setAuthToken';
 
 const store = configureStore();
 
+if(localStorage.token){
+  setAuthToken(localStorage.token);
+}
 const App = (props) => {
-  const [state, setState] = useState({});
+  const [state, setState] = useState({
+    isFullPageLayout: false
+  });
 
   let navbarComponent;
   let sidebarComponent;
@@ -21,7 +27,9 @@ const App = (props) => {
     navbarComponent = !state.isFullPageLayout ? <Navbar /> : '';
     sidebarComponent = !state.isFullPageLayout ? <Sidebar /> : '';
     footerComponent = !state.isFullPageLayout ? <Footer /> : '';
-  }, []);
+  }, [props.history.location.pathname]);
+
+  
 
   const onRouteChanged = () => {
     console.log('ROUTE CHANGED');
@@ -74,14 +82,14 @@ const App = (props) => {
     <div id='block-trade'>
       <Provider store={store}>
         <div className='container-scroller'>
-          {navbarComponent}
+          {!state.isFullPageLayout&& <Navbar />}
           <div className='container-fluid page-body-wrapper'>
-            {sidebarComponent}
+            {!state.isFullPageLayout&&<Sidebar />}
             <div className='main-panel'>
               <div className='content-wrapper'>
                 <AppRoutes />
               </div>
-              {footerComponent}
+              {!state.isFullPageLayout&& <Footer />}
             </div>
           </div>
         </div>
