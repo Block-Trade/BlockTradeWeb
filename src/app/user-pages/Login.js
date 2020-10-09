@@ -1,20 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { loadUser, login, clearError, clearMsg } from '../actions/auth';
 
 const Login = ({
-  auth: { msg, error },
+  auth: { msg, error, isAuthenticated },
   history,
-  loadUser,
   login,
+  loadUser,
   clearError,
   clearMsg,
 }) => {
   const [username, setUsername] = useState('');
   const [password, setPass] = useState('');
+  useEffect(() => {
+    if (isAuthenticated) {
+      history.push('/dashboard');
+    }
 
+    if (error === 'Invalid Credentials') {
+      clearError();
+    }
+    //eslint-disable-next-line
+  }, [error, isAuthenticated, history]);
+  useEffect(() => {
+    if (localStorage.token) {
+      loadUser();
+    }
+  }, []);
   const onSubmit = async (e) => {
     e.preventDefault();
     if (username === '' || password === '') {
@@ -22,8 +36,7 @@ const Login = ({
     } else {
       const formData = { username, password };
       await login({ formData, loadUser });
-      // await loadUser();
-      // history.push('/dashboard');
+      //history.push('/user-pages/company-info');
     }
   };
   return (
@@ -105,7 +118,7 @@ const mapStateToProps = (state) => ({
 });
 export default connect(mapStateToProps, {
   login,
-  loadUser,
   clearError,
   clearMsg,
+  loadUser,
 })(Login);

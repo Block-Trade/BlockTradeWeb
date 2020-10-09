@@ -51,7 +51,9 @@ export const activateUser = async (token) => async (dispatch) => {
 
 export const loadUser = () => async (dispatch) => {
   // @todo - load token into global header
+  console.log('Load user');
   if (localStorage.token) {
+    console.log(localStorage.token);
     setAuthToken({ token: localStorage.token });
   }
   try {
