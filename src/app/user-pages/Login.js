@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { loadUser, login, clearError, clearMsg } from '../actions/auth';
 
 const Login = ({
-  auth: { user,msg, error, isAuthenticated },
+  auth: { user, msg, error, isAuthenticated },
   history,
   login,
   loadUser,
@@ -15,13 +15,13 @@ const Login = ({
   const [username, setUsername] = useState('');
   const [password, setPass] = useState('');
   useEffect(() => {
-    if(isAuthenticated && user){
-      if(user){
-        if(user.companyName==''){
+    if (isAuthenticated && user) {
+      if (user) {
+        if (user.companyName == '') {
           history.push('/user-pages/company-info');
-        }else if(user.kycStatus == false){
+        } else if (user.kycStatus == false) {
           history.push('/kyc');
-        } else{
+        } else {
           history.push('/dashboard');
         }
       }
@@ -43,16 +43,15 @@ const Login = ({
     } else {
       const formData = { username, password };
       await login({ formData, loadUser });
-      if(user){
-        if(user.mobileNo==''){
+      if (user) {
+        if (user.mobileNo == '') {
           history.push('/user-pages/company-info');
-        }else if(user.kycStatus==false){
-          history.push('');
-        } else{
+        } else if (user.kycStatus == false) {
+          history.push('/kyc');
+        } else {
           history.push('/dashboard');
         }
       }
-      
     }
   };
   return (

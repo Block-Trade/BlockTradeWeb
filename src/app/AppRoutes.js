@@ -21,6 +21,7 @@ const MyWallet = lazy(() => import('./components/mywallet/MyWallet'));
 const ActivateForm = lazy(() => import('./components/auth/Activate'));
 const CompanyInfo = lazy(() => import('./user-pages/CompanyInfo'));
 const Kyc = lazy(() => import('./components/kyc/Kyc'));
+const Blankpage = lazy(() => import('./user-pages/BlankPages'));
 
 const AppRoutes = () => {
   return (
@@ -30,7 +31,6 @@ const AppRoutes = () => {
         <PrivateRouter exact path='/settings' component={Setting} />
         <PrivateRouter exact path='/my-wallet' component={MyWallet} />
         <PrivateRouter exact path='/my-trade' component={MyTrade} />
-
         <PublicRouter
           path='/form-Elements/basic-elements'
           component={BasicElements}
@@ -42,14 +42,12 @@ const AppRoutes = () => {
           path='/user-pages/company-info'
           component={CompanyInfo}
         />
-        <PrivateRouter
-          path='/kyc'
-          component={Kyc}
-        />
+        <PrivateRouter path='/kyc' component={Kyc} />
         <PublicRouter path='/activate/:token' component={ActivateForm} />
 
         <PublicRouter path='/user-pages/error-404' component={Error404} />
         <PublicRouter path='/user-pages/error-500' component={Error500} />
+        <PublicRouter path='/user-pages/blank-page' component={Blankpage} />
         <Redirect to='/dashboard' />
       </Switch>
     </Suspense>
