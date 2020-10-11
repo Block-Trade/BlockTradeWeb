@@ -20,6 +20,8 @@ const MyTrade = lazy(() => import('./components/mytrade/MyTrade'));
 const MyWallet = lazy(() => import('./components/mywallet/MyWallet'));
 const ActivateForm = lazy(() => import('./components/auth/Activate'));
 const CompanyInfo = lazy(() => import('./user-pages/CompanyInfo'));
+const Kyc = lazy(() => import('./components/kyc/Kyc'));
+
 const AppRoutes = () => {
   return (
     <Suspense fallback={<Spinner />}>
@@ -39,6 +41,10 @@ const AppRoutes = () => {
         <PrivateRouter
           path='/user-pages/company-info'
           component={CompanyInfo}
+        />
+        <PrivateRouter
+          path='/kyc'
+          component={Kyc}
         />
         <PublicRouter path='/activate/:token' component={ActivateForm} />
 

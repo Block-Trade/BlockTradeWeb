@@ -36,6 +36,7 @@ const App = (props) => {
       '/user-pages/login-1',
       '/user-pages/register-1',
       '/activate',
+      '/kyc',
       '/user-pages/lockscreen',
       '/error-pages/error-404',
       '/error-pages/error-500',

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { loadUser, login, clearError, clearMsg } from '../actions/auth';
 
 const Login = ({
-  auth: { msg, error, isAuthenticated },
+  auth: { user,msg, error, isAuthenticated },
   history,
   login,
   loadUser,
@@ -15,17 +15,24 @@ const Login = ({
   const [username, setUsername] = useState('');
   const [password, setPass] = useState('');
   useEffect(() => {
-    if (isAuthenticated) {
-      history.push('/dashboard');
+    if(isAuthenticated && user){
+      if(user){
+        if(user.companyName==''){
+          history.push('/user-pages/company-info');
+        }else if(user.kycStatus == false){
+          history.push('/kyc');
+        } else{
+          history.push('/dashboard');
+        }
+      }
     }
-
     if (error === 'Invalid Credentials') {
       clearError();
     }
     //eslint-disable-next-line
   }, [error, isAuthenticated, history]);
   useEffect(() => {
-    if (localStorage.token) {
+    if (localStorage.token && !user) {
       loadUser();
     }
   }, []);
@@ -36,7 +43,16 @@ const Login = ({
     } else {
       const formData = { username, password };
       await login({ formData, loadUser });
-      //history.push('/user-pages/company-info');
+      if(user){
+        if(user.mobileNo==''){
+          history.push('/user-pages/company-info');
+        }else if(user.kycStatus==false){
+          history.push('');
+        } else{
+          history.push('/dashboard');
+        }
+      }
+      
     }
   };
   return (

@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Sparklines, SparklinesBars } from 'react-sparklines';
 import { Dropdown } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { loadUser } from '../actions/auth';
 
-const Dashboard = () => {
+const Dashboard = ({ loadUser,auth }) => {
+  useEffect(() => {
+    if(localStorage.token && !auth.user){
+      loadUser();
+    }
+    
+  },[]);
   return (
     <div>
       <div className='row'>
@@ -454,5 +462,8 @@ const Dashboard = () => {
     </div>
   );
 };
+const mapStateToProps = state => ({
+  auth: state.auth
+});
 
-export default Dashboard;
+export default connect(mapStateToProps,{ loadUser })(Dashboard);
