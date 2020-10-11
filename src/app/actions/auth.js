@@ -35,7 +35,6 @@ export const activateUser = async (token) => async (dispatch) => {
     const res = await axios.post('/activate', body, {
       headers: headers,
     });
-
     console.log(res);
     dispatch({
       type: 'ACTIVATE_SUCCESS',

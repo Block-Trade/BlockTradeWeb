@@ -4,16 +4,28 @@ import { connect } from 'react-redux';
 import { signup, clearError, clearMsg } from '../actions/auth';
 import { Toast } from 'react-bootstrap';
 
-const Register = ({ auth: { msg, error }, signup, clearError, clearMsg }) => {
+const Register = ({
+  auth: { msg, error },
+  history,
+  signup,
+  clearError,
+  clearMsg,
+}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPass] = useState('');
   const [show, setShow] = useState(false);
-
+  const [mobileNo, setMobileNo] = useState('');
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (name == '' || username == '' || password == '' || email == '') {
+    if (
+      name == '' ||
+      username == '' ||
+      password == '' ||
+      email == '' ||
+      mobileNo == ''
+    ) {
       alert('Please fill all the fields');
     } else {
       const formData = {
@@ -21,8 +33,10 @@ const Register = ({ auth: { msg, error }, signup, clearError, clearMsg }) => {
         username,
         email,
         password,
+        mobileNo,
       };
       await signup(formData);
+      history.push('/user-pages/blank-page');
       if (error) {
       }
       //setShow(true);
@@ -84,9 +98,22 @@ const Register = ({ auth: { msg, error }, signup, clearError, clearMsg }) => {
                   />
                 </div>
                 <div className='form-group'>
+                  <input
+                    required={true}
+                    type='text'
+                    value={mobileNo}
+                    className='form-control form-control-lg'
+                    id='mobileno'
+                    placeholder='Mobile No'
+                    onChange={(e) => setMobileNo(e.target.value)}
+                    style={{ color: '#000000' }}
+                  />
+                </div>
+                <div className='form-group'>
                   <select
                     className='form-control form-control-lg'
                     id='exampleFormControlSelect2'
+                    style={{ color: '#bdb8c3' }}
                   >
                     <option>Country</option>
                     <option>United States of America</option>

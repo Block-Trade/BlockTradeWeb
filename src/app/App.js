@@ -42,6 +42,7 @@ const App = (props) => {
       '/error-pages/error-500',
       '/general-pages/landing-page',
       '/user-pages/company-info',
+      '/user-pages/blank-page',
     ];
     for (let i = 0; i < fullPageLayoutRoutes.length; i++) {
       if (props.location.pathname === fullPageLayoutRoutes[i]) {
