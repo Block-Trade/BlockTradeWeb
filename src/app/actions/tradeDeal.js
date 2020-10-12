@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const setSellerInfo = (sellerInfo) => async dispatch => {
     dispatch({
         type:'SET_SELLER_INFO',
@@ -36,5 +38,39 @@ export const setFinalBill = (finalBill) => async dispatch => {
 export const resetDeal = () => async dispatch => {
     dispatch({
         type: 'RESET_DEAL'
+    });
+}
+
+export const getUserId = () => async dispatch => {
+    try {
+        const res = await axios.get('/tradeid');
+        console.log(res);
+        const users = res.data.users;
+        dispatch({
+            type: 'USER_ID_FETCHED',
+            payload: users
+        });
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+export const filterName = ({text}) => dispatch => {
+    dispatch({
+        type: 'FILTER_NAME',
+        payload: text
+    });
+}
+
+export const clearFilter = () => dispatch => {
+    dispatch({
+        type: 'CLEAR_FILTER'
+    });
+}
+
+export const setImpId = ({id}) => dispatch => {
+    dispatch({
+        type: 'SET_IMP_ID',
+        payload: id
     });
 }

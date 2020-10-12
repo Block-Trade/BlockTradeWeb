@@ -8,53 +8,68 @@ import walletIcon from '@iconify/icons-entypo/wallet';
 import baselineDashboard from '@iconify/icons-ic/baseline-dashboard';
 import settingsSolid from '@iconify/icons-clarity/settings-solid';
 import { Modal, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { getUserId, filterName, setImpId,clearFilter } from '../actions/tradeDeal';
+import { Form } from 'react-bootstrap';
 
-const isPathActive = (path) => {
-  return this.props.location.pathname.startsWith(path);
-};
-
-const componentDidMount = () => {
-  this.onRouteChanged();
-  // add className 'hover-open' to sidebar navitem while hover in sidebar-icon-only menu
-  const body = document.querySelector('body');
-  document.querySelectorAll('.sidebar .nav-item').forEach((el) => {
-    el.addEventListener('mouseover', function () {
-      if (body.classList.contains('sidebar-icon-only')) {
-        el.classList.add('hover-open');
-      }
-    });
-    el.addEventListener('mouseout', function () {
-      if (body.classList.contains('sidebar-icon-only')) {
-        el.classList.remove('hover-open');
-      }
-    });
-  });
-};
-
-const Sidebar = (props) => {
+const Sidebar = ({location, getUserId, tradeDeal, filterName, setImpId,clearFilter}) => {
+  const [username,setUsername] = useState('');
   const [state, setState] = useState({
     isOpen: false,
     value: 'defaultvalue',
   });
+  useEffect(() => {
+    onRouteChanged();
+    // add className 'hover-open' to sidebar navitem while hover in sidebar-icon-only menu
+    const body = document.querySelector('body');
+    document.querySelectorAll('.sidebar .nav-item').forEach((el) => {
+      el.addEventListener('mouseover', function () {
+        if (body.classList.contains('sidebar-icon-only')) {
+          el.classList.add('hover-open');
+        }
+      });
+      el.addEventListener('mouseout', function () {
+        if (body.classList.contains('sidebar-icon-only')) {
+          el.classList.remove('hover-open');
+        }
+      });
+    });
+    getUserId();
+  },[]);
   const toggleModal = () => {
     setState({
       isOpen: !state.isOpen,
     });
   };
-
+  const isPathActive = (path) => {
+    return location.pathname.startsWith(path);
+  };
   const toggleModalClose = () => {
     setState({
       isOpen: false,
       value: 'defaultvalue',
     });
   };
-
+  const handleNameChange = e => {
+    e.preventDefault();
+    setUsername(e.target.value);
+    filterName({text: e.target.value});
+  }
   const handleChange = (e) => {
     setState({
       value: e.target.value,
     });
   };
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    tradeDeal.filtered.map(fil => {
+      if(fil.username == username){
+        setImpId({id: fil._id});
+      }
+    })
+    clearFilter();
+  }
   const toggleMenuState = (menuState) => {
     if (state[menuState]) {
       setState({ [menuState]: false });
@@ -68,11 +83,9 @@ const Sidebar = (props) => {
     }
   };
 
-  const componentDidUpdate = (prevProps) => {
-    if (props.location !== prevProps.location) {
-      onRouteChanged();
-    }
-  };
+  useEffect(() => {
+    onRouteChanged();
+  },[location.pathname]);
 
   const onRouteChanged = () => {
     document.querySelector('#sidebar').classList.remove('active');
@@ -195,44 +208,33 @@ const Sidebar = (props) => {
                 }}
               >
                 <Modal.Title id='contained-modal-title-vcenter'>
-                  Define your role !
+                  Choose importer.Enter username
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <img
-                  src={require('../../assets/images/importer.png')}
-                  alt='importer'
-                  style={{
-                    maxHeight: '12rem',
-                    maxWidth: '12rem',
-                    marginRight: '2rem',
-                    marginLeft: '0.7rem',
-                    cursor: 'pointer',
-                  }}
+              <Form className='pt-3'>
+              <Form.Group className='d-flex search-field'>
+                <Form.Control
+                  type='text'
+                  placeholder='Username'
+                  size='lg'
+                  className='h-auto'
+                  value={username}
+                  onChange={handleNameChange}
                 />
-                <img
-                  src={require('../../assets/images/exporter.png')}
-                  alt='exporter'
-                  style={{
-                    maxHeight: '12rem',
-                    maxWidth: '12rem',
-                    marginLeft: '2rem',
-                    cursor: 'pointer',
-                  }}
-                />
-                <div style={{ clear: 'both' }}>
-                  <h3
-                    style={{
-                      float: 'left',
-                      paddingLeft: '2rem',
-                      marginLeft: '1.5rem',
-                    }}
+              </Form.Group>
+              </Form>
+              {tradeDeal.filtered && tradeDeal.filtered.map(fil => <p><Link onClick={e => {
+                e.preventDefault();
+                setUsername(fil.username);
+              }} key={fil.username}>{fil.username}</Link></p>)}
+              <div className='mt-3'>
+                  <button
+                    className='btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn'
+                    onClick={onSubmit}
                   >
-                    Importer
-                  </h3>
-                  <h3 style={{ float: 'right', paddingRight: '2.8rem' }}>
-                    Exporter
-                  </h3>
+                    Submit
+                  </button>
                 </div>
               </Modal.Body>
               <Modal.Footer
@@ -348,7 +350,7 @@ const Sidebar = (props) => {
                 {' '}
                 <Link
                   className={
-                    this.isPathActive('/user-pages/error-404')
+                    isPathActive('/user-pages/error-404')
                       ? 'nav-link active'
                       : 'nav-link'
                   }
@@ -377,5 +379,7 @@ const Sidebar = (props) => {
     </nav>
   );
 };
-
-export default withRouter(Sidebar);
+const mapStateToProps = state => ({
+  tradeDeal: state.tradeDeal
+});
+export default withRouter(connect(mapStateToProps,{ getUserId, filterName, setImpId, clearFilter })(Sidebar));

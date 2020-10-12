@@ -1,9 +1,12 @@
 const initialState = {
+    userIds: null,
     sellerInfo: {},
     receiverInfo: {},
     logisticsInfo: {},
     descOfConsign: {},
-    finalBill: {}
+    finalBill: {},
+    filtered: null,
+    selectedImpId: null
 };
 
 export default (state=initialState, action) => {
@@ -33,6 +36,24 @@ export default (state=initialState, action) => {
                 ...state,
                 finalBill:action.payload
             };
+        case 'USER_ID_FETCHED':
+            return {
+                ...state,
+                userIds: action.payload
+            };
+        case 'FILTER_NAME':
+            return {
+                ...state,
+                filtered: state.userIds.filter(id => {
+                    const regex = new RegExp(`${action.payload}`, 'gi');
+                    return id.username.match(regex);
+                })
+            };
+        case 'SET_IMP_ID':
+            return {
+                ...state,
+                selectedImpId: action.payload
+            };
         case 'RESET_DEAL':
             return {
                 sellerInfo:{},
@@ -40,6 +61,11 @@ export default (state=initialState, action) => {
                 logisticsInfo:{},
                 descOfConsign:{},
                 finalBill:{}
+            };
+        case 'CLEAR_FILTER':
+            return {
+                ...state,
+                filtered: null
             };
         default:
             return state;
