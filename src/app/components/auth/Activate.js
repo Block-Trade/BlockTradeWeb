@@ -5,7 +5,7 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 
 const ActivateForm = ({ auth: { msg, error }, match, activateUser }) => {
   const onActivate = () => {
-    activateUser(match.params.token);
+    activateUser({token: match.params.token});
   };
 
   useEffect(() => {

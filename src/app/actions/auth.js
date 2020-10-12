@@ -23,7 +23,7 @@ export const signup = (formData) => async (dispatch) => {
   }
 };
 
-export const activateUser = async (token) => async (dispatch) => {
+export const activateUser = ({token}) => async (dispatch) => {
   const headers = {
     'Content-Type': 'application/json',
   };
