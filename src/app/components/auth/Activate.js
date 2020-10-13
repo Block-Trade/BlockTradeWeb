@@ -3,9 +3,17 @@ import { connect } from 'react-redux';
 import { activateUser, clearError } from '../../actions/auth';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
-const ActivateForm = ({ auth: { msg, error }, match, activateUser }) => {
-  const onActivate = () => {
-    activateUser({token: match.params.token});
+const ActivateForm = ({
+  auth: { msg, error },
+  history,
+  match,
+  activateUser,
+}) => {
+  const onActivate = async () => {
+    await activateUser({ token: match.params.token });
+    if (!error) {
+      history.push('/login');
+    }
   };
 
   useEffect(() => {
@@ -28,8 +36,8 @@ const ActivateForm = ({ auth: { msg, error }, match, activateUser }) => {
                   alt='logo'
                 />
               </div>
-              <div class='card-content' style={{ textAlign: 'center' }}>
-                <span class='card-title'>Account activation</span>
+              <div className='card-content' style={{ textAlign: 'center' }}>
+                <span className='card-title'>Account activation</span>
                 <p>
                   Welcome to BlockTrade. Be a part of our family and start
                   trading in a secure and faster way.

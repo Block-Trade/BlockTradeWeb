@@ -1,19 +1,30 @@
-import React, { Component, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { Collapse } from 'react-bootstrap';
 import { Dropdown } from 'react-bootstrap';
-import { Icon, InlineIcon } from '@iconify/react';
+import { Icon } from '@iconify/react';
 import handshakeIcon from '@iconify/icons-mdi/handshake';
 import walletIcon from '@iconify/icons-entypo/wallet';
 import baselineDashboard from '@iconify/icons-ic/baseline-dashboard';
 import settingsSolid from '@iconify/icons-clarity/settings-solid';
 import { Modal, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { getUserId, filterName, setImpId,clearFilter } from '../actions/tradeDeal';
+import {
+  getUserId,
+  filterName,
+  setImpId,
+  clearFilter,
+} from '../actions/tradeDeal';
 import { Form } from 'react-bootstrap';
 
-const Sidebar = ({location, getUserId, tradeDeal, filterName, setImpId,clearFilter}) => {
-  const [username,setUsername] = useState('');
+const Sidebar = ({
+  location,
+  getUserId,
+  tradeDeal,
+  filterName,
+  setImpId,
+  clearFilter,
+}) => {
+  const [username, setUsername] = useState('');
   const [state, setState] = useState({
     isOpen: false,
     value: 'defaultvalue',
@@ -34,12 +45,13 @@ const Sidebar = ({location, getUserId, tradeDeal, filterName, setImpId,clearFilt
         }
       });
     });
-    getUserId();
-  },[]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const toggleModal = () => {
     setState({
       isOpen: !state.isOpen,
     });
+    getUserId();
   };
   const isPathActive = (path) => {
     return location.pathname.startsWith(path);
@@ -50,42 +62,26 @@ const Sidebar = ({location, getUserId, tradeDeal, filterName, setImpId,clearFilt
       value: 'defaultvalue',
     });
   };
-  const handleNameChange = e => {
+  const handleNameChange = (e) => {
     e.preventDefault();
     setUsername(e.target.value);
-    filterName({text: e.target.value});
-  }
-  const handleChange = (e) => {
-    setState({
-      value: e.target.value,
-    });
+    filterName({ text: e.target.value });
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    tradeDeal.filtered.map(fil => {
-      if(fil.username == username){
-        setImpId({id: fil._id});
+    tradeDeal.filtered.map((fil) => {
+      if (fil.username === username) {
+        setImpId({ id: fil._id });
       }
-    })
+    });
     clearFilter();
-  }
-  const toggleMenuState = (menuState) => {
-    if (state[menuState]) {
-      setState({ [menuState]: false });
-    } else if (Object.keys(state).length === 0) {
-      setState({ [menuState]: true });
-    } else {
-      Object.keys(state).forEach((i) => {
-        setState({ [i]: false });
-      });
-      setState({ [menuState]: true });
-    }
   };
 
   useEffect(() => {
     onRouteChanged();
-  },[location.pathname]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname]);
 
   const onRouteChanged = () => {
     document.querySelector('#sidebar').classList.remove('active');
@@ -212,23 +208,33 @@ const Sidebar = ({location, getUserId, tradeDeal, filterName, setImpId,clearFilt
                 </Modal.Title>
               </Modal.Header>
               <Modal.Body>
-              <Form className='pt-3'>
-              <Form.Group className='d-flex search-field'>
-                <Form.Control
-                  type='text'
-                  placeholder='Username'
-                  size='lg'
-                  className='h-auto'
-                  value={username}
-                  onChange={handleNameChange}
-                />
-              </Form.Group>
-              </Form>
-              {tradeDeal.filtered && tradeDeal.filtered.map(fil => <p><Link onClick={e => {
-                e.preventDefault();
-                setUsername(fil.username);
-              }} key={fil.username}>{fil.username}</Link></p>)}
-              <div className='mt-3'>
+                <Form className='pt-3'>
+                  <Form.Group className='d-flex search-field'>
+                    <Form.Control
+                      type='text'
+                      placeholder='Username'
+                      size='lg'
+                      className='h-auto'
+                      value={username}
+                      onChange={handleNameChange}
+                    />
+                  </Form.Group>
+                </Form>
+                {tradeDeal.filtered &&
+                  tradeDeal.filtered.map((fil) => (
+                    <p>
+                      <Link
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setUsername(fil.username);
+                        }}
+                        key={fil.username}
+                      >
+                        {fil.username}
+                      </Link>
+                    </p>
+                  ))}
+                <div className='mt-3'>
                   <button
                     className='btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn'
                     onClick={onSubmit}
@@ -328,58 +334,15 @@ const Sidebar = ({location, getUserId, tradeDeal, filterName, setImpId,clearFilt
             <span className='menu-title'>Form Elements</span>
           </Link>
         </li>
-        <li
-          className={
-            isPathActive('/user-pages') ? 'nav-item active' : 'nav-item'
-          }
-        >
-          <div
-            className={
-              state.userPagesMenuOpen ? 'nav-link menu-expanded' : 'nav-link'
-            }
-            onClick={() => toggleMenuState('userPagesMenuOpen')}
-            data-toggle='collapse'
-          >
-            <i className='mdi mdi-lock-outline menu-icon'></i>
-            <span className='menu-title'>User Pages</span>
-            <i className='menu-arrow'></i>
-          </div>
-          <Collapse in={state.userPagesMenuOpen}>
-            <ul className='nav flex-column sub-menu'>
-              <li className='nav-item'>
-                {' '}
-                <Link
-                  className={
-                    isPathActive('/user-pages/error-404')
-                      ? 'nav-link active'
-                      : 'nav-link'
-                  }
-                  to='/user-pages/error-404'
-                >
-                  404
-                </Link>
-              </li>
-              <li className='nav-item'>
-                {' '}
-                <Link
-                  className={
-                    isPathActive('/user-pages/error-500')
-                      ? 'nav-link active'
-                      : 'nav-link'
-                  }
-                  to='/user-pages/error-500'
-                >
-                  500
-                </Link>
-              </li>
-            </ul>
-          </Collapse>
-        </li>
       </ul>
     </nav>
   );
 };
-const mapStateToProps = state => ({
-  tradeDeal: state.tradeDeal
+const mapStateToProps = (state) => ({
+  tradeDeal: state.tradeDeal,
 });
-export default withRouter(connect(mapStateToProps,{ getUserId, filterName, setImpId, clearFilter })(Sidebar));
+export default withRouter(
+  connect(mapStateToProps, { getUserId, filterName, setImpId, clearFilter })(
+    Sidebar
+  )
+);

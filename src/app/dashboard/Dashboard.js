@@ -4,13 +4,12 @@ import { Dropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { loadUser } from '../actions/auth';
 
-const Dashboard = ({ loadUser,auth }) => {
+const Dashboard = ({ loadUser, auth }) => {
   useEffect(() => {
-    if(localStorage.token && !auth.user){
+    if (localStorage.token && !auth.user) {
       loadUser();
     }
-    
-  },[]);
+  }, []);
   return (
     <div>
       <div className='row'>
@@ -462,8 +461,8 @@ const Dashboard = ({ loadUser,auth }) => {
     </div>
   );
 };
-const mapStateToProps = state => ({
-  auth: state.auth
+const mapStateToProps = (state) => ({
+  auth: state.auth,
 });
 
-export default connect(mapStateToProps,{ loadUser })(Dashboard);
+export default connect(mapStateToProps, { loadUser })(Dashboard);
