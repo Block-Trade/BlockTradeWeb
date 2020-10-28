@@ -23,6 +23,12 @@ const CompanyInfo = lazy(() => import('./user-pages/CompanyInfo'));
 const Kyc = lazy(() => import('./components/kyc/Kyc'));
 const Blankpage = lazy(() => import('./user-pages/BlankPages'));
 
+const TradeForm1 = lazy(() => import('./components/tradeForm/TradeForm1'));
+const TradeForm2 = lazy(() => import('./components/tradeForm/TradeForm2'));
+const TradeForm3 = lazy(() => import('./components/tradeForm/TradeForm3'));
+const TradeForm4 = lazy(() => import('./components/tradeForm/TradeForm4'));
+const TradeForm5 = lazy(() => import('./components/tradeForm/TradeForm5'));
+const TradeDeal = lazy(() => import('./components/tradeForm/TradeDeal'));
 const AppRoutes = () => {
   return (
     <Suspense fallback={<Spinner />}>
@@ -40,6 +46,13 @@ const AppRoutes = () => {
         <PublicRouter path='/register' component={Register1} />
         <PrivateRouter path='/company-info' component={CompanyInfo} />
         <PrivateRouter path='/kyc' component={Kyc} />
+        <PrivateRouter path='/tradeform1' component={TradeForm1} />
+        <PrivateRouter path='/tradeform2' component={TradeForm2} />
+        <PrivateRouter path='/tradeform3' component={TradeForm3} />
+        <PrivateRouter path='/tradeform4' component={TradeForm4} />
+        <PrivateRouter path='/tradeform5' component={TradeForm5} />
+        <PrivateRouter path='/tradedeal' component={TradeDeal} />
+        
         <PublicRouter path='/activate/:token' component={ActivateForm} />
 
         <PublicRouter path='/error-404' component={Error404} />

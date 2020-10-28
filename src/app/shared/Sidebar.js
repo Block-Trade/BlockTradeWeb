@@ -16,6 +16,7 @@ import {
 } from '../actions/tradeDeal';
 import { Form } from 'react-bootstrap';
 
+
 const Sidebar = ({
   location,
   getUserId,
@@ -25,6 +26,7 @@ const Sidebar = ({
   clearFilter,
 }) => {
   const [username, setUsername] = useState('');
+
   const [state, setState] = useState({
     isOpen: false,
     value: 'defaultvalue',
@@ -70,9 +72,10 @@ const Sidebar = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    tradeDeal.filtered.map((fil) => {
-      if (fil.username === username) {
-        setImpId({ id: fil._id });
+    tradeDeal.filtered.map(fil => {
+      if(fil.username == username){
+        setImpId({id: fil._id});
+        history.push('/tradeform1');
       }
     });
     clearFilter();

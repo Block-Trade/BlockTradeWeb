@@ -3,13 +3,21 @@ import { Sparklines, SparklinesBars } from 'react-sparklines';
 import { Dropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { loadUser } from '../actions/auth';
+import { getAllTrades } from '../actions/trade';
 
 const Dashboard = ({ loadUser, auth }) => {
   useEffect(() => {
     if (localStorage.token && !auth.user) {
       loadUser();
     }
-  }, []);
+
+  },[]);
+  useEffect(() => {
+    getAllTrades();
+    // Call to smart contract to check the status of document verification
+    
+  },[auth]);
+
   return (
     <div>
       <div className='row'>

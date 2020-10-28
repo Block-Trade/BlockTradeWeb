@@ -12,4 +12,7 @@ class MyWallet extends Component {
     return <div>This is a my wallet page</div>;
   }
 }
+
+//Get balance, wallet address, blocked amount, token exchange
+
 export default MyWallet;
