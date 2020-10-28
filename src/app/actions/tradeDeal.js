@@ -74,3 +74,18 @@ export const setImpId = ({id}) => dispatch => {
         payload: id
     });
 }
+
+export const finalUpload = (data) => async dispatch => {
+    try {
+        const headers = {
+            'Content-Type':'application/json'
+        };
+        const res = await axios.post('/trade',data,{
+            headers: headers
+        });
+        console.log(res);
+        // Put data on ipfs from res.data.TradeId
+    } catch (e) {
+    
+    }
+}

@@ -1,8 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { finalUpload } from '../../actions/tradeDeal';
 
-const TradeDeal = ({tradeDeal}) => {
+const TradeDeal = ({tradeDeal, auth, finalUpload}) => {
     const { sellerInfo,receiverInfo,logisticsInfo,descOfConsign,finalBill } = tradeDeal;
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        const data = {
+            expUser: auth.user.username,
+            impUser: tradeDeal.selectedImpId,
+            inco: tradeDeal.receiverInfo.inco,
+            amount: `${tradeDeal.finalBill.curr}.${tradeDeal.finalBill.tradeTotal}`,
+            dueDate: tradeDeal.sellerInfo.invoiceDue
+        };
+        finalUpload(data);
+    }
     return (
         <div>
             <h1 className="center">Trade Deal</h1>
@@ -101,13 +114,14 @@ const TradeDeal = ({tradeDeal}) => {
                 </div>
             </div>
             <h4 className="center">Trade Total: {finalBill.tradeTotal}</h4>
-            <button className="btn btn-large blue">Finalize</button>
+            <button className="btn btn-large blue" onClick={handleSubmit}>Finalize</button>
         </div>
     )
 }
 
 const mapStateToProps = state => ({
-    tradeDeal: state.tradeDeal
+    tradeDeal: state.tradeDeal,
+    auth: state.auth
 });
 
-export default connect(mapStateToProps)(TradeDeal);
+export default connect(mapStateToProps,{ finalUpload })(TradeDeal);

@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { getUserId, filterName, setImpId,clearFilter } from '../actions/tradeDeal';
 import { Form } from 'react-bootstrap';
 
-const Sidebar = ({location, getUserId, tradeDeal, filterName, setImpId,clearFilter}) => {
+const Sidebar = ({location, history, getUserId, tradeDeal, filterName, setImpId,clearFilter}) => {
   const [username,setUsername] = useState('');
   const [state, setState] = useState({
     isOpen: false,
@@ -66,6 +66,7 @@ const Sidebar = ({location, getUserId, tradeDeal, filterName, setImpId,clearFilt
     tradeDeal.filtered.map(fil => {
       if(fil.username == username){
         setImpId({id: fil._id});
+        history.push('/tradeform1');
       }
     })
     clearFilter();
