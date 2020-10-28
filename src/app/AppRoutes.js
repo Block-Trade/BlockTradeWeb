@@ -42,12 +42,9 @@ const AppRoutes = () => {
           component={BasicElements}
         />
 
-        <PublicRouter path='/user-pages/login-1' component={Login} />
-        <PublicRouter path='/user-pages/register-1' component={Register1} />
-        <PrivateRouter
-          path='/user-pages/company-info'
-          component={CompanyInfo}
-        />
+        <PublicRouter path='/login' component={Login} />
+        <PublicRouter path='/register' component={Register1} />
+        <PrivateRouter path='/company-info' component={CompanyInfo} />
         <PrivateRouter path='/kyc' component={Kyc} />
         <PrivateRouter path='/tradeform1' component={TradeForm1} />
         <PrivateRouter path='/tradeform2' component={TradeForm2} />
@@ -58,9 +55,9 @@ const AppRoutes = () => {
         
         <PublicRouter path='/activate/:token' component={ActivateForm} />
 
-        <PublicRouter path='/user-pages/error-404' component={Error404} />
-        <PublicRouter path='/user-pages/error-500' component={Error500} />
-        <PublicRouter path='/user-pages/blank-page' component={Blankpage} />
+        <PublicRouter path='/error-404' component={Error404} />
+        <PublicRouter path='/error-500' component={Error500} />
+        <PublicRouter path='/blank-page' component={Blankpage} />
         <Redirect to='/dashboard' />
       </Switch>
     </Suspense>

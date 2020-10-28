@@ -20,11 +20,11 @@ const Register = ({
   const onSubmit = async (e) => {
     e.preventDefault();
     if (
-      name == '' ||
-      username == '' ||
-      password == '' ||
-      email == '' ||
-      mobileNo == ''
+      name === '' ||
+      username === '' ||
+      password === '' ||
+      email === '' ||
+      mobileNo === ''
     ) {
       alert('Please fill all the fields');
     } else {
@@ -157,7 +157,7 @@ const Register = ({
                 </div>
                 <div className='text-center mt-4 font-weight-light'>
                   Already have an account?{' '}
-                  <Link to='/user-pages/login' className='text-primary'>
+                  <Link to='/login' className='text-primary'>
                     Login
                   </Link>
                 </div>

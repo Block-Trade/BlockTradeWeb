@@ -31,7 +31,7 @@ const CompanyInfo = ({ auth: { msg, error }, history, companyInfo }) => {
         companyTelNo,
       };
       await companyInfo(companyFormData);
-      history.push('/dashboard');
+      history.push('/kyc');
     }
   };
   return (

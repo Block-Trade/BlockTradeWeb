@@ -1,5 +1,6 @@
-import React, { Component, useEffect, useState } from 'react';
-import { withRouter, Route, BrowserRouter as Router } from 'react-router-dom';
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from 'react';
+import { withRouter } from 'react-router-dom';
 import './App.scss';
 import AppRoutes from './AppRoutes';
 import Navbar from './shared/Navbar';
@@ -19,6 +20,7 @@ const App = (props) => {
     isFullPageLayout: false,
   });
 
+  // eslint-disable-next-line no-unused-vars
   let navbarComponent;
   let sidebarComponent;
   let footerComponent;
@@ -27,22 +29,22 @@ const App = (props) => {
     navbarComponent = !state.isFullPageLayout ? <Navbar /> : '';
     sidebarComponent = !state.isFullPageLayout ? <Sidebar /> : '';
     footerComponent = !state.isFullPageLayout ? <Footer /> : '';
+    // eslint-disable-next-line
   }, [props.history.location.pathname]);
 
   const onRouteChanged = () => {
     console.log('ROUTE CHANGED');
     window.scrollTo(0, 0);
     const fullPageLayoutRoutes = [
-      '/user-pages/login-1',
-      '/user-pages/register-1',
+      '/login',
+      '/register',
       '/activate',
       '/kyc',
-      '/user-pages/lockscreen',
-      '/error-pages/error-404',
-      '/error-pages/error-500',
+      '/error-404',
+      'error-500',
       '/general-pages/landing-page',
-      '/user-pages/company-info',
-      '/user-pages/blank-page',
+      '/company-info',
+      '/blank-page',
     ];
     for (let i = 0; i < fullPageLayoutRoutes.length; i++) {
       if (props.location.pathname === fullPageLayoutRoutes[i]) {
@@ -71,13 +73,6 @@ const App = (props) => {
       }
     }
   };
-  /*
-  componentDidUpdate(prevProps) {
-     if (this.props.location.pathname !== prevProps.location.pathname) {
-       this.onRouteChanged();
-    }
-  }
-*/
   return (
     <div id='block-trade'>
       <Provider store={store}>

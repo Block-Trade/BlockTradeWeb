@@ -17,9 +17,9 @@ const Login = ({
   useEffect(() => {
     if (isAuthenticated && user) {
       if (user) {
-        if (user.companyName == '') {
-          history.push('/user-pages/company-info');
-        } else if (user.kycStatus == false) {
+        if (user.companyName === '') {
+          history.push('/company-info');
+        } else if (user.kycStatus === false) {
           history.push('/kyc');
         } else {
           history.push('/dashboard');
@@ -44,9 +44,9 @@ const Login = ({
       const formData = { username, password };
       await login({ formData, loadUser });
       if (user) {
-        if (user.mobileNo == '') {
-          history.push('/user-pages/company-info');
-        } else if (user.kycStatus == false) {
+        if (user.mobileNo === '') {
+          history.push('/company-info');
+        } else if (user.kycStatus === false) {
           history.push('/kyc');
         } else {
           history.push('/dashboard');
@@ -116,7 +116,7 @@ const Login = ({
                 </div>
                 <div className='text-center mt-4 font-weight-light'>
                   Don't have an account?
-                  <Link to='/user-pages/register-1' className='text-primary'>
+                  <Link to='/register' className='text-primary'>
                     Create
                   </Link>
                 </div>
