@@ -140,27 +140,24 @@ const TradeForm1 = ({history,setSellerInfo, tradeDeal}) => {
 
     return (
         <div className={classes.root}>
-        <Grid
-        container
-        direction="row"
-        justify="center"
-        alignItems="center"
-        >
-        <Grid item xs={12} alignContent="center">
+        <div style={{ marginLeft: 'auto',marginRight:'auto' }}>
             <h3 style={{alignItems:"center"}}>Seller Information</h3>
-        </Grid>
-            <Grid item xs={12}>
             <form className={classes.root} noValidate autoComplete="off">
-            <Grid container spacing={3}>
-                <Grid item md={4}>
-                <TextField id="sellerfirm" label="SellerFirm" variant="outlined" value={sellerFirm} onChange={(e) => setSellerFirm(e.target.value)}  />
-                </Grid>
-                <Grid item md={4}>
-                <TextField id="invoice" label="Invoice Number" variant="outlined" value={invoiceNo} onChange={(e) => setInvoiceNo(e.target.value)}  />
-                </Grid>
-            </Grid>
+                <TextField
+                  id="sellerfirm"
+                  label="SellerFirm"
+                  type="text"
+                  variant="outlined"
+                  value={sellerFirm} onChange={(e) => setSellerFirm(e.target.value)}
+                  style={{marginBottom:"1rem"}}
+                />
+                <TextField
+                  id="invoice"
+                  label="Invoice Number"
+                  variant="outlined"
+                  value={invoiceNo} onChange={(e) => setInvoiceNo(e.target.value)}
+                />
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <Grid container justify="space-around">
                   <KeyboardDatePicker
                     disableToolbar
                     variant="inline"
@@ -174,8 +171,6 @@ const TradeForm1 = ({history,setSellerInfo, tradeDeal}) => {
             'aria-label': 'change date',
           }}
                   />
-                </Grid>
-                <Grid container justify="space-around">
                   <KeyboardDatePicker
                     disableToolbar
                     variant="inline"
@@ -189,7 +184,6 @@ const TradeForm1 = ({history,setSellerInfo, tradeDeal}) => {
             'aria-label': 'change date',
           }}
                   />
-                </Grid>
                 </MuiPickersUtilsProvider>
                 <TextField
                 id="outlined-multiline-static"
@@ -204,48 +198,9 @@ const TradeForm1 = ({history,setSellerInfo, tradeDeal}) => {
                 <TextField id="sellercont" label="Seller Contact" variant="outlined" value={sellerCont} onChange={(e) => setSellerCont(e.target.value)}  />
                 <TextField id="sellertel" label="Seller Telephone" variant="outlined" value={sellerTel} onChange={(e) => setSellerTel(e.target.value)}  />
                 <TextField id="selleremail" label="Seller Email" variant="outlined" value={sellerEmail} onChange={(e) => setSellerEmail(e.target.value)}  />
-
-{/*                <div className="input-field">
-                    <label htmlFor="sellerFirm">Seller Firm {" "}</label>
-                    <input type="text" name="sellerFirm" id="sellerFirm" value={sellerFirm} onChange={(e) => setSellerFirm(e.target.value)} />
-                </div>
-                <div className="input-field">
-                    <label htmlFor="invoiceNo">Invoice Number {" "}</label>
-                    <input type="text" name="invoiceNo" id="invoiceNo" value={invoiceNo} onChange={(e) => setInvoiceNo(e.target.value)} />
-                </div>
-                <div className="input-field">
-                    <label htmlFor="invoiceDate">Invoice Date {" "}</label>
-                    <input type="date" name="invoiceDate" id="invoiceDate" value={invoiceDate} onChange={(e) => setInvoiceDate(e.target.value)} />
-                </div>
-                <div className="input-field">
-                    <label htmlFor="invoiceDue">Invoice Due {" "}</label>
-                    <input type="date" name="invoiceDue" id="invoiceDue" value={invoiceDue} onChange={(e) => setInvoiceDue(e.target.value)} />
-                </div>
-                <div className="input-field">
-                    <label htmlFor="sellerAddr">Seller Address {" "}</label>
-                    <textarea id="sellerAddr" name="sellerAddr" value={sellerAddr} onChange={(e) => setSellerAddr(e.target.value)}></textarea>
-                </div>
-                <div className="input-field">
-                    <label htmlFor="purposeShip">Purpose of Shipment {" "}</label>
-                    <input type="text" name="purposeShip" id="purposeShip" value={purposeShip} onChange={(e) => setPurposeShip(e.target.value)} />
-                </div>
-                <div className="input-field">
-                    <label htmlFor="party">Party to transaction {" "}</label>
-                    <input type="text" name="party" id="party" value={party} onChange={(e) => setParty(e.target.value)} />
-                </div>
-                <div className="input-field">
-                    <label htmlFor="sellerCont">Seller Contact {" "}</label>
-                    <input type="text" name="sellerCont" id="sellerCont" value={sellerCont} onChange={(e) => setSellerCont(e.target.value)} />
-                </div>
-                <div className="input-field">
-                    <label htmlFor="sellerTel">Seller Telephone {" "}</label>
-                    <input type="text" name="sellerTel" id="sellerTel" value={sellerTel} onChange={(e) => setSellerTel(e.target.value)} />
-                </div>
-                <div className="input-field">
-                    <label htmlFor="sellerEmail">Seller Email {" "}</label>
-                    <input type="email" name="sellerEmail" id="sellerEmail" value={sellerEmail} onChange={(e) => setSellerEmail(e.target.value)} />
-                </div>
-*/}                <div className={classes.wrapper}>
+                <div className={classes.wrapper} style={{display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',}}>
                         <Fab
                         aria-label="save"
                         color="primary"
@@ -255,12 +210,10 @@ const TradeForm1 = ({history,setSellerInfo, tradeDeal}) => {
                         {success ? <CheckIcon /> : <SaveIcon />}
                     </Fab>
                     {loading && <CircularProgress size={68} className={classes.fabProgress} />}
-                    </div>
+                </div>
             </form>
-            </Grid>
-        </Grid>
-        
         </div>
+      </div>
     )
 }
 
