@@ -37,7 +37,6 @@ const TradeForm4 = ({history,setDescOfConsign,tradeDeal}) => {
             setCurrDisc(descriptionOfConsignmentInfo.currDisc);
             setTotalCube(descriptionOfConsignmentInfo.totalCube);
             setTotalGross(descriptionOfConsignmentInfo.totalGross);
-            
         }
     },[]);
 
