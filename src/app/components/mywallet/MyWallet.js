@@ -151,11 +151,7 @@ class MyWallet extends Component {
       return (
 
           <div>
-              <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-                  <p>
-                      BlockTrade
-                  </p>
-              </nav>
+              
               <div className="container-fluid mt-5">
                   <div className="row">
                       <main role="main" className="col-lg-12 d-flex text-center">

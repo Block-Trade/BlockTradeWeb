@@ -24,6 +24,7 @@ const Sidebar = ({
   filterName,
   setImpId,
   clearFilter,
+  history
 }) => {
   const [username, setUsername] = useState('');
 
