@@ -91,13 +91,12 @@ const TestFrom = () => {
           </div>
         ) : (
           <div>
-            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-            <div>
+            <div style={{ display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',}}>
               <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back
               </Button>
-              
-
               <Button
                 variant="contained"
                 color="primary"
