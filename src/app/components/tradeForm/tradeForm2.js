@@ -2,7 +2,7 @@ import React,{ useState,useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setReceiverInfo } from '../../actions/tradeDeal';
 
-const TradeForm2 = ({history,setReceiverInfo}) => {
+const TradeForm2 = ({history,setReceiverInfo, tradeDeal}) => {
     const [receiverFirm, setReceiverFirm] = useState("");
     const [receiverAddr,setReceiverAddr] = useState("");
     const [receiverCont,setReceiverCont] = useState("");
@@ -12,6 +12,21 @@ const TradeForm2 = ({history,setReceiverInfo}) => {
     const [payMeth,setPayMeth] = useState("");
     const [incurr,setIncurr] = useState("");
     const [inco,setInco] = useState("");
+
+    useEffect(() => {
+        const { receiverInfo } = tradeDeal;
+        if(receiverInfo){
+            setReceiverFirm(receiverInfo.receiverFirm);
+            setReceiverAddr(receiverInfo.receiverAddr);
+            setReceiverCont(receiverInfo.receiverCont);
+            setReceiverTel(receiverInfo.receiverTel);
+            setReceiverEmail(receiverInfo.receiverTel);
+            setDutyPay(receiverInfo.dutyPay);
+            setPayMeth(receiverInfo.payMeth);
+            setInco(receiverInfo.inco);
+            setIncurr(receiverInfo.incurr);
+        }
+    },[]);
 
     const nextForm = (e) => {
         e.preventDefault();
@@ -28,7 +43,7 @@ const TradeForm2 = ({history,setReceiverInfo}) => {
         };
         console.log(receiverInfo);
         setReceiverInfo(receiverInfo);
-        history.push('/tradeform3');
+        //history.push('/tradeform3');
     }
     return (
         <div className="container">
@@ -182,4 +197,8 @@ const mapDispatchToProps = (dispatch) => ({
     setReceiverInfo: (receiverInfo) => dispatch(setReceiverInfo(receiverInfo))
 });
 
-export default connect(null,mapDispatchToProps)(TradeForm2);
+const mapStateToProps = state => ({
+    tradeDeal: state.tradeDeal
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(TradeForm2);

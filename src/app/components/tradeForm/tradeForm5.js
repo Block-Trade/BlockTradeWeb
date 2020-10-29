@@ -2,7 +2,7 @@ import React,{ useState } from 'react';
 import { connect } from 'react-redux';
 import { setFinalBill } from '../../actions/tradeDeal';
 
-const TradeForm5 = ({history,setFinalBill}) => {
+const TradeForm5 = ({history,setFinalBill,tradeDeal}) => {
     const [curr,setCurr] = useState("");
     const [adjTotal,setAdjTotal] = useState("");
     const [devAmount,setDevAmount] = useState("");
@@ -166,4 +166,8 @@ const mapDispatchToProps = (dispatch) => ({
     setFinalBill: (finalBill) => dispatch(setFinalBill(finalBill))
 });
 
-export default connect(null,mapDispatchToProps)(TradeForm5);
+const mapStateToProps = state => ({
+    tradeDeal: state.tradeDeal
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(TradeForm5);

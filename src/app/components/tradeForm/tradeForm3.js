@@ -2,7 +2,7 @@ import React,{ useState,useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setLogisticsInfo } from '../../actions/tradeDeal';
 
-const TradeForm3 = ({history,setLogisticsInfo}) => {
+const TradeForm3 = ({history,setLogisticsInfo, tradeDeal}) => {
     const [poc, setPOC] = useState("");
     const [collDate,setCollDate] = useState("");
     const [collTime,setCollTime] = useState("");
@@ -11,6 +11,20 @@ const TradeForm3 = ({history,setLogisticsInfo}) => {
     const [deptTime,setDeptTime] = useState("");
     const [placeofd,setPlaceofd] = useState("");
     const [shippingm,setShippingm] = useState("");
+
+    useEffect(() => {
+        const { logisticsInfo } = tradeDeal;
+        if(logisticsInfo){
+            setPOC(logisticsInfo.poc);
+            setCollDate(logisticsInfo.collDate);
+            setCollTime(logisticsInfo.collTime);
+            setPOD(logisticsInfo.pod);
+            setDeptDate(logisticsInfo.deptDate);
+            setDeptTime(logisticsInfo.deptTime);
+            setPlaceofd(logisticsInfo.placeofd);
+            setShippingm(logisticsInfo.shippingm);
+        }
+    },[]);
 
     const nextForm = (e) => {
         e.preventDefault();
@@ -26,7 +40,7 @@ const TradeForm3 = ({history,setLogisticsInfo}) => {
         }
         console.log(logisticsInfo);
         setLogisticsInfo(logisticsInfo);
-        history.push('/tradeform4')
+        //history.push('/tradeform4')
     }
     return (
         <div className="container">
@@ -74,4 +88,8 @@ const mapDispatchToProps = (dispatch) => ({
     setLogisticsInfo: (logisticsInfo) => dispatch(setLogisticsInfo(logisticsInfo))
 });
 
-export default connect(null,mapDispatchToProps)(TradeForm3);
+const mapStateToProps = state => ({
+    tradeDeal: state.tradeDeal
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(TradeForm3);

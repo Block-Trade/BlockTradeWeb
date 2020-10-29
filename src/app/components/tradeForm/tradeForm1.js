@@ -2,7 +2,7 @@ import React,{ useState,useEffect } from 'react';
 import { setSellerInfo } from '../../actions/tradeDeal';
 import { connect } from 'react-redux';
 
-const TradeForm1 = ({history,setSellerInfo}) => {
+const TradeForm1 = ({history,setSellerInfo, tradeDeal}) => {
     const [sellerFirm, setSellerFirm] = useState("");
     const [invoiceNo, setInvoiceNo] = useState("");
     const [invoiceDate,setInvoiceDate] = useState("");
@@ -13,6 +13,22 @@ const TradeForm1 = ({history,setSellerInfo}) => {
     const [sellerCont,setSellerCont] = useState("");
     const [sellerTel,setSellerTel] = useState("");
     const [sellerEmail,setSellerEmail] = useState("");
+
+    useEffect(() => {
+        const { sellerInfo } = tradeDeal;
+        if(sellerInfo){
+            setSellerFirm(sellerInfo.sellerFirm);
+            setInvoiceNo(sellerInfo.invoiceNo);
+            setInvoiceDate(sellerInfo.invoiceDate);
+            setInvoiceDue(sellerInfo.invoiceDue);
+            setSellerAddr(sellerInfo.sellerAddr);
+            setPurposeShip(sellerInfo.purposeShip);
+            setParty(sellerInfo.party);
+            setSellerCont(sellerInfo.sellerCont);
+            setSellerTel(sellerInfo.sellerTel);
+            setSellerEmail(sellerInfo.sellerEmail);
+        }
+    },[]);
 
     const nextForm = (e) => {
         e.preventDefault();
@@ -30,7 +46,7 @@ const TradeForm1 = ({history,setSellerInfo}) => {
         };
         setSellerInfo(sellerInfo);
         console.log(sellerInfo);
-        history.push('/tradeform2');
+        //history.push('/tradeform2');
     }
 
     return (
@@ -87,4 +103,8 @@ const mapDispatchToProps = (dispatch) => ({
     setSellerInfo: (sellerInfo) => dispatch(setSellerInfo(sellerInfo))
 });
 
-export default connect(null,mapDispatchToProps)(TradeForm1);
+const mapStateToProps =state => ({
+    tradeDeal: state.tradeDeal
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(TradeForm1);

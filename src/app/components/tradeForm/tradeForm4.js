@@ -2,7 +2,7 @@ import React,{ useState,useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setDescOfConsign } from '../../actions/tradeDeal';
 
-const TradeForm4 = ({history,setDescOfConsign}) => {
+const TradeForm4 = ({history,setDescOfConsign,tradeDeal}) => {
     const [pid, setPID] = useState("");
     const [fxRate,setFxRate] = useState("");
     const [description,setDescription] = useState("");
@@ -58,7 +58,7 @@ const TradeForm4 = ({history,setDescOfConsign}) => {
         }
         console.log(descOfConsign);
         setDescOfConsign(descOfConsign);
-        history.push('/tradeform5');
+        //history.push('/tradeform5');
     }
     return (
         <div className="container">
@@ -139,4 +139,8 @@ const mapDispatchToProps = (dispatch) => ({
     setDescOfConsign: (descOfConsign) => dispatch(setDescOfConsign(descOfConsign))
 });
 
-export default connect(null,mapDispatchToProps)(TradeForm4);
+const mapStateToProps = state => ({
+    tradeDeal: state.tradeDeal
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(TradeForm4);
