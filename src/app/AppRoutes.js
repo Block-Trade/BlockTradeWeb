@@ -23,12 +23,14 @@ const CompanyInfo = lazy(() => import('./user-pages/CompanyInfo'));
 const Kyc = lazy(() => import('./components/kyc/Kyc'));
 const Blankpage = lazy(() => import('./user-pages/BlankPages'));
 
-const TradeForm1 = lazy(() => import('./components/tradeForm/tradeForm1'));
-const TradeForm2 = lazy(() => import('./components/tradeForm/tradeForm2'));
-const TradeForm3 = lazy(() => import('./components/tradeForm/tradeForm3'));
-const TradeForm4 = lazy(() => import('./components/tradeForm/tradeForm4'));
-const TradeForm5 = lazy(() => import('./components/tradeForm/tradeForm5'));
+const TradeForm1 = lazy(() => import('./components/tradeForm/TradeForm1'));
+const TradeForm2 = lazy(() => import('./components/tradeForm/TradeForm2'));
+const TradeForm3 = lazy(() => import('./components/tradeForm/TradeForm3'));
+const TradeForm4 = lazy(() => import('./components/tradeForm/TradeForm4'));
+const TradeForm5 = lazy(() => import('./components/tradeForm/TradeForm5'));
 const TradeDeal = lazy(() => import('./components/tradeForm/TradeDeal'));
+const TestForm = lazy(() => import('./components/tradeForm/TestForm'));
+
 const AppRoutes = () => {
   return (
     <Suspense fallback={<Spinner />}>
@@ -52,6 +54,7 @@ const AppRoutes = () => {
         <PrivateRouter path='/tradeform4' component={TradeForm4} />
         <PrivateRouter path='/tradeform5' component={TradeForm5} />
         <PrivateRouter path='/tradedeal' component={TradeDeal} />
+        <PrivateRouter path='/testform' component={TestForm} />
         
         <PublicRouter path='/activate/:token' component={ActivateForm} />
 
