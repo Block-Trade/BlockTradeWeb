@@ -19,6 +19,27 @@ const TradeForm4 = ({history,setDescOfConsign,tradeDeal}) => {
     const [totalCube,setTotalCube]= useState("");
     const [totalGross,setTotalGross] = useState("");
 
+    useEffect(() => {
+        const { descriptionOfConsignmentInfo } = tradeDeal;
+        if(descriptionOfConsignmentInfo){
+            setPID(descriptionOfConsignmentInfo.pid);
+            setFxRate(descriptionOfConsignmentInfo.fxRate);
+            setDescription(descriptionOfConsignmentInfo.description);
+            setSellPrice(descriptionOfConsignmentInfo.sellPrice);
+            setTax(descriptionOfConsignmentInfo.tax);
+            setItemPrice(descriptionOfConsignmentInfo.itemPrice);
+            setUnitsPk(descriptionOfConsignmentInfo.unitsPk);
+            setQty(descriptionOfConsignmentInfo.qty);
+            setAmount(descriptionOfConsignmentInfo.amount);
+            setProducts(descriptionOfConsignmentInfo.products);
+            setTotalAmount(descriptionOfConsignmentInfo.totalAmount);
+            setTotalNetWt(descriptionOfConsignmentInfo.totalNetWt);
+            setCurrDisc(descriptionOfConsignmentInfo.currDisc);
+            setTotalCube(descriptionOfConsignmentInfo.totalCube);
+            setTotalGross(descriptionOfConsignmentInfo.totalGross);
+        }
+    },[]);
+
     const product = {
         pid,
         fxRate,

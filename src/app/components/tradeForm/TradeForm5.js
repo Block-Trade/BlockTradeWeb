@@ -1,4 +1,4 @@
-import React,{ useState } from 'react';
+import React,{ useState,useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setFinalBill } from '../../actions/tradeDeal';
 
@@ -14,6 +14,21 @@ const TradeForm5 = ({history,setFinalBill,tradeDeal}) => {
     const [preTaxAmount,setPreTaxAmount] = useState("");
     const [tradeTotal,setTradeTotal] = useState("");
 
+    useEffect(() => {
+        const { billDetails } = tradeDeal;
+        if(billDetails){
+            setCurr(billDetails.curr);
+            setAdjTotal(billDetails.adjTotal);
+            setDevAmount(billDetails.devAmount);
+            setPackingChg(billDetails.packingChg);
+            setHandChg(billDetails.handChg);
+            setOtherChg(billDetails.otherChg);
+            setInsurAmount(billDetails.insurAmount);
+            setTaxAmount(billDetails.taxAmount);
+            setPreTaxAmount(billDetails.preTaxAmount);
+            setTradeTotal(billDetails.tradeTotal);
+        }
+    },[]);
     const nextForm = (e) => {
         e.preventDefault();
         const finalBill = {
