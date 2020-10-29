@@ -36,6 +36,10 @@ const Login = ({
       loadUser();
     }
   }, []);
+  const handleLogin = (event) => {
+    if (event.key === 'Enter') {
+    }
+  }
   const onSubmit = async (e) => {
     e.preventDefault();
     if (username === '' || password === '') {
@@ -94,6 +98,7 @@ const Login = ({
                   <button
                     className='btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn'
                     onClick={onSubmit}
+                    onKeyDown={handleLogin}
                   >
                     LOGIN
                   </button>

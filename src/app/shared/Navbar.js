@@ -147,7 +147,8 @@ class Navbar extends Component {
                   </Dropdown.Item>
                   <Dropdown.Item
                     className='dropdown-item preview-item d-flex align-items-center border-0'
-                    onClick={(evt) => evt.preventDefault()}
+                    onClick={()=>{localStorage.clear();
+                      window.location.href = '/';}}
                   >
                     Sign Out
                   </Dropdown.Item>
