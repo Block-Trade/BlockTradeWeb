@@ -45,13 +45,16 @@ function getSteps() {
     }
 }
 
-const TestFrom = () => {
+const TestFrom = ({history}) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
 
   const handleNext = () => {
+    if(activeStep===steps.length-1){
+      history.push('/tradedeal');
+    }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -86,7 +89,7 @@ const TestFrom = () => {
               All steps completed - you&apos;re finished
             </Typography>
             <Button onClick={handleReset} className={classes.button}>
-              Reset
+              Finish
             </Button>
           </div>
         ) : (

@@ -9,7 +9,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import Button from '@material-ui/core/Button';
 import Fab from '@material-ui/core/Fab';
 import CheckIcon from '@material-ui/icons/Check';
-import SaveIcon from '@material-ui/icons/Save';
+import SaveOutlined from '@material-ui/icons/Save';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { green } from '@material-ui/core/colors';
 import clsx from 'clsx';
@@ -198,16 +198,14 @@ const TradeForm1 = ({history,setSellerInfo, tradeDeal}) => {
                 <TextField id="sellercont" label="Seller Contact" variant="outlined" value={sellerCont} onChange={(e) => setSellerCont(e.target.value)}  />
                 <TextField id="sellertel" label="Seller Telephone" variant="outlined" value={sellerTel} onChange={(e) => setSellerTel(e.target.value)}  />
                 <TextField id="selleremail" label="Seller Email" variant="outlined" value={sellerEmail} onChange={(e) => setSellerEmail(e.target.value)}  />
-                <div className={classes.wrapper} style={{display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',}}>
+                <div className={classes.wrapper}>
                         <Fab
                         aria-label="save"
                         color="primary"
                         className={buttonClassname}
                         onClick={handleButtonClick}
                     >
-                        {success ? <CheckIcon /> : <SaveIcon />}
+                        {success ? <CheckIcon /> : <SaveOutlined />}
                     </Fab>
                     {loading && <CircularProgress size={68} className={classes.fabProgress} />}
                 </div>

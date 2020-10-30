@@ -114,8 +114,7 @@ const TradeForm5 = ({history,setFinalBill,tradeDeal}) => {
             setTradeTotal(billDetails.tradeTotal);
         }
     },[]);
-    const nextForm = (e) => {
-        e.preventDefault();
+    const nextForm = () => {
         const finalBill = {
             curr,
             adjTotal,
@@ -129,7 +128,7 @@ const TradeForm5 = ({history,setFinalBill,tradeDeal}) => {
         };
         console.log(finalBill);
         setFinalBill(finalBill);
-        history.push('/tradedeal');
+        //history.push('/tradedeal');
     }
     return (
         <div className={classes.root}>

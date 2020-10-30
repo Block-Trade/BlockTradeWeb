@@ -147,8 +147,7 @@ const TradeForm4 = ({history,setDescOfConsign,tradeDeal}) => {
         setItemPrice(0);
     }
 
-    const nextForm = (e) => {
-        e.preventDefault();
+    const nextForm = () => {
         setProducts([...products, product]);
         const descOfConsign = {
             products,
@@ -238,6 +237,7 @@ const TradeForm4 = ({history,setDescOfConsign,tradeDeal}) => {
                     color="primary"
                     className={classes.button}
                     endIcon={<AddCircleRoundedIcon></AddCircleRoundedIcon>}
+                    onClick={addProduct}
                 >
                     ADD
                 </Button>

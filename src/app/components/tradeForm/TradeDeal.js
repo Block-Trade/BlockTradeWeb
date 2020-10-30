@@ -14,7 +14,7 @@ const TradeDeal = ({tradeDeal, auth, finalUpload}) => {
             amount: `${tradeDeal.finalBill.curr}.${tradeDeal.finalBill.tradeTotal}`,
             dueDate: tradeDeal.sellerInfo.invoiceDue
         };
-        finalUpload(data);
+        finalUpload({data, finalBill: tradeDeal.finalBill});
     }
     return (
         <div>

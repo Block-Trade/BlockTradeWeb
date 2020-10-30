@@ -4,9 +4,14 @@ export const getAllTrades = () => async dispatch => {
     try {
         const trades = await axios.get('/trade');
         console.log(trades);
-        
+        dispatch({
+            type:'SET_TRADES',
+            payload: trades.data
+        })
     } catch (e) {
-        
+        dispatch({
+            type:'TRADE_ERROR'
+        });
     }
 }
 

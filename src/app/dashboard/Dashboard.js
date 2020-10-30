@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Sparklines, SparklinesBars } from 'react-sparklines';
 import { Dropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { loadUser } from '../actions/auth';
 import { getAllTrades } from '../actions/trade';
+import RecentTrades from '../components/trades/RecentTrades';
 
-const Dashboard = ({ loadUser, auth }) => {
+const Dashboard = ({ trade,loadUser, auth,getAllTrades }) => {
   useEffect(() => {
     if (localStorage.token && !auth.user) {
       loadUser();
@@ -16,10 +17,21 @@ const Dashboard = ({ loadUser, auth }) => {
     getAllTrades();
     // Call to smart contract to check the status of document verification
     
-  },[auth]);
-
+  },[]);
+  const {trades} = trade;
   return (
-    <div>
+    <Fragment>
+      {trades && <Fragment>
+        <div className="row">
+        <div className='col-xl-3 col-lg-6 col-md-6 col-sm-6 grid-margin'>
+          <h3>Recent trades</h3>
+        </div>
+        </div>  
+        <RecentTrades />
+      
+      </Fragment>
+    }
+    
       <div className='row'>
         <div className='col-xl-3 col-lg-6 col-md-6 col-sm-6 grid-margin stretch-card'>
           <div className='card card-statistics'>
@@ -466,11 +478,12 @@ const Dashboard = ({ loadUser, auth }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Fragment>
   );
 };
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  trade: state.trade
 });
 
-export default connect(mapStateToProps, { loadUser })(Dashboard);
+export default connect(mapStateToProps, { loadUser, getAllTrades })(Dashboard);
