@@ -25,24 +25,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function getSteps() {
-    return [<TradeForm1 />,<TradeForm2 />,<TradeForm3/>,<TradeForm4/>,<TradeForm5/>];
+  return [<TradeForm1 />, <TradeForm2 />, <TradeForm3 />, <TradeForm4 />, <TradeForm5 />];
+}
+
+function getStepContent(stepIndex) {
+  switch (stepIndex) {
+    case 0:
+      return 'Enter Seller Info';
+    case 1:
+      return 'Enter Receiver Info';
+    case 2:
+      return 'Logistics Details';
+    case 3:
+      return 'Product Details';
+    case 4:
+      return 'Final Bill';
+    default:
+      return 'Unknown stepIndex';
   }
-  
-  function getStepContent(stepIndex) {
-    switch (stepIndex) {
-      case 0:
-        return 'Enter Seller Info';
-      case 1:
-        return 'Enter Receiver Info';
-      case 2:
-        return 'Logistics Details';
-      case 3:
-          return 'Product Details';
-      case 4:
-          return 'Final Bill';
-      default:
-        return 'Unknown stepIndex';
-    }
 }
 
 const TestFrom = () => {
@@ -73,7 +73,7 @@ const TestFrom = () => {
           return (
             <Step key={label} {...stepProps}>
               <StepLabel {...labelProps}>{labelStep}</StepLabel>
-              
+
             </Step>
           );
         })}
@@ -90,25 +90,25 @@ const TestFrom = () => {
             </Button>
           </div>
         ) : (
-          <div>
-            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
             <div>
-              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                Back
+              <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+              <div>
+                <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                  Back
               </Button>
-              
 
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleNext}
-                className={classes.button}
-              >
-                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-              </Button>
+
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleNext}
+                  className={classes.button}
+                >
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                </Button>
+              </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
     </div>
   );
