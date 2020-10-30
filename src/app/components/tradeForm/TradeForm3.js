@@ -104,16 +104,15 @@ const TradeForm3 = ({history,setLogisticsInfo, tradeDeal}) => {
         }
     },[]);
 
-    const nextForm = (e) => {
-        e.preventDefault();
+    const nextForm = () => {
         const logisticsInfo = {
-            PlaceofColl: poc,
+            placeofColl: poc,
             collDate,
             collTime,
-            PlaceofDis: pod,
+            placeofDis: pod,
             deptDate,
             deptTime,
-            PlaceofDel: placeofd,
+            placeofDeal: placeofd,
             shippingm
         }
         console.log(logisticsInfo);
@@ -139,7 +138,7 @@ const TradeForm3 = ({history,setLogisticsInfo, tradeDeal}) => {
                     id="collDate"
                     label="Collection Date"
                     format="MM/dd/yyyy"
-                    value={collDate} onChange={(e) => setCollDate(e.target.value)}
+                    value={collDate} onChange={(e) => setCollDate(e)}
                     KeyboardButtonProps={{
                         'aria-label': 'change date',
                     }}
@@ -148,7 +147,7 @@ const TradeForm3 = ({history,setLogisticsInfo, tradeDeal}) => {
                     margin="normal"
                     id="collTime"
                     label="Collection Time"
-                    value={collTime} onChange={(e) => setCollTime(e.target.value)}
+                    value={collTime} onChange={(e) => setCollTime(e)}
                     KeyboardButtonProps={{
                         'aria-label': 'change time',
                     }}
@@ -167,7 +166,7 @@ const TradeForm3 = ({history,setLogisticsInfo, tradeDeal}) => {
                     id="deptDate"
                     label="Departure Date"
                     format="MM/dd/yyyy"
-                    value={deptDate} onChange={(e) => setDeptDate(e.target.value)}
+                    value={deptDate} onChange={(e) => setDeptDate(e)}
                     KeyboardButtonProps={{
                         'aria-label': 'change date',
                     }}
@@ -176,7 +175,7 @@ const TradeForm3 = ({history,setLogisticsInfo, tradeDeal}) => {
                     margin="normal"
                     id="deptTime"
                     label="Departure Time"
-                    value={deptTime} onChange={(e) => setDeptTime(e.target.value)}
+                    value={deptTime} onChange={(e) => setDeptTime(e)}
                     KeyboardButtonProps={{
                         'aria-label': 'change time',
                     }}

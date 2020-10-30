@@ -75,7 +75,7 @@ export const setImpId = ({id}) => dispatch => {
     });
 }
 
-export const finalUpload = (data) => async dispatch => {
+export const finalUpload = ({data, finalBill}) => async dispatch => {
     try {
         const headers = {
             'Content-Type':'application/json'

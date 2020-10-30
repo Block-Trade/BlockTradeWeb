@@ -104,8 +104,7 @@ useEffect(() => {
         }
     },[]);
 
-    const nextForm = (e) => {
-        e.preventDefault();
+    const nextForm = () => {
         const receiverInfo = {
             receiverFirm,
             receiverAddr,
