@@ -67,8 +67,11 @@ const Sidebar = ({
   };
   const handleNameChange = (e) => {
     e.preventDefault();
+    if(e.target.value!==''){
+      
+      filterName({ text: e.target.value });
+    }
     setUsername(e.target.value);
-    filterName({ text: e.target.value });
   };
 
   const onSubmit = (e) => {

@@ -2,36 +2,36 @@ import axios from 'axios';
 
 export const setSellerInfo = (sellerInfo) => async dispatch => {
     dispatch({
-        type:'SET_SELLER_INFO',
-        payload:sellerInfo
+        type: 'SET_SELLER_INFO',
+        payload: sellerInfo
     });
 }
 
 export const setReceiverInfo = (receiverInfo) => async dispatch => {
     dispatch({
-        type:'SET_RECEIVER_INFO',
-        payload:receiverInfo
+        type: 'SET_RECEIVER_INFO',
+        payload: receiverInfo
     });
 }
 
 export const setLogisticsInfo = (logisticsInfo) => async dispatch => {
     dispatch({
-        type:'SET_LOGISTICS_INFO',
-        payload:logisticsInfo
+        type: 'SET_LOGISTICS_INFO',
+        payload: logisticsInfo
     });
 }
 
 export const setDescOfConsign = (descOfConsign) => async dispatch => {
     dispatch({
-        type:'SET_DESC_OF_CONSIGNMENT',
-        payload:descOfConsign
+        type: 'SET_DESC_OF_CONSIGNMENT',
+        payload: descOfConsign
     });
 }
 
 export const setFinalBill = (finalBill) => async dispatch => {
     dispatch({
-        type:'SET_FINAL_BILL',
-        payload:finalBill
+        type: 'SET_FINAL_BILL',
+        payload: finalBill
     });
 }
 
@@ -55,7 +55,7 @@ export const getUserId = () => async dispatch => {
     }
 }
 
-export const filterName = ({text}) => dispatch => {
+export const filterName = ({ text }) => dispatch => {
     dispatch({
         type: 'FILTER_NAME',
         payload: text
@@ -68,24 +68,37 @@ export const clearFilter = () => dispatch => {
     });
 }
 
-export const setImpId = ({id}) => dispatch => {
+export const setImpId = ({ id }) => dispatch => {
     dispatch({
         type: 'SET_IMP_ID',
         payload: id
     });
 }
 
-export const finalUpload = (data) => async dispatch => {
+export const finalUpload = ({ data, finalBill }) => async dispatch => {
     try {
         const headers = {
-            'Content-Type':'application/json'
+            'Content-Type': 'application/json'
         };
-        const res = await axios.post('/trade',data,{
+        const res = await axios.post('/trade', data, {
             headers: headers
         });
         console.log(res);
         // Put data on ipfs from res.data.TradeId
+
+        const ipfsClient = require('ipfs-http-client')
+        const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' })
+
+        ipfs.add(finalBill, (error, result) => {
+            console.log('Ipfs result', result[0].hash)
+            if (error) {
+                console.error(error)
+                return
+            }                
+        })
+
+
     } catch (e) {
-    
+
     }
 }

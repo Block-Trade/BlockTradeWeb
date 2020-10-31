@@ -45,13 +45,16 @@ function getStepContent(stepIndex) {
   }
 }
 
-const TestFrom = () => {
+const TestFrom = ({history}) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
 
   const handleNext = () => {
+    if(activeStep===steps.length-1){
+      history.push('/tradedeal');
+    }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -86,27 +89,26 @@ const TestFrom = () => {
               All steps completed - you&apos;re finished
             </Typography>
             <Button onClick={handleReset} className={classes.button}>
-              Reset
+              Finish
             </Button>
           </div>
         ) : (
-            <div>
-              <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-              <div>
-                <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
-                  Back
+          <div>
+            <div style={{ display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',}}>
+              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+                Back
               </Button>
-
-
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleNext}
-                  className={classes.button}
-                >
-                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                </Button>
-              </div>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleNext}
+                className={classes.button}
+              >
+                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+              </Button>
+            </div>
             </div>
           )}
       </div>
