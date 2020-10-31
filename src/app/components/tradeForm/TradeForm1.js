@@ -14,6 +14,10 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { green } from '@material-ui/core/colors';
 import clsx from 'clsx';
 import Container from '@material-ui/core/Container';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 import {
   MuiPickersUtilsProvider,
@@ -100,6 +104,8 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
   const [sellerCont, setSellerCont] = useState('');
   const [sellerTel, setSellerTel] = useState('');
   const [sellerEmail, setSellerEmail] = useState('');
+  const [payType,setPayType] = useState("");
+  const [creditP,setCreditP] = useState(0);
   //const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
 
   useEffect(() => {
@@ -123,7 +129,8 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
       sellerFirm,
       invoiceNo,
       invoiceDate,
-      invoiceDue,
+      paymentType:payType,
+      creditPeriod:creditP,
       sellerAddr,
       purposeShip,
       party,
@@ -159,7 +166,7 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
           <Grid item xs={12}>
             <TextField
               id='sellerfirm'
-              label='SellerFirm'
+              label='Seller Firm'
               type='text'
               variant='outlined'
               value={sellerFirm}
@@ -193,24 +200,33 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
               />
             </MuiPickersUtilsProvider>
           </Grid>
-          <Grid item xs={12}>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <KeyboardDatePicker
-                disableToolbar
-                inputVariant='outlined'
-                format='MM/dd/yyyy'
-                margin='normal'
-                id='date-picker-inline'
-                label='Invoice Due'
-                value={invoiceDue}
-                onChange={(e) => setInvoiceDue(e)}
-                KeyboardButtonProps={{
-                  'aria-label': 'change date',
-                }}
-                style={{ width: '100%' }}
-              />
-            </MuiPickersUtilsProvider>
+          <Grid item xs={6}>
+            <FormControl
+              variant='outlined'
+              className={classes.formControl}
+              style={{ width: '100%' }}
+            >
+              <InputLabel id='paymentType'>Payment Type</InputLabel>
+              <Select
+                value={payType}
+                onChange={(e) => setPayType(e.target.value)}
+                label='Payment Type'
+              >
+                <MenuItem value={'PL'}>PL</MenuItem>
+                <MenuItem value={'PA'}>PA</MenuItem>
+              </Select>
+            </FormControl>
           </Grid>
+          {payType==='PA' && <Grid item xs={6}>
+            <TextField
+              id='credit'
+              label='Credit Period'
+              type='number'
+              variant='outlined'
+              value={creditP}
+              onChange={(e) => setCreditP(e.target.value)}
+            />
+          </Grid>}
           <Grid item xs={12}>
             <TextField
               id='outlined-multiline-static'

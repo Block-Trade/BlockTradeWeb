@@ -78,7 +78,7 @@ const Sidebar = ({
     e.preventDefault();
     tradeDeal.filtered.map(fil => {
       if(fil.username == username){
-        setImpId({id: fil._id});
+        setImpId({username: fil.username});
         history.push('/testform');
       }
     });

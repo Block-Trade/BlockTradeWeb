@@ -68,14 +68,14 @@ export const clearFilter = () => dispatch => {
     });
 }
 
-export const setImpId = ({id}) => dispatch => {
+export const setImpId = ({username}) => dispatch => {
     dispatch({
         type: 'SET_IMP_ID',
-        payload: id
+        payload: username
     });
 }
 
-export const finalUpload = ({data, finalBill}) => async dispatch => {
+export const finalUpload = ({data, ipfsData}) => async dispatch => {
     try {
         const headers = {
             'Content-Type':'application/json'
