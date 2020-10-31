@@ -275,18 +275,18 @@ useEffect(() => {
                         <MenuItem value="DDP">DDP - DELIVERED Duty PAID</MenuItem>
                     </Select>
                 </FormControl>
-                <div className={classes.wrapper} style={{display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',}}>
-                        <Fab
-                        aria-label="save"
-                        color="primary"
-                        className={buttonClassname}
-                        onClick={handleButtonClick}
-                    >
-                        {success ? <CheckIcon /> : <SaveIcon />}
-                    </Fab>
-                    {loading && <CircularProgress size={68} className={classes.fabProgress} />}
+                <div style={{display: 'flex', alignItems: 'center',justifyContent: 'center'}}>
+                  <div className={classes.wrapper}>
+                          <Fab
+                          aria-label="save"
+                          color="primary"
+                          className={buttonClassname}
+                          onClick={handleButtonClick}
+                      >
+                          {success ? <CheckIcon /> : <SaveIcon />}
+                      </Fab>
+                      {loading && <CircularProgress size={68} className={classes.fabProgress} />}
+                  </div>
                 </div>
             </form>
         </div>

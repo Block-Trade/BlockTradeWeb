@@ -198,16 +198,18 @@ const TradeForm1 = ({history,setSellerInfo, tradeDeal}) => {
                 <TextField id="sellercont" label="Seller Contact" variant="outlined" value={sellerCont} onChange={(e) => setSellerCont(e.target.value)}  />
                 <TextField id="sellertel" label="Seller Telephone" variant="outlined" value={sellerTel} onChange={(e) => setSellerTel(e.target.value)}  />
                 <TextField id="selleremail" label="Seller Email" variant="outlined" value={sellerEmail} onChange={(e) => setSellerEmail(e.target.value)}  />
-                <div className={classes.wrapper}>
-                        <Fab
-                        aria-label="save"
-                        color="primary"
-                        className={buttonClassname}
-                        onClick={handleButtonClick}
-                    >
-                        {success ? <CheckIcon /> : <SaveOutlined />}
-                    </Fab>
-                    {loading && <CircularProgress size={68} className={classes.fabProgress} />}
+                <div style={{display: 'flex', alignItems: 'center',justifyContent: 'center'}}>
+                  <div className={classes.wrapper}>
+                          <Fab
+                          aria-label="save"
+                          color="primary"
+                          className={buttonClassname}
+                          onClick={handleButtonClick}
+                      >
+                          {success ? <CheckIcon /> : <SaveOutlined />}
+                      </Fab>
+                      {loading && <CircularProgress size={68} className={classes.fabProgress} />}
+                  </div>
                 </div>
             </form>
         </div>
