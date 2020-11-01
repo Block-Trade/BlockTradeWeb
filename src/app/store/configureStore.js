@@ -4,6 +4,7 @@ import tradeDealReducer from '../reducers/tradeDeal';
 import kycReducer from '../reducers/kyc';
 import thunk from 'redux-thunk';
 import tradeReducer from '../reducers/trade';
+import conReducer from '../reducers/connection';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -13,7 +14,8 @@ export default () => {
             auth: authReducer,
             tradeDeal: tradeDealReducer,
             kyc: kycReducer,
-            trade: tradeReducer
+            trade: tradeReducer,
+            conn: conReducer
         }),
         composeEnhancers(applyMiddleware(thunk))
     );
