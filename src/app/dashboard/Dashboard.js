@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import { loadUser } from '../actions/auth';
 import { getAllTrades } from '../actions/trade';
 import RecentTrades from '../components/trades/RecentTrades';
+import { getAllConn } from '../actions/connection';
 
-const Dashboard = ({ trade,loadUser, auth,getAllTrades }) => {
+const Dashboard = ({ trade,loadUser, auth,getAllTrades, getAllConn }) => {
   useEffect(() => {
     if (localStorage.token && !auth.user) {
       loadUser();
@@ -15,6 +16,7 @@ const Dashboard = ({ trade,loadUser, auth,getAllTrades }) => {
   },[]);
   useEffect(() => {
     getAllTrades();
+    // Get all connections
     // Call to smart contract to check the status of document verification
     
   },[]);
@@ -486,4 +488,4 @@ const mapStateToProps = (state) => ({
   trade: state.trade
 });
 
-export default connect(mapStateToProps, { loadUser, getAllTrades })(Dashboard);
+export default connect(mapStateToProps, { loadUser, getAllTrades, getAllConn })(Dashboard);
