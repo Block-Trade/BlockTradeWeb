@@ -11,6 +11,8 @@ import TradeForm2 from './TradeForm2';
 import TradeForm3 from './TradeForm3';
 import TradeForm4 from './TradeForm4';
 import TradeForm5 from './TradeForm5';
+import { connect } from 'react-redux';
+import { finalUpload } from '../../actions/tradeDeal';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,15 +47,31 @@ function getStepContent(stepIndex) {
   }
 }
 
-const TestFrom = ({history}) => {
+const TestFrom = ({history, tradeDeal, finalUpload, auth}) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
-
+  const { sellerInfo,receiverInfo,logisticsInfo,descOfConsign,finalBill } = tradeDeal;
   const handleNext = () => {
     if(activeStep===steps.length-1){
-      history.push('/tradedeal');
+      //history.push('/tradedeal');
+      const data = {
+        expUser: auth.user.username,
+        impUser: tradeDeal.selectedImpId,
+        inco: tradeDeal.receiverInfo.inco,
+        amount: `${tradeDeal.finalBill.curr}.${tradeDeal.finalBill.tradeTotal}`,
+        creditPeriod: tradeDeal.sellerInfo.creditP,
+        paymentType: tradeDeal.sellerInfo.paymentType
+    };
+      const ipfsData = {
+          sellerInfo,
+          receiverInfo,
+          logisticsInfo,
+          descOfConsign,
+          finalBill
+      };
+      finalUpload({data, ipfsData});
     }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -116,5 +134,9 @@ const TestFrom = ({history}) => {
   );
 }
 
+const mapStateToProps = state => ({
+  tradeDeal: state.tradeDeal,
+  auth: state.auth
+});
 
-export default TestFrom;
+export default connect(mapStateToProps,{ finalUpload })(TestFrom);

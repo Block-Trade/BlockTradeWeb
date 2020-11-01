@@ -14,7 +14,14 @@ const TradeDeal = ({tradeDeal, auth, finalUpload}) => {
             amount: `${tradeDeal.finalBill.curr}.${tradeDeal.finalBill.tradeTotal}`,
             dueDate: tradeDeal.sellerInfo.invoiceDue
         };
-        finalUpload({data, finalBill: tradeDeal.finalBill});
+        const ipfsData = {
+            sellerInfo,
+            receiverInfo,
+            logisticsInfo,
+            descOfConsign,
+            finalBill
+        };
+        finalUpload({data, ipfsData});
     }
     return (
         <div>

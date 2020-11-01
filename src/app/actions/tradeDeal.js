@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+const IPFS = require('ipfs-mini');
+const ipfs = new IPFS({host: 'ipfs.infura.io', port: 5001, protocol:'https'})
+
 export const setSellerInfo = (sellerInfo) => async dispatch => {
     dispatch({
         type: 'SET_SELLER_INFO',
@@ -68,14 +71,14 @@ export const clearFilter = () => dispatch => {
     });
 }
 
-export const setImpId = ({ id }) => dispatch => {
+export const setImpId = ({ username }) => dispatch => {
     dispatch({
         type: 'SET_IMP_ID',
-        payload: id
+        payload: username
     });
 }
 
-export const finalUpload = ({ data, finalBill }) => async dispatch => {
+export const finalUpload = ({ data, ipfsData }) => async dispatch => {
     try {
         const headers = {
             'Content-Type': 'application/json'
@@ -85,18 +88,21 @@ export const finalUpload = ({ data, finalBill }) => async dispatch => {
         });
         console.log(res);
         // Put data on ipfs from res.data.TradeId
+        console.log("IPFS starts here");
 
-        const ipfsClient = require('ipfs-http-client')
-        const ipfs = ipfsClient({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' })
+        var x = JSON.stringify(ipfsData['sellerInfo']) + "\n\n" + JSON.stringify(ipfsData['receiverInfo']) + "\n\n" + JSON.stringify(ipfsData['logisticsInfo']) + "\n\n" + JSON.stringify(ipfsData["descOfConsign"]) + "\n\n" + JSON.stringify(ipfsData['finalBill']);
 
-        ipfs.add(finalBill, (error, result) => {
-            console.log('Ipfs result', result[0].hash)
+        console.log(x);
+
+        ipfs.add(x, (error, result) => {
+            
             if (error) {
                 console.error(error)
                 return
-            }                
-        })
+            }
 
+            console.log('Ipfs string x result', result)
+        })        
 
     } catch (e) {
 

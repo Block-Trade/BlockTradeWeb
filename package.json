@@ -29,6 +29,8 @@
     "font-awesome": "^4.7.0",
     "history": "^5.0.0",
     "http-proxy-middleware": "^1.0.5",
+    "ipfs-http-client": "^48.0.0",
+    "ipfs-mini": "^1.1.5",
     "materialize-css": "^1.0.0-rc.2",
     "mdbreact": "^4.27.0",
     "namor": "^1.1.3",
