@@ -69,6 +69,9 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
   const classes = useStyles();
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
+  const [err,setErr] = useState(false);
+  const [flag,setFlag] = useState(true);
+
   const timer = React.useRef();
 
   const buttonClassname = clsx({
@@ -121,7 +124,9 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
       setSellerCont(sellerInfo.sellerCont);
       setSellerTel(sellerInfo.sellerTel);
       setSellerEmail(sellerInfo.sellerEmail);
+      setFlag(false);
     }
+    checkCondition();
   }, []);
 
   const nextForm = () => {
@@ -140,8 +145,16 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
     };
     setSellerInfo(sellerInfo);
     console.log(sellerInfo);
-    //history.push('/tradeform2');
+    //history.push('/tradeform2')
   };
+
+  const checkCondition = () => {
+    if(sellerAddr&&sellerEmail&&sellerCont&&payType&&party&&purposeShip&&sellerTel&&sellerFirm&&invoiceNo&&invoiceDate){
+      setFlag(false);
+    }else {
+      setFlag(true);
+    }
+  }
 
   return (
     <div
@@ -170,8 +183,11 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={sellerFirm}
-              onChange={(e) => setSellerFirm(e.target.value)}
               style={{ width: '100%' }}
+              onChange={(e) => {setSellerFirm(e.target.value); checkCondition()}}
+              error={sellerFirm===''? true:false} 
+              helperText={sellerFirm===''?"Seller Firm is required":''}
+              required
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -180,10 +196,13 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
               label='Invoice Number'
               variant='outlined'
               value={invoiceNo}
-              onChange={(e) => setInvoiceNo(e.target.value)}
+              onChange={(e) => {setInvoiceNo(e.target.value); checkCondition()}}
+              error={invoiceNo===''? true:false} 
+              helperText={invoiceNo===''?"Invoice Number is required":''}
+              required
             />
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={6} style={{padddingTop:0}}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
                 disableToolbar
@@ -193,7 +212,7 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
                 id='date-picker-inline'
                 label='Invoice Date'
                 value={invoiceDate}
-                onChange={(e) => setInvoiceDate(e)}
+                onChange={(e) => {setInvoiceDate(e); checkCondition()}}
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
@@ -209,8 +228,9 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
               <InputLabel id='paymentType'>Payment Type</InputLabel>
               <Select
                 value={payType}
-                onChange={(e) => setPayType(e.target.value)}
+                onChange={(e) => {setPayType(e.target.value); checkCondition()}}
                 label='Payment Type'
+                required
               >
                 <MenuItem value={'PL'}>PL</MenuItem>
                 <MenuItem value={'PA'}>PA</MenuItem>
@@ -224,7 +244,10 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
               type='number'
               variant='outlined'
               value={creditP}
-              onChange={(e) => setCreditP(e.target.value)}
+              onChange={(e) => {setCreditP(e.target.value); checkCondition()}}
+              error={creditP===''? true:false} 
+              helperText={creditP===''?"Credit Period is required":''}
+              required
             />
           </Grid>}
           <Grid item xs={12}>
@@ -235,8 +258,11 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
               rows={4}
               variant='outlined'
               value={sellerAddr}
-              onChange={(e) => setSellerAddr(e.target.value)}
+              onChange={(e) => {setSellerAddr(e.target.value); checkCondition()}}
               style={{ width: '100%' }}
+              error={sellerAddr===''? true:false} 
+              helperText={sellerAddr===''?"Seller Address is required":''}
+              required
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -245,8 +271,11 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
               label='Purpose of shipment'
               variant='outlined'
               value={purposeShip}
-              onChange={(e) => setPurposeShip(e.target.value)}
+              onChange={(e) => {setPurposeShip(e.target.value); checkCondition()}}
               style={{ width: '100%' }}
+              error={purposeShip===''? true:false} 
+              helperText={purposeShip===''?"Purpose of shipment is required":''}
+              required
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -255,8 +284,11 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
               label='Party to transaction'
               variant='outlined'
               value={party}
-              onChange={(e) => setParty(e.target.value)}
+              onChange={(e) => {setParty(e.target.value);checkCondition()}}
               style={{ width: '100%' }}
+              error={party===''? true:false} 
+              helperText={party===''?"Party to transaction is required":''}
+              required
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -265,8 +297,11 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
               label='Seller Contact'
               variant='outlined'
               value={sellerCont}
-              onChange={(e) => setSellerCont(e.target.value)}
+              onChange={(e) => {setSellerCont(e.target.value); checkCondition()}}
               style={{ width: '100%' }}
+              error={sellerCont===''? true:false} 
+              helperText={sellerCont===''?"Seller Contact is required":''}
+              required
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -275,8 +310,11 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
               label='Seller Telephone'
               variant='outlined'
               value={sellerTel}
-              onChange={(e) => setSellerTel(e.target.value)}
+              onChange={(e) => {setSellerTel(e.target.value); checkCondition()}}
               style={{ width: '100%' }}
+              error={sellerTel===''? true:false} 
+              helperText={sellerTel===''?"Seller Telephone is required":''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -285,8 +323,11 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
               label='Seller Email'
               variant='outlined'
               value={sellerEmail}
-              onChange={(e) => setSellerEmail(e.target.value)}
+              onChange={(e) => {setSellerEmail(e.target.value); checkCondition()}}
               style={{ width: '100%' }}
+              error={sellerEmail===''? true:false} 
+              helperText={sellerEmail===''?"Seller Email is required":''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -303,6 +344,7 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
                   color='primary'
                   className={buttonClassname}
                   onClick={handleButtonClick}
+                  disabled={flag}
                 >
                   {success ? <CheckIcon /> : <SaveOutlined />}
                 </Fab>
