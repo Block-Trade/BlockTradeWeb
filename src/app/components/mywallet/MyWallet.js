@@ -8,6 +8,7 @@ import TokenExchange from '../../../abis/TokenExchange.json';
 import Payment from '../../../abis/Payment.json';
 import Web3 from 'web3';
 import Main from './Main';
+import { loadUser } from '../../actions/auth';
 
 // import DatePicker from 'react-datepicker';
 // import { Dropdown } from 'react-bootstrap';
@@ -42,6 +43,10 @@ class MyWallet extends Component {
       await this.loadBlockchainData()
   }
 
+
+  componentDidMount(){
+      loadUser();
+  }
   async loadBlockchainData() {
       const web3 = window.web3
 

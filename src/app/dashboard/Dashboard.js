@@ -9,17 +9,16 @@ import { getAllConn } from '../actions/connection';
 
 const Dashboard = ({ trade,loadUser, auth,getAllTrades, getAllConn }) => {
   useEffect(() => {
-    if (localStorage.token && !auth.user) {
-      loadUser();
-    }
-
-  },[]);
-  useEffect(() => {
-    getAllTrades();
-    // Get all connections
-    // Call to smart contract to check the status of document verification
+    loadUser();
     
   },[]);
+  useEffect(() => {
+    // Get all connections
+    // Call to smart contract to check the status of document verification
+    if(auth.user){
+      getAllTrades();
+    }
+  },[auth.user]);
   const {trades} = trade;
   return (
     <Fragment>
