@@ -15,4 +15,18 @@ export const getAllTrades = () => async dispatch => {
     }
 }
 
+
+export const statusUpdate = ({tradeId, status}) => async dispatch => {
+    try {
+        const headers = {
+            'Content-Type':'application/json'
+        }
+        const res = await axios.post('/trade/update',{tradeId,tradeStatus: status},{
+            headers: headers
+        });
+        console.log(res);
+    } catch (e) {
+
+    }
+}
 //Get ipfs doc through trade id

@@ -8,6 +8,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { connect } from 'react-redux';
+import {statusUpdate} from '../../actions/trade';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,7 +36,7 @@ function getSteps() {
     return ['Documents Uploaded', 'Documents Verified', 'Goods Laided','Goods Received','Payment complete'];
 }
 
-const TradeCard = ({trade, user}) => {
+const TradeCard = ({trade, user, statusUpdate}) => {
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
     const [activeStep, setActiveStep] = React.useState(0);
@@ -88,14 +90,18 @@ const TradeCard = ({trade, user}) => {
             Status: {steps[activeStep]}
           </Typography>
           <Typography variant="body2" component="p">
-            Due Date: {trade.dueDate}
+            Payment Time: {trade.paymentType}
+            <br />
+            {trade.creditPeriod!==0 && `Credit Period: ${trade.creditPeriod}`}
             <br />
             Amount: {trade.amount}
           </Typography>
         </CardContent>
         <CardActions>
           <Button size="small">View Details</Button>
-          {trade.importerUserName === user.username && <Button size="small">Verify document</Button>}
+          {((trade.importerUserName === user.username) && (trade.tradeStatus==='DU')) && <Button size="small" onClick={() => {
+            statusUpdate({tradeId: trade.TradeId,status:'IV'})
+          }}>Verify document</Button>}
           {!status && <Button size="small" onClick={() => handleStatusClick({tradeStatus:trade.tradeStatus})}>Check Status</Button>}
         </CardActions>
       </Card>
@@ -103,4 +109,4 @@ const TradeCard = ({trade, user}) => {
     )
 }
 
-export default TradeCard;
+export default connect(null,{ statusUpdate })(TradeCard);
