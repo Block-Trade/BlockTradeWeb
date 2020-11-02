@@ -27,7 +27,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function getSteps() {
-  return [<TradeForm1 />, <TradeForm2 />, <TradeForm3 />, <TradeForm4 />, <TradeForm5 />];
+  return [
+    <TradeForm1 />,
+    <TradeForm2 />,
+    <TradeForm3 />,
+    <TradeForm4 />,
+    <TradeForm5 />,
+  ];
 }
 
 function getStepContent(stepIndex) {
@@ -47,14 +53,20 @@ function getStepContent(stepIndex) {
   }
 }
 
-const TestFrom = ({history, tradeDeal, finalUpload, auth}) => {
+const TestFrom = ({ history, tradeDeal, finalUpload, auth }) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
 
-  const { sellerInfo,receiverInfo,logisticsInfo,descOfConsign,finalBill } = tradeDeal;
+  const {
+    sellerInfo,
+    receiverInfo,
+    logisticsInfo,
+    descOfConsign,
+    finalBill,
+  } = tradeDeal;
   const handleNext = () => {
-    if(activeStep===steps.length-1){
+    if (activeStep === steps.length - 1) {
       //history.push('/tradedeal');
       const data = {
         expUser: auth.user.username,
@@ -62,20 +74,24 @@ const TestFrom = ({history, tradeDeal, finalUpload, auth}) => {
         inco: tradeDeal.receiverInfo.inco,
         amount: `${tradeDeal.finalBill.curr}.${tradeDeal.finalBill.tradeTotal}`,
         creditPeriod: tradeDeal.sellerInfo.creditP,
-        paymentType: tradeDeal.sellerInfo.paymentType
-    };
-      const ipfsData = {
-          sellerInfo,
-          receiverInfo,
-          logisticsInfo,
-          descOfConsign,
-          finalBill
+        paymentType: tradeDeal.sellerInfo.paymentType,
       };
-      finalUpload({data, ipfsData});
+      const ipfsData = {
+        sellerInfo,
+        receiverInfo,
+        logisticsInfo,
+        descOfConsign,
+        finalBill,
+      };
+      finalUpload({ data, ipfsData });
     }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    localStorage.setItem('flag', true);
   };
-
+  const disable = () => {
+    const d = localStorage.getItem('flag');
+    return d == 'true' ? true : false;
+  };
   const handleBack = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
@@ -94,7 +110,6 @@ const TestFrom = ({history, tradeDeal, finalUpload, auth}) => {
           return (
             <Step key={label} {...stepProps}>
               <StepLabel {...labelProps}>{labelStep}</StepLabel>
-
             </Step>
           );
         })}
@@ -112,31 +127,40 @@ const TestFrom = ({history, tradeDeal, finalUpload, auth}) => {
           </div>
         ) : (
           <div>
-            <div style={{ display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',}}>
-              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Button
+                disabled={activeStep === 0}
+                onClick={handleBack}
+                className={classes.button}
+              >
                 Back
               </Button>
               <Button
-                variant="contained"
-                color="primary"
+                variant='contained'
+                color='primary'
                 onClick={handleNext}
                 className={classes.button}
+                disabled={disable()}
               >
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>
             </div>
-            </div>
-          )}
+          </div>
+        )}
       </div>
     </div>
   );
-}
+};
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   tradeDeal: state.tradeDeal,
-  auth: state.auth
+  auth: state.auth,
 });
 
-export default connect(mapStateToProps,{ finalUpload })(TestFrom);
+export default connect(mapStateToProps, { finalUpload })(TestFrom);
