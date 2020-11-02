@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { kycDl, kycPass } from '../../actions/kyc';
 import { Card, Button, Form } from 'react-bootstrap';
+import { loadUser } from '../../actions/auth';
 
-const Kyc = ({ kycDl, kycPass, kyc, history }) => {
+const Kyc = ({ kycDl, kycPass, kyc, history,loadUser }) => {
   const [meth, setMeth] = useState('');
   const [toggler, setToggler] = useState(false);
   const [no, setNo] = useState('');
@@ -13,6 +14,12 @@ const Kyc = ({ kycDl, kycPass, kyc, history }) => {
       history.push('/dashboard');
     }
   }, [history, kyc.kycStatus]);
+
+  useEffect(() => {
+    loadUser();
+    
+  },[]);
+
   const onSubmit = (e) => {
     e.preventDefault();
     if (cc === '' || no === '') {
@@ -114,4 +121,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   kyc: state.kyc,
 });
-export default connect(mapStateToProps, { kycDl, kycPass })(Kyc);
+export default connect(mapStateToProps, { kycDl, kycPass,loadUser })(Kyc);
