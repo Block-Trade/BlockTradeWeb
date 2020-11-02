@@ -73,6 +73,8 @@ const TradeForm2 = ({ history, setReceiverInfo, tradeDeal }) => {
   const [inco, setInco] = useState('');
   const [success, setSuccess] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const [err, setErr] = useState(false);
+  const [flag, setFlag] = useState(true);
   const timer = React.useRef();
   const buttonClassname = clsx({
     [classes.buttonSuccess]: success,
@@ -90,6 +92,7 @@ const TradeForm2 = ({ history, setReceiverInfo, tradeDeal }) => {
         setLoading(false);
       }, 2000);
     }
+    localStorage.setItem('flag', flag);
   };
   useEffect(() => {
     const { receiverInfo } = tradeDeal;
@@ -104,6 +107,7 @@ const TradeForm2 = ({ history, setReceiverInfo, tradeDeal }) => {
       setInco(receiverInfo.inco);
       setIncurr(receiverInfo.incurr);
     }
+    checkCondition();
   }, []);
 
   const nextForm = () => {
@@ -121,6 +125,23 @@ const TradeForm2 = ({ history, setReceiverInfo, tradeDeal }) => {
     console.log(receiverInfo);
     setReceiverInfo(receiverInfo);
     //history.push('/tradeform3');
+  };
+  const checkCondition = () => {
+    if (
+      receiverFirm &&
+      receiverAddr &&
+      receiverCont &&
+      receiverTel &&
+      receiverEmail &&
+      dutyPay &&
+      payMeth &&
+      incurr &&
+      inco
+    ) {
+      setFlag(false);
+    } else {
+      setFlag(true);
+    }
   };
   return (
     <div
@@ -143,8 +164,16 @@ const TradeForm2 = ({ history, setReceiverInfo, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={receiverFirm}
-              onChange={(e) => setReceiverFirm(e.target.value)}
+              onChange={(e) => {
+                setReceiverFirm(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={receiverFirm === '' ? true : false}
+              helperText={
+                receiverFirm === '' ? 'Receiver Firm is required' : ''
+              }
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -153,8 +182,16 @@ const TradeForm2 = ({ history, setReceiverInfo, tradeDeal }) => {
               label='Receiver Address'
               variant='outlined'
               value={receiverAddr}
-              onChange={(e) => setReceiverAddr(e.target.value)}
+              onChange={(e) => {
+                setReceiverAddr(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={receiverAddr === '' ? true : false}
+              helperText={
+                receiverAddr === '' ? 'Receiver Address is required' : ''
+              }
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -163,8 +200,16 @@ const TradeForm2 = ({ history, setReceiverInfo, tradeDeal }) => {
               label='Receiver Contact'
               variant='outlined'
               value={receiverCont}
-              onChange={(e) => setReceiverCont(e.target.value)}
+              onChange={(e) => {
+                setReceiverCont(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={receiverCont === '' ? true : false}
+              helperText={
+                receiverCont === '' ? 'Receiver Contact is required' : ''
+              }
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -173,8 +218,16 @@ const TradeForm2 = ({ history, setReceiverInfo, tradeDeal }) => {
               label='Receiver Telephone'
               variant='outlined'
               value={receiverTel}
-              onChange={(e) => setReceiverTel(e.target.value)}
+              onChange={(e) => {
+                setReceiverTel(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={receiverTel === '' ? true : false}
+              helperText={
+                receiverTel === '' ? 'Receiver Telephone is required' : ''
+              }
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -183,8 +236,16 @@ const TradeForm2 = ({ history, setReceiverInfo, tradeDeal }) => {
               label='Receiver Email'
               variant='outlined'
               value={receiverEmail}
-              onChange={(e) => setReceiverEmail(e.target.value)}
+              onChange={(e) => {
+                setReceiverEmail(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={receiverEmail === '' ? true : false}
+              helperText={
+                receiverEmail === '' ? 'Receiver Email is required' : ''
+              }
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -198,8 +259,14 @@ const TradeForm2 = ({ history, setReceiverInfo, tradeDeal }) => {
               </InputLabel>
               <Select
                 value={dutyPay}
-                onChange={(e) => setDutyPay(e.target.value)}
+                onChange={(e) => {
+                  setDutyPay(e.target.value);
+                  checkCondition();
+                }}
                 label='Taxes & Duty Payable By'
+                error={dutyPay === '' ? true : false}
+                helperText={dutyPay === '' ? 'Duty Pay is required' : ''}
+                required
               >
                 <MenuItem value={'exporter'}>Exporter</MenuItem>
                 <MenuItem value={'importer'}>Importer</MenuItem>
@@ -215,8 +282,14 @@ const TradeForm2 = ({ history, setReceiverInfo, tradeDeal }) => {
               <InputLabel id='payMethod'>Payment Method</InputLabel>
               <Select
                 value={payMeth}
-                onChange={(e) => setPayMeth(e.target.value)}
+                onChange={(e) => {
+                  setPayMeth(e.target.value);
+                  checkCondition();
+                }}
                 label='Payment Method'
+                error={payMeth === '' ? true : false}
+                helperText={payMeth === '' ? 'Payment Method is required' : ''}
+                required
               >
                 <MenuItem value={'adtk'}>Advanced Token</MenuItem>
                 <MenuItem value={'asse'}>Assests</MenuItem>
@@ -233,8 +306,14 @@ const TradeForm2 = ({ history, setReceiverInfo, tradeDeal }) => {
               <Select
                 name='incurr'
                 value={incurr}
-                onChange={(e) => setIncurr(e.target.value)}
+                onChange={(e) => {
+                  setIncurr(e.target.value);
+                  checkCondition();
+                }}
                 label='Currency'
+                error={incurr === '' ? true : false}
+                helperText={incurr === '' ? 'Currency is required' : ''}
+                required
               >
                 <MenuItem value='' disabled selected>
                   Invoice Currency
@@ -332,8 +411,14 @@ const TradeForm2 = ({ history, setReceiverInfo, tradeDeal }) => {
               <InputLabel id='inco'>IncoTerms</InputLabel>
               <Select
                 value={inco}
-                onChange={(e) => setInco(e.target.value)}
+                onChange={(e) => {
+                  setInco(e.target.value);
+                  checkCondition();
+                }}
                 label='Incoterms'
+                error={inco === '' ? true : false}
+                helperText={inco === '' ? 'Incoterms is required' : ''}
+                required
               >
                 <MenuItem value='' disabled selected>
                   IncoTerms
@@ -374,6 +459,7 @@ const TradeForm2 = ({ history, setReceiverInfo, tradeDeal }) => {
                   color='primary'
                   className={buttonClassname}
                   onClick={handleButtonClick}
+                  disabled={flag}
                 >
                   {success ? <CheckIcon /> : <SaveIcon />}
                 </Fab>

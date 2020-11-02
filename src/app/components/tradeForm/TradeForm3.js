@@ -74,6 +74,8 @@ const TradeForm3 = ({ history, setLogisticsInfo, tradeDeal }) => {
   const [shippingm, setShippingm] = useState('');
   const [success, setSuccess] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const [err, setErr] = useState(false);
+  const [flag, setFlag] = useState(true);
   const timer = React.useRef();
   const buttonClassname = clsx({
     [classes.buttonSuccess]: success,
@@ -91,6 +93,7 @@ const TradeForm3 = ({ history, setLogisticsInfo, tradeDeal }) => {
         setLoading(false);
       }, 2000);
     }
+    localStorage.setItem('flag', flag);
   };
   useEffect(() => {
     const { logisticsInfo } = tradeDeal;
@@ -121,6 +124,22 @@ const TradeForm3 = ({ history, setLogisticsInfo, tradeDeal }) => {
     setLogisticsInfo(logisticsInfo);
     //history.push('/tradeform4')
   };
+  const checkCondition = () => {
+    if (
+      poc &&
+      collDate &&
+      collTime &&
+      pod &&
+      deptDate &&
+      deptTime &&
+      placeofd &&
+      shippingm
+    ) {
+      setFlag(false);
+    } else {
+      setFlag(true);
+    }
+  };
   return (
     <div
       className={classes.root}
@@ -142,8 +161,14 @@ const TradeForm3 = ({ history, setLogisticsInfo, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={poc}
-              onChange={(e) => setPOC(e.target.value)}
+              onChange={(e) => {
+                setPOC(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={poc === '' ? true : false}
+              helperText={poc === '' ? 'Place of Collection is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -155,11 +180,19 @@ const TradeForm3 = ({ history, setLogisticsInfo, tradeDeal }) => {
                 format='MM/dd/yyyy'
                 inputVariant='outlined'
                 value={collDate}
-                onChange={(e) => setCollDate(e)}
+                onChange={(e) => {
+                  setCollDate(e);
+                  checkCondition();
+                }}
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
                 style={{ width: '100%' }}
+                error={collDate === '' ? true : false}
+                helperText={
+                  collDate === '' ? 'Collection Date is required' : ''
+                }
+                required
               />
             </MuiPickersUtilsProvider>
           </Grid>
@@ -171,11 +204,19 @@ const TradeForm3 = ({ history, setLogisticsInfo, tradeDeal }) => {
                 inputVariant='outlined'
                 label='Collection Time'
                 value={collTime}
-                onChange={(e) => setCollTime(e)}
+                onChange={(e) => {
+                  setCollTime(e);
+                  checkCondition();
+                }}
                 KeyboardButtonProps={{
                   'aria-label': 'change time',
                 }}
                 style={{ width: '100%' }}
+                error={collTime === '' ? true : false}
+                helperText={
+                  collTime === '' ? 'Collection Time is required' : ''
+                }
+                required
               />
             </MuiPickersUtilsProvider>
           </Grid>
@@ -186,8 +227,14 @@ const TradeForm3 = ({ history, setLogisticsInfo, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={pod}
-              onChange={(e) => setPOD(e.target.value)}
+              onChange={(e) => {
+                setPOD(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={pod === '' ? true : false}
+              helperText={pod === '' ? 'Place of Departure is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -199,11 +246,17 @@ const TradeForm3 = ({ history, setLogisticsInfo, tradeDeal }) => {
                 inputVariant='outlined'
                 format='MM/dd/yyyy'
                 value={deptDate}
-                onChange={(e) => setDeptDate(e)}
+                onChange={(e) => {
+                  setDeptDate(e);
+                  checkCondition();
+                }}
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
                 }}
                 style={{ width: '100%' }}
+                error={deptDate === '' ? true : false}
+                helperText={deptDate === '' ? 'Departure Date is required' : ''}
+                required
               />
             </MuiPickersUtilsProvider>
           </Grid>
@@ -215,11 +268,17 @@ const TradeForm3 = ({ history, setLogisticsInfo, tradeDeal }) => {
                 label='Departure Time'
                 inputVariant='outlined'
                 value={deptTime}
-                onChange={(e) => setDeptTime(e)}
+                onChange={(e) => {
+                  setDeptTime(e);
+                  checkCondition();
+                }}
                 KeyboardButtonProps={{
                   'aria-label': 'change time',
                 }}
                 style={{ width: '100%' }}
+                error={deptTime === '' ? true : false}
+                helperText={deptTime === '' ? 'Departure Time is required' : ''}
+                required
               />
             </MuiPickersUtilsProvider>
           </Grid>
@@ -230,8 +289,16 @@ const TradeForm3 = ({ history, setLogisticsInfo, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={placeofd}
-              onChange={(e) => setPlaceofd(e.target.value)}
+              onChange={(e) => {
+                setPlaceofd(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={placeofd === '' ? true : false}
+              helperText={
+                placeofd === '' ? 'Place of Departure is required' : ''
+              }
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -241,8 +308,16 @@ const TradeForm3 = ({ history, setLogisticsInfo, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={shippingm}
-              onChange={(e) => setShippingm(e.target.value)}
+              onChange={(e) => {
+                setShippingm(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={shippingm === '' ? true : false}
+              helperText={
+                shippingm === '' ? 'Place of Departure is required' : ''
+              }
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -259,6 +334,7 @@ const TradeForm3 = ({ history, setLogisticsInfo, tradeDeal }) => {
                   color='primary'
                   className={buttonClassname}
                   onClick={handleButtonClick}
+                  disabled={flag}
                 >
                   {success ? <CheckIcon /> : <SaveIcon />}
                 </Fab>

@@ -83,6 +83,8 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
   const [tradeTotal, setTradeTotal] = useState('');
   const [success, setSuccess] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const [err, setErr] = useState(false);
+  const [flag, setFlag] = useState(true);
   const timer = React.useRef();
   const buttonClassname = clsx({
     [classes.buttonSuccess]: success,
@@ -100,6 +102,7 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
         setLoading(false);
       }, 2000);
     }
+    localStorage.setItem('flag', flag);
   };
   useEffect(() => {
     const { billDetails } = tradeDeal;
@@ -131,6 +134,23 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
     console.log(finalBill);
     setFinalBill(finalBill);
     //history.push('/tradedeal');
+  };
+  const checkCondition = () => {
+    if (
+      curr &&
+      adjTotal &&
+      devAmount &&
+      packingChg &&
+      handChg &&
+      otherChg &&
+      taxAmount &&
+      preTaxAmount &&
+      tradeTotal
+    ) {
+      setFlag(false);
+    } else {
+      setFlag(true);
+    }
   };
   return (
     <div
@@ -251,8 +271,14 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={adjTotal}
-              onChange={(e) => setAdjTotal(e.target.value)}
+              onChange={(e) => {
+                setAdjTotal(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={adjTotal === '' ? true : false}
+              helperText={adjTotal === '' ? 'Adjusted Total is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -262,8 +288,14 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={devAmount}
-              onChange={(e) => setDevAmount(e.target.value)}
+              onChange={(e) => {
+                setDevAmount(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={devAmount === '' ? true : false}
+              helperText={devAmount === '' ? 'Dev Amount is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -273,8 +305,16 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={packingChg}
-              onChange={(e) => setPackingChg(e.target.value)}
+              onChange={(e) => {
+                setPackingChg(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={packingChg === '' ? true : false}
+              helperText={
+                packingChg === '' ? 'Packaging Charges is required' : ''
+              }
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -284,8 +324,14 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={handChg}
-              onChange={(e) => setHandChg(e.target.value)}
+              onChange={(e) => {
+                setHandChg(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={handChg === '' ? true : false}
+              helperText={handChg === '' ? 'Handling Charges is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -295,8 +341,14 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={otherChg}
-              onChange={(e) => setOtherChg(e.target.value)}
+              onChange={(e) => {
+                setOtherChg(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={otherChg === '' ? true : false}
+              helperText={otherChg === '' ? 'Other Charges is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -306,8 +358,16 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={insurAmount}
-              onChange={(e) => setInsurAmount(e.target.value)}
+              onChange={(e) => {
+                setInsurAmount(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={insurAmount === '' ? true : false}
+              helperText={
+                insurAmount === '' ? 'Insurance Amount is required' : ''
+              }
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -317,8 +377,14 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={taxAmount}
-              onChange={(e) => setTaxAmount(e.target.value)}
+              onChange={(e) => {
+                setTaxAmount(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={taxAmount === '' ? true : false}
+              helperText={taxAmount === '' ? 'Tax Amount is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -328,8 +394,16 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={preTaxAmount}
-              onChange={(e) => setPreTaxAmount(e.target.value)}
+              onChange={(e) => {
+                setPreTaxAmount(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={preTaxAmount === '' ? true : false}
+              helperText={
+                preTaxAmount === '' ? 'Pre Tax Amount is required' : ''
+              }
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -339,8 +413,14 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={tradeTotal}
-              onChange={(e) => setTradeTotal(e.target.value)}
+              onChange={(e) => {
+                setTradeTotal(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={tradeTotal === '' ? true : false}
+              helperText={tradeTotal === '' ? 'Trade Total is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -357,6 +437,7 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
                   color='primary'
                   className={buttonClassname}
                   onClick={handleButtonClick}
+                  disabled={flag}
                 >
                   {success ? <CheckIcon /> : <SaveIcon />}
                 </Fab>
