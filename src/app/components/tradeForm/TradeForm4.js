@@ -84,6 +84,8 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
   const [totalGross, setTotalGross] = useState('');
   const [success, setSuccess] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const [err, setErr] = useState(false);
+  const [flag, setFlag] = useState(true);
   const timer = React.useRef();
   const buttonClassname = clsx({
     [classes.buttonSuccess]: success,
@@ -101,6 +103,7 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
         setLoading(false);
       }, 2000);
     }
+    localStorage.setItem('flag', flag);
   };
   useEffect(() => {
     const { descriptionOfConsignmentInfo } = tradeDeal;
@@ -163,6 +166,28 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
     setDescOfConsign(descOfConsign);
     //history.push('/tradeform5');
   };
+  const checkCondition = () => {
+    if (
+      products &&
+      totalAmount &&
+      totalCube &&
+      totalGross &&
+      totalNetWt &&
+      currDisc &&
+      pid &&
+      fxRate &&
+      description &&
+      sellPrice &&
+      tax &&
+      itemPrice &&
+      unitsPk &&
+      qty
+    ) {
+      setFlag(false);
+    } else {
+      setFlag(true);
+    }
+  };
   return (
     <div
       className={classes.root}
@@ -184,8 +209,14 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={pid}
-              onChange={(e) => setPID(e.target.value)}
+              onChange={(e) => {
+                setPID(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={pid === '' ? true : false}
+              helperText={pid === '' ? 'Product ID is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -195,8 +226,14 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={fxRate}
-              onChange={(e) => setFxRate(e.target.value)}
+              onChange={(e) => {
+                setFxRate(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={fxRate === '' ? true : false}
+              helperText={fxRate === '' ? 'Fix Rate is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -206,10 +243,16 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={(e) => {
+                setDescription(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
               multiline
               rows={3}
+              error={description === '' ? true : false}
+              helperText={description === '' ? 'Description is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -219,8 +262,14 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={sellPrice}
-              onChange={(e) => setSellPrice(e.target.value)}
+              onChange={(e) => {
+                setSellPrice(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={sellPrice === '' ? true : false}
+              helperText={sellPrice === '' ? 'Sell Price is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -230,8 +279,14 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               type='number'
               variant='outlined'
               value={tax}
-              onChange={(e) => setTax(e.target.value)}
+              onChange={(e) => {
+                setTax(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={tax === '' ? true : false}
+              helperText={tax === '' ? 'Tax is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -241,8 +296,14 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               type='number'
               variant='outlined'
               value={itemPrice}
-              onChange={(e) => setItemPrice(e.target.value)}
+              onChange={(e) => {
+                setItemPrice(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={itemPrice === '' ? true : false}
+              helperText={itemPrice === '' ? 'Item Price is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -252,8 +313,14 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={unitsPk}
-              onChange={(e) => setUnitsPk(e.target.value)}
+              onChange={(e) => {
+                setUnitsPk(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={unitsPk === '' ? true : false}
+              helperText={unitsPk === '' ? 'Units Packaged is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -263,8 +330,14 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               type='number'
               variant='outlined'
               value={qty}
-              onChange={(e) => setQty(e.target.value)}
+              onChange={(e) => {
+                setQty(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={qty === '' ? true : false}
+              helperText={qty === '' ? 'Quantity is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -274,8 +347,14 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={amount}
-              onChange={(e) => setAmount(e.target.value)}
+              onChange={(e) => {
+                setAmount(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={amount === '' ? true : false}
+              helperText={amount === '' ? 'Amount is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -303,8 +382,14 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={totalAmount}
-              onChange={(e) => setTotalAmount(e.target.value)}
+              onChange={(e) => {
+                setTotalAmount(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={totalAmount === '' ? true : false}
+              helperText={totalAmount === '' ? 'Total Amount is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -314,8 +399,14 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={currDisc}
-              onChange={(e) => setCurrDisc(e.target.value)}
+              onChange={(e) => {
+                setCurrDisc(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={currDisc === '' ? true : false}
+              helperText={currDisc === '' ? 'Current Discount is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -325,8 +416,14 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={totalNetWt}
-              onChange={(e) => setTotalNetWt(e.target.value)}
+              onChange={(e) => {
+                setTotalNetWt(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={totalNetWt === '' ? true : false}
+              helperText={totalNetWt === '' ? 'Total Net Wt. is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -336,8 +433,14 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={totalCube}
-              onChange={(e) => setTotalCube(e.target.value)}
+              onChange={(e) => {
+                setTotalCube(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={totalCube === '' ? true : false}
+              helperText={totalCube === '' ? 'Total Cube is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -347,8 +450,14 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               type='text'
               variant='outlined'
               value={totalGross}
-              onChange={(e) => setTotalGross(e.target.value)}
+              onChange={(e) => {
+                setTotalGross(e.target.value);
+                checkCondition();
+              }}
               style={{ width: '100%' }}
+              error={totalGross === '' ? true : false}
+              helperText={totalGross === '' ? 'Total Gross is required' : ''}
+              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -365,6 +474,7 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
                   color='primary'
                   className={buttonClassname}
                   onClick={handleButtonClick}
+                  disabled={flag}
                 >
                   {success ? <CheckIcon /> : <SaveIcon />}
                 </Fab>
