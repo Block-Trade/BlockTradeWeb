@@ -5,8 +5,6 @@ import { signup, clearError, clearMsg } from '../actions/auth';
 import { Toast } from 'react-bootstrap';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
 import MuiAlert from '@material-ui/lab/Alert';
 
 function Alert(props) {
@@ -40,7 +38,7 @@ const Register = ({
       mobileNo === ''
     ) {
       setMessage('Please fill all the fields');
-      setVariant('error');
+      setVariant('warning');
       setOpen(true);
     } else {
       const formData = {
@@ -56,6 +54,9 @@ const Register = ({
       await signup(formData);
       history.push('/blank-page');
       if (error) {
+        setMessage('Something went wrong !');
+        setVariant('error');
+        setOpen(true);
       }
       //setShow(true);
       //clearError();
@@ -189,6 +190,10 @@ const Register = ({
                 open={open}
                 autoHideDuration={4000}
                 onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
               >
                 <Alert onClose={handleClose} severity={variant}>
                   {message}

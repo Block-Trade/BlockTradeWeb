@@ -3,12 +3,21 @@ import { connect } from 'react-redux';
 import { kycDl, kycPass } from '../../actions/kyc';
 import { Card, Button, Form } from 'react-bootstrap';
 import { loadUser } from '../../actions/auth';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
-const Kyc = ({ kycDl, kycPass, kyc, history,loadUser }) => {
+function Alert(props) {
+  return <MuiAlert elevation={6} variant='filled' {...props} />;
+}
+
+const Kyc = ({ kycDl, kycPass, kyc, history, loadUser }) => {
   const [meth, setMeth] = useState('');
   const [toggler, setToggler] = useState(false);
   const [no, setNo] = useState('');
   const [cc, setCc] = useState('');
+  const [open, setOpen] = React.useState(false);
+  const [variant, setVariant] = React.useState('error');
+  const [message, setMessage] = React.useState('');
   useEffect(() => {
     if (kyc.kycStatus === true) {
       history.push('/dashboard');
@@ -17,13 +26,14 @@ const Kyc = ({ kycDl, kycPass, kyc, history,loadUser }) => {
 
   useEffect(() => {
     loadUser();
-    
-  },[]);
+  }, []);
 
   const onSubmit = (e) => {
     e.preventDefault();
     if (cc === '' || no === '') {
-      alert('Please fill all fields');
+      setMessage('Please fill all the fields');
+      setVariant('warning');
+      setOpen(true);
     } else {
       if (meth === 'dl') {
         const formData = {
@@ -38,7 +48,14 @@ const Kyc = ({ kycDl, kycPass, kyc, history,loadUser }) => {
         };
         kycPass(formData);
       }
+      setMessage('KYC Verified');
+      setVariant('success');
+      setOpen(true);
     }
+  };
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') return;
+    setOpen(false);
   };
   return (
     <div style={{ backgroundColor: '#2853C3', textAlign: 'center' }}>
@@ -114,6 +131,19 @@ const Kyc = ({ kycDl, kycPass, kyc, history,loadUser }) => {
           </Card.Body>
         )}
       </Card>
+      <Snackbar
+        open={open}
+        autoHideDuration={4000}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+      >
+        <Alert onClose={handleClose} severity={variant}>
+          {message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };
@@ -121,4 +151,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   kyc: state.kyc,
 });
-export default connect(mapStateToProps, { kycDl, kycPass,loadUser })(Kyc);
+export default connect(mapStateToProps, { kycDl, kycPass, loadUser })(Kyc);
