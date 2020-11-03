@@ -44,8 +44,8 @@ const AppRoutes = () => {
           component={BasicElements}
         />
 
-        <Route path='/login' component={Login} />
-        <Route path='/register' component={Register1} />
+        <PublicRouter path='/login' component={Login} />
+        <PublicRouter path='/register' component={Register1} />
         <PrivateRouter path='/company-info' component={CompanyInfo} />
         <PrivateRouter path='/kyc' component={Kyc} />
         <PrivateRouter path='/tradeform1' component={TradeForm1} />
