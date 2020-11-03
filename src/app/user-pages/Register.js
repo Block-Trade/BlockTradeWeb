@@ -3,6 +3,13 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signup, clearError, clearMsg } from '../actions/auth';
 import { Toast } from 'react-bootstrap';
+import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant='filled' {...props} />;
+}
 
 const Register = ({
   auth: { msg, error },
@@ -17,6 +24,10 @@ const Register = ({
   const [password, setPass] = useState('');
   const [show, setShow] = useState(false);
   const [mobileNo, setMobileNo] = useState('');
+  const [open, setOpen] = React.useState(false);
+  const [variant, setVariant] = React.useState('error');
+  const [message, setMessage] = React.useState('');
+
   const onSubmit = async (e) => {
     e.preventDefault();
     if (
@@ -26,7 +37,9 @@ const Register = ({
       email === '' ||
       mobileNo === ''
     ) {
-      alert('Please fill all the fields');
+      setMessage('Please fill all the fields');
+      setVariant('warning');
+      setOpen(true);
     } else {
       const formData = {
         name,
@@ -35,16 +48,27 @@ const Register = ({
         password,
         mobileNo,
       };
+      setMessage('Registration Successful');
+      setVariant('success');
+      setOpen(true);
       await signup(formData);
-      history.push('/user-pages/blank-page');
+      history.push('/blank-page');
       if (error) {
+        setMessage('Something went wrong !');
+        setVariant('error');
+        setOpen(true);
       }
       //setShow(true);
       //clearError();
       //clearMsg();
       //setTimeout(setShow(false),3000);
     }
+
     //setShow(false);
+  };
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') return;
+    setOpen(false);
   };
   return (
     <div>
@@ -162,6 +186,19 @@ const Register = ({
                   </Link>
                 </div>
               </form>
+              <Snackbar
+                open={open}
+                autoHideDuration={4000}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+              >
+                <Alert onClose={handleClose} severity={variant}>
+                  {message}
+                </Alert>
+              </Snackbar>
             </div>
           </div>
         </div>
