@@ -21,7 +21,7 @@ const BlankPage = () => {
                 style={{ display: 'grid', height: '100%', textAlign: 'center' }}
               >
                 <h6 style={{ margin: 'auto' }}>
-                  An Activation link has been sent to you email. Kindly check
+                  An Activation link has been sent to your email. Kindly check
                   your email to proceed further.
                 </h6>
               </div>
