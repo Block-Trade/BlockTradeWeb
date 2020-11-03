@@ -7,7 +7,7 @@ export const getAllTrades = () => async dispatch => {
         const td = trades.data.trades;
         //dateChecker({trade: trades.data.trades[1]});
         td.map(async t => {
-            if(t.paymentType==='PA'){
+            if(t.paymentType==='PA' && t.rf===false){
                 var date1 = new Date(t.invoiceDate);
                 
                 date1 = date1.addDays(t.creditPeriod);
@@ -16,7 +16,7 @@ export const getAllTrades = () => async dispatch => {
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
                 console.log(diffTime + " milliseconds");
                 console.log(diffDays + " days");
-                if(diffDays==2){
+                if(diffDays<=5){
                     const headers = {
                         'Content-Type':'application/json'
                     };

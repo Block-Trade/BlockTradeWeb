@@ -24,6 +24,7 @@ const Login = ({
   const [variant, setVariant] = React.useState('error');
   const [message, setMessage] = React.useState('');
   useEffect(() => {
+    
     if (isAuthenticated && user) {
       if (user) {
         if (user.companyName === '') {
@@ -32,14 +33,21 @@ const Login = ({
           history.push('/kyc');
         } else {
           history.push('/dashboard');
+          setMessage('Login Successful');
+          setVariant('success');
+          setOpen(true);
         }
+      } else {
+        setMessage('Something went wrong !');
+        setVariant('error');
+        setOpen(true);
       }
     }
     if (error === 'Invalid Credentials') {
       clearError();
     }
     //eslint-disable-next-line
-  }, [error, isAuthenticated, history]);
+  }, [isAuthenticated]);
   useEffect(() => {
     if (localStorage.token && !user) {
       loadUser();
@@ -58,7 +66,7 @@ const Login = ({
     } else {
       const formData = { username, password };
       await login({ formData, loadUser });
-      if (user) {
+      if (isAuthenticated) {
         if (user.companyName === '') {
           history.push('/company-info');
         } else if (user.kycStatus === false) {
@@ -70,7 +78,7 @@ const Login = ({
           setOpen(true);
         }
       } else {
-        setMessage('Something went wrong !');
+        setMessage('Invalid Credentials !');
         setVariant('error');
         setOpen(true);
       }
@@ -120,7 +128,7 @@ const Login = ({
                   <button
                     className='btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn'
                     onClick={onSubmit}
-                    onKeyDown={handleLogin}
+                    //onKeyDown={handleLogin}
                   >
                     LOGIN
                   </button>
