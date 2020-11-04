@@ -126,7 +126,7 @@ async loadBlockchainData() {
 export const finalUpload = ({ data, ipfsData, conn }) => async dispatch => {
     try {
         const headers = {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application /json'
         };
         const res = await axios.post('/trade', data, {
             headers: headers

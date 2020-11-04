@@ -24,6 +24,12 @@ import {
 } from '@material-ui/pickers';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant='filled' {...props} />;
+}
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -85,6 +91,9 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
   const [loading, setLoading] = React.useState(false);
   const [err, setErr] = useState(false);
   const [flag, setFlag] = useState(true);
+  const [open, setOpen] = React.useState(false);
+  const [variant, setVariant] = React.useState('error');
+  const [message, setMessage] = React.useState('');
   const timer = React.useRef();
   const buttonClassname = clsx({
     [classes.buttonSuccess]: success,
@@ -103,6 +112,9 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
       }, 2000);
     }
     localStorage.setItem('flag', flag);
+    setMessage('New Trade initiated successfully');
+    setVariant('success');
+    setOpen(true);
   };
   useEffect(() => {
     const { billDetails } = tradeDeal;
@@ -151,6 +163,10 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
     } else {
       setFlag(true);
     }
+  };
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') return;
+    setOpen(false);
   };
   return (
     <div
@@ -449,6 +465,19 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
           </Grid>
         </Grid>
       </Container>
+      <Snackbar
+        open={open}
+        autoHideDuration={4000}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+      >
+        <Alert onClose={handleClose} severity={variant}>
+          {message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

@@ -1,14 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { companyInfo } from '../actions/auth';
+import { companyInfo, loadUser } from '../actions/auth';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
-const CompanyInfo = ({ auth: { msg, error }, history, companyInfo }) => {
+function Alert(props) {
+  return <MuiAlert elevation={6} variant='filled' {...props} />;
+}
+
+const CompanyInfo = ({
+  auth: { msg, error },
+  history,
+  companyInfo,
+  loadUser,
+}) => {
   const [companyName, setCompanyName] = useState('');
   const [companyEmail, setCompanyEmail] = useState('');
   const [companyAddress, setCompanyAddress] = useState('');
   const [country, setCompanyCountry] = useState('');
   const [city, setCompanyCity] = useState('');
   const [companyTelNo, setTelNo] = useState('');
+  const [open, setOpen] = React.useState(false);
+  const [variant, setVariant] = React.useState('error');
+  const [message, setMessage] = React.useState('');
+  useEffect(() => {
+    loadUser();
+  }, []);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -20,7 +37,9 @@ const CompanyInfo = ({ auth: { msg, error }, history, companyInfo }) => {
       companyTelNo === '' ||
       companyAddress === ''
     ) {
-      alert('Please fill all the fields');
+      setMessage('Please fill all the fields');
+      setVariant('warning');
+      setOpen(true);
     } else {
       const companyFormData = {
         companyName,
@@ -30,9 +49,16 @@ const CompanyInfo = ({ auth: { msg, error }, history, companyInfo }) => {
         city,
         companyTelNo,
       };
+      setMessage('Company Info Added Successfully');
+      setVariant('Success');
+      setOpen(true);
       await companyInfo(companyFormData);
       history.push('/kyc');
     }
+  };
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') return;
+    setOpen(false);
   };
   return (
     <div>
@@ -130,6 +156,19 @@ const CompanyInfo = ({ auth: { msg, error }, history, companyInfo }) => {
                   </button>
                 </div>
               </form>
+              <Snackbar
+                open={open}
+                autoHideDuration={4000}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+              >
+                <Alert onClose={handleClose} severity={variant}>
+                  {message}
+                </Alert>
+              </Snackbar>
             </div>
           </div>
         </div>
@@ -140,4 +179,4 @@ const CompanyInfo = ({ auth: { msg, error }, history, companyInfo }) => {
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
-export default connect(mapStateToProps, { companyInfo })(CompanyInfo);
+export default connect(mapStateToProps, { companyInfo, loadUser })(CompanyInfo);

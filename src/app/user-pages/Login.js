@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import { Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { loadUser, login, clearError, clearMsg } from '../actions/auth';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant='filled' {...props} />;
+}
 
 const Login = ({
   auth: { user, msg, error, isAuthenticated },
@@ -14,7 +20,11 @@ const Login = ({
 }) => {
   const [username, setUsername] = useState('');
   const [password, setPass] = useState('');
+  const [open, setOpen] = React.useState(false);
+  const [variant, setVariant] = React.useState('error');
+  const [message, setMessage] = React.useState('');
   useEffect(() => {
+    
     if (isAuthenticated && user) {
       if (user) {
         if (user.companyName === '') {
@@ -23,14 +33,21 @@ const Login = ({
           history.push('/kyc');
         } else {
           history.push('/dashboard');
+          setMessage('Login Successful');
+          setVariant('success');
+          setOpen(true);
         }
+      } else {
+        setMessage('Something went wrong !');
+        setVariant('error');
+        setOpen(true);
       }
     }
     if (error === 'Invalid Credentials') {
       clearError();
     }
     //eslint-disable-next-line
-  }, [error, isAuthenticated, history]);
+  }, [isAuthenticated]);
   useEffect(() => {
     if (localStorage.token && !user) {
       loadUser();
@@ -39,24 +56,37 @@ const Login = ({
   const handleLogin = (event) => {
     if (event.key === 'Enter') {
     }
-  }
+  };
   const onSubmit = async (e) => {
     e.preventDefault();
     if (username === '' || password === '') {
-      alert('fill all the fields');
+      setMessage('Please fill all the fields');
+      setVariant('warning');
+      setOpen(true);
     } else {
       const formData = { username, password };
       await login({ formData, loadUser });
-      if (user) {
-        if (user.mobileNo === '') {
+      if (isAuthenticated) {
+        if (user.companyName === '') {
           history.push('/company-info');
         } else if (user.kycStatus === false) {
           history.push('/kyc');
         } else {
           history.push('/dashboard');
+          setMessage('Login Successful');
+          setVariant('success');
+          setOpen(true);
         }
+      } else {
+        setMessage('Invalid Credentials !');
+        setVariant('error');
+        setOpen(true);
       }
     }
+  };
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') return;
+    setOpen(false);
   };
   return (
     <div>
@@ -98,7 +128,7 @@ const Login = ({
                   <button
                     className='btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn'
                     onClick={onSubmit}
-                    onKeyDown={handleLogin}
+                    //onKeyDown={handleLogin}
                   >
                     LOGIN
                   </button>
@@ -126,6 +156,19 @@ const Login = ({
                   </Link>
                 </div>
               </Form>
+              <Snackbar
+                open={open}
+                autoHideDuration={4000}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+              >
+                <Alert onClose={handleClose} severity={variant}>
+                  {message}
+                </Alert>
+              </Snackbar>
             </div>
           </div>
         </div>
