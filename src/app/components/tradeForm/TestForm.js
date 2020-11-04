@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -13,7 +13,7 @@ import TradeForm4 from './TradeForm4';
 import TradeForm5 from './TradeForm5';
 import { connect } from 'react-redux';
 import { finalUpload } from '../../actions/tradeDeal';
-
+import { loadUser } from '../../actions/auth';
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -57,7 +57,9 @@ const TestFrom = ({ history, tradeDeal, finalUpload, auth,conn }) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
-
+  useEffect(() => {
+    loadUser();
+  }, []);
   const {
     sellerInfo,
     receiverInfo,
