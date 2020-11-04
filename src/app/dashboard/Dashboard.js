@@ -14,10 +14,11 @@ const Dashboard = ({ trade,loadUser, auth,getAllTrades, getAllConn }) => {
   },[]);
   useEffect(() => {
     // Get all connections
-    getAllConn();
+    
     // Call to smart contract to check the status of document verification
     if(auth.user){
       getAllTrades();
+      getAllConn();
     }
   },[auth.user]);
   const {trades} = trade;
