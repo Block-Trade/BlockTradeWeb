@@ -128,7 +128,7 @@ export const finalUpload = ({ data, ipfsData, conn }) => async dispatch => {
         console.log(conn);
 
         const headers = {
-            'Content-Type': 'application /json'
+            'Content-Type': 'application/json'
         };
         const res = await axios.post('/trade', data, {
             headers: headers
