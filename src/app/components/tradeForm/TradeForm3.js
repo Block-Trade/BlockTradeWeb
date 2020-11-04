@@ -334,7 +334,7 @@ const TradeForm3 = ({ history, setLogisticsInfo, tradeDeal }) => {
                   color='primary'
                   className={buttonClassname}
                   onClick={handleButtonClick}
-                  disabled={flag}
+                  //disabled={flag}
                 >
                   {success ? <CheckIcon /> : <SaveIcon />}
                 </Fab>

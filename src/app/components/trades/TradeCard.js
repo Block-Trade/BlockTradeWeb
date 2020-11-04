@@ -36,7 +36,7 @@ function getSteps() {
     return ['Documents Uploaded', 'Documents Verified', 'Goods Laided','Goods Received','Payment complete'];
 }
 
-const TradeCard = ({trade, user, statusUpdate}) => {
+const TradeCard = ({trade, user, statusUpdate, conn}) => {
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
     const [activeStep, setActiveStep] = React.useState(0);
@@ -109,4 +109,6 @@ const TradeCard = ({trade, user, statusUpdate}) => {
     )
 }
 
-export default connect(null,{ statusUpdate })(TradeCard);
+const mapStateToProps = state => ({conn: state.conn});
+
+export default connect(mapStateToProps,{ statusUpdate })(TradeCard);

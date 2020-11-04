@@ -146,7 +146,7 @@ const TestFrom = ({ history, tradeDeal, finalUpload, auth }) => {
                 color='primary'
                 onClick={handleNext}
                 className={classes.button}
-                disabled={disable()}
+                //disabled={disable()}
               >
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
               </Button>

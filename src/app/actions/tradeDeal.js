@@ -3,7 +3,7 @@ import Web3 from 'web3';
 import Trades from '../../abis/Trades.json';
 
 const IPFS = require('ipfs-mini');
-const ipfs = new IPFS({host: 'ipfs.infura.io', port: 5001, protocol:'https'})
+const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' })
 
 export const setSellerInfo = (sellerInfo) => async dispatch => {
     dispatch({
@@ -123,7 +123,7 @@ async loadBlockchainData() {
     }
 }*/
 
-export const finalUpload = ({ data, ipfsData }) => async dispatch => {
+export const finalUpload = ({ data, ipfsData, conn }) => async dispatch => {
     try {
         const headers = {
             'Content-Type': 'application/json'
@@ -137,19 +137,28 @@ export const finalUpload = ({ data, ipfsData }) => async dispatch => {
         console.log("IPFS starts here");
 
         var tradeId = "asdaqweqweqq";
-
+        //var tId = conn.trades_contracts.method.setTrade(res.data.trade1.TradeId, )
         var x = JSON.stringify(ipfsData['sellerInfo']) + "\n\n" + JSON.stringify(ipfsData['receiverInfo']) + "\n\n" + JSON.stringify(ipfsData['logisticsInfo']) + "\n\n" + JSON.stringify(ipfsData["descOfConsign"]) + "\n\n" + JSON.stringify(ipfsData['finalBill']);
 
         console.log(x);
 
 
-        ipfs.add(x, (error, result) => {            
+
+
+        ipfs.add(x, (error, result) => {
             if (error) {
                 console.error(error)
                 return
             }
             console.log('Ipfs string x result', result)
-        })        
+            var tId = conn.trades_contracts.method.setTrade(res.data.trade1.TradeId, result).call();
+            conn.trades_contracts.methods.setTrade(res.data.trade1.TradeId, result)
+                .send().on('transactionHash', (hash) => {
+                    console.log("Successfull transacation");
+                })
+        })
+
+        console.log("its done");
 
     } catch (e) {
 
