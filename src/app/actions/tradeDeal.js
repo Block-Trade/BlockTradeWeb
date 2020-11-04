@@ -125,6 +125,8 @@ async loadBlockchainData() {
 
 export const finalUpload = ({ data, ipfsData, conn }) => async dispatch => {
     try {
+        console.log(conn);
+
         const headers = {
             'Content-Type': 'application /json'
         };
@@ -141,7 +143,6 @@ export const finalUpload = ({ data, ipfsData, conn }) => async dispatch => {
         var x = JSON.stringify(ipfsData['sellerInfo']) + "\n\n" + JSON.stringify(ipfsData['receiverInfo']) + "\n\n" + JSON.stringify(ipfsData['logisticsInfo']) + "\n\n" + JSON.stringify(ipfsData["descOfConsign"]) + "\n\n" + JSON.stringify(ipfsData['finalBill']);
 
         console.log(x);
-
 
 
 

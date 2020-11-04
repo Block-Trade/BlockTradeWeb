@@ -53,7 +53,7 @@ function getStepContent(stepIndex) {
   }
 }
 
-const TestFrom = ({ history, tradeDeal, finalUpload, auth }) => {
+const TestFrom = ({ history, tradeDeal, finalUpload, auth,conn }) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
@@ -83,7 +83,8 @@ const TestFrom = ({ history, tradeDeal, finalUpload, auth }) => {
         descOfConsign,
         finalBill,
       };
-      finalUpload({ data, ipfsData });
+      console.log(conn);
+      finalUpload({ data, ipfsData,conn });
     }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     localStorage.setItem('flag', true);
@@ -161,6 +162,7 @@ const TestFrom = ({ history, tradeDeal, finalUpload, auth }) => {
 const mapStateToProps = (state) => ({
   tradeDeal: state.tradeDeal,
   auth: state.auth,
+  conn: state.conn
 });
 
 export default connect(mapStateToProps, { finalUpload })(TestFrom);
