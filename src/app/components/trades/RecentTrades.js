@@ -32,9 +32,6 @@ const useStyles = makeStyles((theme) => ({
       },
 }));
 
-function getSteps() {
-    return ['Documents Uploaded', 'Documents Verified', 'Goods Laided','Goods Received','Payment complete'];
-}
   
 
 const RecentTrades = ({ trade,auth }) => {
@@ -42,35 +39,7 @@ const RecentTrades = ({ trade,auth }) => {
     const bull = <span className={classes.bullet}>•</span>;
     const { trades } = trade.trades;
     console.log(trades);
-    const [activeStep, setActiveStep] = React.useState(0);
-    const steps = getSteps();
     const {user} = auth;
-    const [status,setStatus] = useState(false);
-    const setStep = (status) => {
-        switch(status){
-            case 'DU':
-                setActiveStep(0);
-                break;
-            case 'DV':
-                setActiveStep(1);
-                break;
-            case 'GL':
-                setActiveStep(2);
-                break;
-            case 'GR':
-                setActiveStep(3);
-                break;
-            case 'PD':
-                setActiveStep(4);
-                break;
-        }
-    }
-    var a;
-
-    const handleStatusClick = ({tradeStatus}) => {
-        setStep(tradeStatus);
-        setStatus(true);
-    }
     return (
     
     <div className="row">
