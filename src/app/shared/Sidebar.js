@@ -16,15 +16,15 @@ import {
 } from '../actions/tradeDeal';
 import { Form } from 'react-bootstrap';
 
-
 const Sidebar = ({
+  auth,
   location,
   getUserId,
   tradeDeal,
   filterName,
   setImpId,
   clearFilter,
-  history
+  history,
 }) => {
   const [username, setUsername] = useState('');
 
@@ -67,8 +67,7 @@ const Sidebar = ({
   };
   const handleNameChange = (e) => {
     e.preventDefault();
-    if(e.target.value!==''){
-      
+    if (e.target.value !== '') {
       filterName({ text: e.target.value });
     }
     setUsername(e.target.value);
@@ -76,9 +75,9 @@ const Sidebar = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    tradeDeal.filtered.map(fil => {
-      if(fil.username == username){
-        setImpId({username: fil.username});
+    tradeDeal.filtered.map((fil) => {
+      if (fil.username == username) {
+        setImpId({ username: fil.username });
         history.push('/testform');
       }
     });
@@ -137,14 +136,16 @@ const Sidebar = ({
                 <div className='d-flex justify-content-between align-items-start'>
                   <div className='profile-image'>
                     <img
-                      src={require('../../assets/images/faces/face8.jpg')}
+                      src={require('../../assets/images/circle-cropped.png')}
                       alt='profile'
                     />
                   </div>
                   <div className='text-left ml-3'>
-                    <p className='profile-name'>Richard V.Welsh</p>
+                    <p className='profile-name'>
+                      {auth.user && auth.user.username}
+                    </p>
                     <small className='designation text-muted text-small'>
-                      Manager
+                      {auth.user && auth.user.country}
                     </small>
                     <span className='status-indicator online'></span>
                   </div>
@@ -347,6 +348,7 @@ const Sidebar = ({
 };
 const mapStateToProps = (state) => ({
   tradeDeal: state.tradeDeal,
+  auth: state.auth,
 });
 export default withRouter(
   connect(mapStateToProps, { getUserId, filterName, setImpId, clearFilter })(
