@@ -1,4 +1,6 @@
-import React,{ useState, useEffect } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable default-case */
+import React, { useState, useEffect } from 'react';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -42,40 +44,37 @@ function getSteps() {
   ];
 }
 
-
-const TradeCard = ({trade, user, statusUpdate, conn}) => {
-    const classes = useStyles();
-    var d;
-    useEffect(async () => {
-      d = await conn.trades_contract.methods.getTrade(trade.TradeId).call();
-      d = 'https://ipfs.infura.io/ipfs/' + d; 
-      console.log(d);
-    },[]);
-    const bull = <span className={classes.bullet}>•</span>;
-    const [activeStep, setActiveStep] = React.useState(0);
-    const steps = getSteps();
-    const [status,setStatus] = useState(false);
-    const setStep = (status) => {
-        switch(status){
-            case 'DU':
-                setActiveStep(0);
-                break;
-            case 'DV':
-                setActiveStep(1);
-                break;
-            case 'GL':
-                setActiveStep(2);
-                break;
-            case 'GR':
-                setActiveStep(3);
-                break;
-            case 'PD':
-                setActiveStep(4);
-                break;
-        }
+const TradeCard = ({ trade, user, statusUpdate, conn }) => {
+  const classes = useStyles();
+  var d;
+  useEffect(async () => {
+    d = await conn.trades_contract.methods.getTrade(trade.TradeId).call();
+    d = 'https://ipfs.infura.io/ipfs/' + d;
+    console.log(d);
+  }, []);
+  const bull = <span className={classes.bullet}>•</span>;
+  const [activeStep, setActiveStep] = React.useState(0);
+  const steps = getSteps();
+  const [status, setStatus] = useState(false);
+  const setStep = (status) => {
+    switch (status) {
+      case 'DU':
+        setActiveStep(0);
+        break;
+      case 'DV':
+        setActiveStep(1);
+        break;
+      case 'GL':
+        setActiveStep(2);
+        break;
+      case 'GR':
+        setActiveStep(3);
+        break;
+      case 'PD':
+        setActiveStep(4);
+        break;
     }
   };
-
   const handleStatusClick = ({ tradeStatus }) => {
     setStep(tradeStatus);
     setStatus(true);
@@ -152,16 +151,41 @@ const TradeCard = ({trade, user, statusUpdate, conn}) => {
               Check Status
             </Button>
           )}
+        </CardActions>
         <CardActions>
-          {((trade.importerUserName === user.username) && (trade.tradeStatus==='DU')) && <Button size="small" onClick={() => {
-            statusUpdate({tradeId: trade.TradeId,status:'IV'})
-          }}>Verify document</Button>}
-          {(trade.tradeStatus==='DV' && trade.exporterUserName===user.username) && <Button size="small" onClick={() => {
-            statusUpdate({tradeId: trade.TradeId,status:'GL'})
-          }}>Goods Laided</Button>}
-          {(trade.tradeStatus==='GL' && trade.importerUserName===user.username) && <Button size="small" onClick={() => {
-            statusUpdate({tradeId: trade.TradeId,status:'GD'})
-          }}>Goods Recieved</Button>}
+          {trade.importerUserName === user.username &&
+            trade.tradeStatus === 'DU' && (
+              <Button
+                size='small'
+                onClick={() => {
+                  statusUpdate({ tradeId: trade.TradeId, status: 'IV' });
+                }}
+              >
+                Verify document
+              </Button>
+            )}
+          {trade.tradeStatus === 'DV' &&
+            trade.exporterUserName === user.username && (
+              <Button
+                size='small'
+                onClick={() => {
+                  statusUpdate({ tradeId: trade.TradeId, status: 'GL' });
+                }}
+              >
+                Goods Laided
+              </Button>
+            )}
+          {trade.tradeStatus === 'GL' &&
+            trade.importerUserName === user.username && (
+              <Button
+                size='small'
+                onClick={() => {
+                  statusUpdate({ tradeId: trade.TradeId, status: 'GD' });
+                }}
+              >
+                Goods Recieved
+              </Button>
+            )}
         </CardActions>
       </Card>
     </div>

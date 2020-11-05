@@ -13,13 +13,13 @@ import {
   filterName,
   setImpId,
   clearFilter,
-} from '../actions/tradeDeal';
+} from '../../actions/tradeDeal';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 const UserDetails = ({
   auth,
   location,
   getUserId,
-  tradeDeal,
   filterName,
   setImpId,
   clearFilter,
@@ -30,8 +30,8 @@ const UserDetails = ({
       <div className='mb-3 mx-auto'>
         <img
           className='rounded-circle'
-          src={userDetails.avatar}
-          alt={userDetails.name}
+          src={auth.user.avatar}
+          alt={auth.user.name}
           width='110'
         />
       </div>
@@ -80,11 +80,10 @@ UserDetails.defaultProps = {
 };
 
 const mapStateToProps = (state) => ({
-  tradeDeal: state.tradeDeal,
   auth: state.auth,
 });
 export default withRouter(
   connect(mapStateToProps, { getUserId, filterName, setImpId, clearFilter })(
-    Sidebar
+    UserDetails
   )
 );
