@@ -37,6 +37,9 @@ import CheckCircle from '@material-ui/icons/CheckCircle';
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 300,
+    '&:hover': {
+      transform: 'translate3D(0,-1px,0) scale(1.03)',
+    },
   },
   bullet: {
     display: 'inline-block',
@@ -70,6 +73,31 @@ const useStyles = makeStyles((theme) => ({
   secondaryTail: {
     backgroundColor: theme.palette.secondary.main,
   },
+  btn: {
+    boxShadow: 'none',
+    textTransform: 'none',
+    fontSize: 16,
+    padding: '6px 12px',
+    marginRight: '5px',
+    border: '1px solid',
+    lineHeight: 1.5,
+    backgroundColor: '#f3f4fa',
+    borderColor: '#f3f4fa',
+    borderRadius: '5px',
+    '&:hover': {
+      backgroundColor: '#ffffff',
+      borderColor: '#f3f4fa',
+      transform: 'translate3D(0,-1px,0) scale(1.03)',
+      boxShadow:
+        '8px 28px 50px rgba(39,44,49,.07), 1px 6px 12px rgba(39,44,49,.04)',
+      transition: 'all .6s ease',
+    },
+    '&:active': {
+      boxShadow: 'none',
+      backgroundColor: '#f3f4fa',
+      borderColor: '#ffffff',
+    },
+  },
 }));
 
 function getSteps() {
@@ -82,13 +110,13 @@ function getSteps() {
   ];
 }
 
-const TradeCard = ({ trade, user, statusUpdate, conn }) => {
+const TradeCard = ({ auth, trade, user, statusUpdate, conn }) => {
   const classes = useStyles();
   var d;
   useEffect(async () => {
-    d = await conn.trades_contract.methods.getTrade(trade.TradeId).call();
-    d = 'https://ipfs.infura.io/ipfs/' + d;
-    console.log(d);
+    // d = await conn.trades_contract.methods.getTrade(trade.TradeId).call();
+    // d = 'https://ipfs.infura.io/ipfs/' + d;
+    // console.log(d);
   }, []);
   const bull = <span className={classes.bullet}>•</span>;
   const [activeStep, setActiveStep] = React.useState(0);
@@ -130,7 +158,7 @@ const TradeCard = ({ trade, user, statusUpdate, conn }) => {
   };
 
   return (
-    <div className='col-lg-6 col-md-6 col-sm-6 grid-margin stretch-card'>
+    <div className='col-lg-6 col-md-6 col-sm-6 grid-margin'>
       <Card
         className={classes.root}
         raised={true}
@@ -138,71 +166,89 @@ const TradeCard = ({ trade, user, statusUpdate, conn }) => {
           backgroundImage: 'linear-gradient(120deg, #2d5fc3, #128bfc, #18bef1)',
           color: 'white',
           borderRadius: 20,
+          maxWidth: '40rem',
+          maxHeight: '40rem',
         }}
       >
         <CardContent>
-          <Typography
-            className={classes.title}
-            gutterBottom
-            style={{ color: 'black' }}
-          >
-            <Fragment>
-              {trade.exporterUserName === user.username
-                ? `Importer Name:`
-                : `Exporter Name:`}
-              <span style={{ color: 'white' }}>
+          <div className='d-flex'>
+            <div className='profile-image'>
+              <img
+                src={require('../../../assets/images/circle-cropped.png')}
+                alt='profile'
+                style={{
+                  maxHeight: '110px',
+                  maxWidth: '120px',
+                  marginLeft: '2rem',
+                }}
+              />
+            </div>
+            <div
+              className='text-right ml-3'
+              style={{ paddingLeft: '2rem', paddingTop: '3rem' }}
+            >
+              <h4 className='profile-name' style={{ color: 'black' }}>
                 {trade.exporterUserName === user.username
-                  ? `${trade.importerUserName}`
-                  : `${trade.exporterUserName}`}
-              </span>
-            </Fragment>
-          </Typography>
+                  ? `Importer Name:`
+                  : `Exporter Name:`}
+                <span style={{ color: 'white' }}>
+                  &nbsp;&nbsp;
+                  {trade.exporterUserName === user.username
+                    ? `${trade.importerUserName}`
+                    : `${trade.exporterUserName}`}
+                </span>
+              </h4>
+            </div>
+          </div>
+          <hr />
           <Typography
-            variant='h5'
             component='h2'
             style={{ wordWrap: 'break-word', color: 'black' }}
           >
-            Trade Id: <span style={{ color: 'white' }}>{trade.TradeId}</span>
+            Trade Id:{' '}
+            <span style={{ color: 'white' }}>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{trade.TradeId}
+            </span>
           </Typography>
-          <Typography className={classes.pos} style={{ color: 'black' }}>
-            Status: <span style={{ color: 'white' }}>{steps[activeStep]}</span>
-          </Typography>
-          <Typography variant='body2' component='p' style={{ color: 'black' }}>
-            Payment Time:{' '}
-            <span style={{ color: 'white' }}>{trade.paymentType}</span>
-            <br />
-            <Fragment>
-              {trade.creditPeriod !== 0 && `Credit Period:`}
+          <hr />
+          <h5 style={{ color: 'black' }}>
+            Status :
+            <span style={{ color: 'white' }}>
+              &nbsp;&nbsp;&nbsp;{steps[activeStep]}
+            </span>
+          </h5>
+          <h5 style={{ color: 'black' }}>
+            Payment Type :
+            <span style={{ color: 'white' }}>
+              &nbsp;&nbsp;&nbsp;{trade.paymentType}
+            </span>
+          </h5>
+          {trade.creditPeriod && trade.creditPeriod !== 0 && (
+            <h5 style={{ color: 'black' }}>
+              Credit Period :
               <span style={{ color: 'white' }}>
-                {trade.creditPeriod !== 0 && `${trade.creditPeriod}`}
+                &nbsp;&nbsp;&nbsp;{trade.creditPeriod}
               </span>
-            </Fragment>
-            <br />
-            Amount: <span style={{ color: 'white' }}>{trade.amount}</span>
-          </Typography>
+            </h5>
+          )}
+          <h5 style={{ color: 'black' }}>
+            Amount :
+            <span style={{ color: 'white' }}>
+              &nbsp;&nbsp;&nbsp;{trade.amount}
+            </span>
+          </h5>
         </CardContent>
         <CardActions style={{ color: 'ffffff' }}>
-          {trade.importerUserName === user.username &&
-            trade.tradeStatus === 'DU' && (
-              <Button
-                size='small'
-                style={{ backgroundColor: 'ffffff' }}
-                onClick={() => {
-                  statusUpdate({ tradeId: trade.TradeId, status: 'IV' });
-                }}
-              >
-                Verify document
-              </Button>
-            )}
-
-          <Button size='small'>View Details</Button>
-          <Button size='small' onClick={handleOpen}>
+          <Button className={classes.btn} style={{ marginLeft: '1rem' }}>
+            View Details
+          </Button>
+          <Button className={classes.btn} onClick={handleOpen}>
             Check Status
           </Button>
           {trade.importerUserName === user.username &&
             trade.tradeStatus === 'DU' && (
               <Button
-                size='small'
+                className={classes.btn}
                 onClick={() => {
                   statusUpdate({ tradeId: trade.TradeId, status: 'IV' });
                 }}
@@ -213,7 +259,7 @@ const TradeCard = ({ trade, user, statusUpdate, conn }) => {
           {trade.tradeStatus === 'DV' &&
             trade.exporterUserName === user.username && (
               <Button
-                size='small'
+                className={classes.btn}
                 onClick={() => {
                   statusUpdate({ tradeId: trade.TradeId, status: 'GL' });
                 }}
@@ -224,7 +270,7 @@ const TradeCard = ({ trade, user, statusUpdate, conn }) => {
           {trade.tradeStatus === 'GL' &&
             trade.importerUserName === user.username && (
               <Button
-                size='small'
+                className={classes.btn}
                 onClick={() => {
                   statusUpdate({ tradeId: trade.TradeId, status: 'GD' });
                 }}
@@ -420,6 +466,6 @@ const TradeCard = ({ trade, user, statusUpdate, conn }) => {
   );
 };
 
-const mapStateToProps = (state) => ({ conn: state.conn });
+const mapStateToProps = (state) => ({ conn: state.conn, auth: state.auth });
 
 export default connect(mapStateToProps, { statusUpdate })(TradeCard);
