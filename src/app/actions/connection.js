@@ -9,6 +9,10 @@ export const getAllConn = () => async (dispatch) => {
   const accounts = await web3.eth.getAccounts();
   //this.setState({ account: accounts[0] });
   console.log(accounts[0]);
+  dispatch({
+    type: 'SET_ACCOUNT',
+    payload: accounts[0]
+  })
 
   let ethBalance = await web3.eth.getBalance(accounts[0]);
   //this.setState({ ethBalance: ethBalance });
@@ -21,7 +25,7 @@ export const getAllConn = () => async (dispatch) => {
     window.alert("Trades Contract deployed to detected network");
     const address = tradesData.address
     const trades = new web3.eth.Contract(abi, address)
-    console.log(trades);
+    console.log(trades.methods.setTrade);
     dispatch({
       type: 'SET_TRADES_CONTRACT',
       payload: trades
@@ -30,7 +34,7 @@ export const getAllConn = () => async (dispatch) => {
     window.alert('Trades contract not deployed to detected network')
   }
 
-  loadBlockchainData();
+  //loadBlockchainData();
 };
 
 export const loadWeb3 = async () => {
@@ -48,6 +52,7 @@ export const loadWeb3 = async () => {
   }
 };
 
+/*
 export const loadBlockchainData = () => async (dispatch) => {
   const web3 = window.web3;
 
@@ -75,3 +80,4 @@ export const loadBlockchainData = () => async (dispatch) => {
     window.alert('Trades contract not deployed to detected network')
   }
 };
+*/

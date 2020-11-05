@@ -1,4 +1,4 @@
-import React,{ useState } from 'react'
+import React,{ useState, useEffect } from 'react'
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -38,6 +38,12 @@ function getSteps() {
 
 const TradeCard = ({trade, user, statusUpdate, conn}) => {
     const classes = useStyles();
+    var d;
+    useEffect(async () => {
+      d = await conn.trades_contract.methods.getTrade(trade.TradeId).call();
+      d = 'https://ipfs.infura.io/ipfs/' + d; 
+      console.log(d);
+    },[]);
     const bull = <span className={classes.bullet}>•</span>;
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
@@ -98,7 +104,6 @@ const TradeCard = ({trade, user, statusUpdate, conn}) => {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">View Details</Button>
           {((trade.importerUserName === user.username) && (trade.tradeStatus==='DU')) && <Button size="small" onClick={() => {
             statusUpdate({tradeId: trade.TradeId,status:'IV'})
           }}>Verify document</Button>}
