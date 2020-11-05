@@ -1,11 +1,14 @@
 import axios from 'axios';
 
-export const getAllTrades = () => async dispatch => {
+export const getAllTrades = ({conn}) => async dispatch => {
     try {
         const trades = await axios.get('/trade');
         console.log(trades.data.trades[2]);
         const td = trades.data.trades;
         //dateChecker({trade: trades.data.trades[1]});
+        td.map(async t => {
+            //Write ur code here
+        });
         td.map(async t => {
             if(t.paymentType==='PA' && t.rf===false){
                 var date1 = new Date(t.invoiceDate);

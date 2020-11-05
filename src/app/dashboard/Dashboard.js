@@ -7,7 +7,7 @@ import { getAllTrades } from '../actions/trade';
 import RecentTrades from '../components/trades/RecentTrades';
 import { getAllConn } from '../actions/connection';
 
-const Dashboard = ({ trade,loadUser, auth,getAllTrades, getAllConn }) => {
+const Dashboard = ({ trade,loadUser, auth,getAllTrades, getAllConn,conn }) => {
   useEffect(() => {
     loadUser();
     
@@ -17,10 +17,11 @@ const Dashboard = ({ trade,loadUser, auth,getAllTrades, getAllConn }) => {
     
     // Call to smart contract to check the status of document verification
     if(auth.user){
-      getAllTrades();
       getAllConn();
+      getAllTrades({conn})
     }
   },[auth.user]);
+  
   const {trades} = trade;
   return (
     <Fragment>
@@ -486,7 +487,8 @@ const Dashboard = ({ trade,loadUser, auth,getAllTrades, getAllConn }) => {
 };
 const mapStateToProps = (state) => ({
   auth: state.auth,
-  trade: state.trade
+  trade: state.trade,
+  conn: state.conn
 });
 
 export default connect(mapStateToProps, { loadUser, getAllTrades, getAllConn })(Dashboard);
