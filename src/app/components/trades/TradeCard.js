@@ -223,11 +223,11 @@ const TradeCard = ({ auth, trade, user, statusUpdate, conn }) => {
               &nbsp;&nbsp;&nbsp;{trade.paymentType}
             </span>
           </h5>
-          {trade.creditPeriod && trade.creditPeriod !== 0 && (
+          {trade.paymentType==='PA' && trade.creditPeriod !== 0 && (
             <h5 style={{ color: 'black' }}>
               Credit Period :
               <span style={{ color: 'white' }}>
-                &nbsp;&nbsp;&nbsp;{trade.creditPeriod}
+                &nbsp;&nbsp;&nbsp;{(trade.creditPeriod !== 0) && `${trade.creditPeriod}`}
               </span>
             </h5>
           )}

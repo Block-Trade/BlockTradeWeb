@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const getAllTrades = ({ conn }) => async (dispatch) => {
+export const getAllTrades = () => async (dispatch) => {
   try {
     const trades = await axios.get('/trade');
     console.log(trades.data.trades[2]);
