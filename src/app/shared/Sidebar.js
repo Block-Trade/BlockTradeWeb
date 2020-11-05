@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { Dropdown } from 'react-bootstrap';
-import { Icon } from '@iconify/react';
+import { Icon, InlineIcon } from '@iconify/react';
 import handshakeIcon from '@iconify/icons-mdi/handshake';
 import walletIcon from '@iconify/icons-entypo/wallet';
 import baselineDashboard from '@iconify/icons-ic/baseline-dashboard';
 import settingsSolid from '@iconify/icons-clarity/settings-solid';
+import bxsUser from '@iconify/icons-bx/bxs-user';
 import { Modal, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {
@@ -330,6 +331,23 @@ const Sidebar = ({
               height='1.5rem'
             />
             <span className='menu-title'>&nbsp;&nbsp;&nbsp;&nbsp;Settings</span>
+          </Link>
+        </li>
+        <li
+          className={
+            isPathActive('/user-profile') ? 'nav-item active' : 'nav-item'
+          }
+        >
+          <Link className='nav-link' to='/user-profile'>
+            <Icon
+              icon={bxsUser}
+              color='#979797'
+              width='1.5rem'
+              height='1.5rem'
+            />
+            <span className='menu-title'>
+              &nbsp;&nbsp;&nbsp;&nbsp;User Profile
+            </span>
           </Link>
         </li>
         <li
