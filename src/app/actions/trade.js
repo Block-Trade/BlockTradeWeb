@@ -7,6 +7,9 @@ export const getAllTrades = () => async dispatch => {
         const td = trades.data.trades;
         //dateChecker({trade: trades.data.trades[1]});
         td.map(async t => {
+            
+        })
+        td.map(async t => {
             if(t.paymentType==='PA' && t.rf===false){
                 var date1 = new Date(t.invoiceDate);
                 
