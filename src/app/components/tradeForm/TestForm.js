@@ -77,6 +77,7 @@ const TestFrom = ({ history, tradeDeal, finalUpload, auth,conn }) => {
         amount: `${tradeDeal.finalBill.curr}.${tradeDeal.finalBill.tradeTotal}`,
         creditPeriod: tradeDeal.sellerInfo.creditP,
         paymentType: tradeDeal.sellerInfo.paymentType,
+        invoiceDate: tradeDeal.sellerInfo.invoiceDate
       };
       const ipfsData = {
         sellerInfo,

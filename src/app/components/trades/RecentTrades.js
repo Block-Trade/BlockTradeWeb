@@ -86,6 +86,7 @@ const RecentTrades = ({ trade, auth }) => {
   );
 };
 
+
 const mapStateToProps = (state) => ({
   auth: state.auth,
   trade: state.trade,
