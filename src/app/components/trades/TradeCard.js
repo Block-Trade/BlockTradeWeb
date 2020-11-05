@@ -1,10 +1,6 @@
-<<<<<<< HEAD
-import React, { useState, useEffect } from 'react'
-=======
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable default-case */
 import React, { useState, useEffect, Fragment } from 'react';
->>>>>>> 117e2906c9b24f125efda7828a43f8875490919d
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -15,13 +11,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
-import { statusUpdate } from '../../actions/trade';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    minWidth: 275,
-=======
 import Paper from '@material-ui/core/Paper';
 import { statusUpdate } from '../../actions/trade';
 import Modal from '@material-ui/core/Modal';
@@ -48,7 +37,6 @@ import CheckCircle from '@material-ui/icons/CheckCircle';
 const useStyles = makeStyles((theme) => ({
   root: {
     minWidth: 300,
->>>>>>> 117e2906c9b24f125efda7828a43f8875490919d
   },
   bullet: {
     display: 'inline-block',
@@ -65,12 +53,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(1),
     marginBottom: theme.spacing(1),
   },
-<<<<<<< HEAD
-}));
-
-function getSteps() {
-  return ['Documents Uploaded', 'Documents Verified', 'Goods Laided', 'Goods Received', 'Payment complete'];
-=======
   modal: {
     display: 'flex',
     alignItems: 'center',
@@ -98,31 +80,20 @@ function getSteps() {
     'Goods Received',
     'Payment complete',
   ];
->>>>>>> 117e2906c9b24f125efda7828a43f8875490919d
 }
 
 const TradeCard = ({ trade, user, statusUpdate, conn }) => {
   const classes = useStyles();
   var d;
   useEffect(async () => {
-<<<<<<< HEAD
-    if (conn.trades_contract) {
-      d = await conn.trades_contract.methods.getTrade(trade.TradeId).call();
-      d = 'https://ipfs.infura.io/ipfs/' + d;
-      console.log(d);
-    }
-=======
     d = await conn.trades_contract.methods.getTrade(trade.TradeId).call();
     d = 'https://ipfs.infura.io/ipfs/' + d;
     console.log(d);
->>>>>>> 117e2906c9b24f125efda7828a43f8875490919d
   }, []);
   const bull = <span className={classes.bullet}>•</span>;
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
   const [status, setStatus] = useState(false);
-<<<<<<< HEAD
-=======
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
@@ -133,7 +104,6 @@ const TradeCard = ({ trade, user, statusUpdate, conn }) => {
     setOpen(false);
   };
 
->>>>>>> 117e2906c9b24f125efda7828a43f8875490919d
   const setStep = (status) => {
     switch (status) {
       case 'DU':
@@ -152,37 +122,6 @@ const TradeCard = ({ trade, user, statusUpdate, conn }) => {
         setActiveStep(4);
         break;
     }
-<<<<<<< HEAD
-  }
-
-  const handleStatusClick = ({ tradeStatus }) => {
-    setStep(tradeStatus);
-    setStatus(true);
-  }
-  useEffect(() => {
-    setStep(trade.tradeStatus);
-    setStatus(true);
-  }, []);
-
-  return (
-    <div className='col-lg-6 col-md-6 col-sm-6 grid-margin stretch-card'>
-      <Card className={classes.root} raised={true} style={{ backgroundImage: "linear-gradient(white, #15a3f7)", borderRadius: 20 }}>
-        <CardContent>
-          {status && <div className={classes.root}>
-            <Stepper activeStep={activeStep} alternativeLabel style={{ backgroundImage: "linear-gradient(white, #15a3f7)" }}>
-              {steps.map((label) => (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
-                </Step>
-              ))}
-            </Stepper>
-          </div>}
-          <Typography className={classes.title} color="textSecondary" gutterBottom>
-            {trade.exporterUserName === user.username ? ((`Importer Name:${trade.importerUserName}`)) : (`Exporter Name:${trade.exporterUserName}`)}
-          </Typography>
-          <Typography variant="h5" component="h2" style={{ wordWrap: "break-word" }}>
-            Trade Id: {trade.TradeId}
-=======
   };
 
   const handleStatusClick = ({ tradeStatus }) => {
@@ -224,7 +163,6 @@ const TradeCard = ({ trade, user, statusUpdate, conn }) => {
             style={{ wordWrap: 'break-word', color: 'black' }}
           >
             Trade Id: <span style={{ color: 'white' }}>{trade.TradeId}</span>
->>>>>>> 117e2906c9b24f125efda7828a43f8875490919d
           </Typography>
           <Typography className={classes.pos} style={{ color: 'black' }}>
             Status: <span style={{ color: 'white' }}>{steps[activeStep]}</span>
@@ -233,41 +171,16 @@ const TradeCard = ({ trade, user, statusUpdate, conn }) => {
             Payment Time:{' '}
             <span style={{ color: 'white' }}>{trade.paymentType}</span>
             <br />
-<<<<<<< HEAD
-            {trade.creditPeriod !== 0 && `Credit Period: ${trade.creditPeriod}`}
-=======
             <Fragment>
               {trade.creditPeriod !== 0 && `Credit Period:`}
               <span style={{ color: 'white' }}>
                 {trade.creditPeriod !== 0 && `${trade.creditPeriod}`}
               </span>
             </Fragment>
->>>>>>> 117e2906c9b24f125efda7828a43f8875490919d
             <br />
             Amount: <span style={{ color: 'white' }}>{trade.amount}</span>
           </Typography>
         </CardContent>
-<<<<<<< HEAD
-        <CardActions>
-          {((trade.importerUserName === user.username) && (trade.tradeStatus === 'DU')) && <Button size="small" onClick={() => {
-            statusUpdate({ tradeId: trade.TradeId, status: 'IV' })
-          }}>Verify document</Button>}
-          {(trade.tradeStatus === 'DV' && trade.exporterUserName === user.username) && <Button size="small" onClick={() => {
-            statusUpdate({ tradeId: trade.TradeId, status: 'GL' })
-          }}>Goods Laided</Button>}
-          {(trade.tradeStatus === 'GL' && trade.importerUserName === user.username) && <Button size="small" onClick={() => {
-            statusUpdate({ tradeId: trade.TradeId, status: 'GD' })
-          }}>Goods Recieved</Button>}
-        </CardActions>
-      </Card>
-    </div>
-  )
-}
-
-const mapStateToProps = state => ({ conn: state.conn });
-
-export default connect(mapStateToProps, { statusUpdate })(TradeCard);
-=======
         <CardActions style={{ color: 'ffffff' }}>
           {trade.importerUserName === user.username &&
             trade.tradeStatus === 'DU' && (
@@ -510,4 +423,3 @@ export default connect(mapStateToProps, { statusUpdate })(TradeCard);
 const mapStateToProps = (state) => ({ conn: state.conn });
 
 export default connect(mapStateToProps, { statusUpdate })(TradeCard);
->>>>>>> 117e2906c9b24f125efda7828a43f8875490919d
