@@ -72,13 +72,17 @@ const TradeCard = ({trade, user, statusUpdate, conn}) => {
         setStep(tradeStatus);
         setStatus(true);
     }
+    useEffect(() => {
+      setStep(trade.tradeStatus);
+      setStatus(true);
+    },[]);
 
     return (
         <div className='col-lg-6 col-md-6 col-sm-6 grid-margin stretch-card'>
-        <Card className={classes.root} style={{backgroundImage: "linear-gradient(white, #15a3f7)"}}>
+        <Card className={classes.root} raised={true} style={{backgroundImage: "linear-gradient(white, #15a3f7)", borderRadius:20}}>
         <CardContent>
       {status &&  <div className={classes.root}>
-      <Stepper activeStep={activeStep} alternativeLabel>
+      <Stepper activeStep={activeStep} alternativeLabel style={{backgroundImage: "linear-gradient(white, #15a3f7)"}}>
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
@@ -89,7 +93,7 @@ const TradeCard = ({trade, user, statusUpdate, conn}) => {
           <Typography className={classes.title} color="textSecondary" gutterBottom>
             {trade.exporterUserName === user.username ? ((`Importer Name:${trade.importerUserName}`)):(`Exporter Name:${trade.exporterUserName}`)}
           </Typography>
-          <Typography variant="h5" component="h2">
+          <Typography variant="h5" component="h2" style={{wordWrap:"break-word"}}>
             Trade Id: {trade.TradeId}
           </Typography>
           <Typography className={classes.pos} color="textSecondary">
@@ -107,7 +111,12 @@ const TradeCard = ({trade, user, statusUpdate, conn}) => {
           {((trade.importerUserName === user.username) && (trade.tradeStatus==='DU')) && <Button size="small" onClick={() => {
             statusUpdate({tradeId: trade.TradeId,status:'IV'})
           }}>Verify document</Button>}
-          {!status && <Button size="small" onClick={() => handleStatusClick({tradeStatus:trade.tradeStatus})}>Check Status</Button>}
+          {(trade.tradeStatus==='DV' && trade.exporterUserName===user.username) && <Button size="small" onClick={() => {
+            statusUpdate({tradeId: trade.TradeId,status:'GL'})
+          }}>Goods Laided</Button>}
+          {(trade.tradeStatus==='GL' && trade.importerUserName===user.username) && <Button size="small" onClick={() => {
+            statusUpdate({tradeId: trade.TradeId,status:'GD'})
+          }}>Goods Recieved</Button>}
         </CardActions>
       </Card>
       </div>
