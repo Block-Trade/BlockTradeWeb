@@ -122,7 +122,7 @@ const TradeCard = ({trade, user, statusUpdate, conn}) => {
                 break;
         }
     }
-  };
+  
 
   const handleStatusClick = ({ tradeStatus }) => {
     setStep(tradeStatus);
@@ -161,9 +161,7 @@ const TradeCard = ({trade, user, statusUpdate, conn}) => {
           </Typography>
         </CardContent>
         <CardActions style={{ color: 'ffffff' }}>
-          <Button size='small' style={{ color: 'ffffff' }}>
-            View Details
-          </Button>
+          
           {trade.importerUserName === user.username &&
             trade.tradeStatus === 'DU' && (
               <Button
@@ -176,18 +174,7 @@ const TradeCard = ({trade, user, statusUpdate, conn}) => {
                 Verify document
               </Button>
             )}
-          {!status && (
-            <Button
-              size='small'
-              style={{ color: 'ffffff' }}
-              onClick={() =>
-                handleStatusClick({ tradeStatus: trade.tradeStatus })
-              }
-            >
-              Check Status
-            </Button>
-          )}
-        <CardActions>
+          
           <Button size="small">View Details</Button>
           <Button size="small" onClick={handleOpen}>Check Status</Button>
           {((trade.importerUserName === user.username) && (trade.tradeStatus==='DU')) && <Button size="small" onClick={() => {
@@ -301,7 +288,7 @@ const TradeCard = ({trade, user, statusUpdate, conn}) => {
       </Modal>
       </div>
     )
-}
+};
 
 const mapStateToProps = (state) => ({ conn: state.conn });
 
