@@ -79,7 +79,7 @@ const RecentTrades = ({ trade, auth }) => {
   return (
     <div className='row'>
       {trades &&
-        trades.map((trad) => (
+        trades.slice(0,5).map((trad) => (
           <TradeCard style={{ color: 'ffffff' }} trade={trad} user={user} />
         ))}
     </div>
