@@ -125,7 +125,7 @@ async loadBlockchainData() {
 
 export const finalUpload = ({ data, ipfsData, conn }) => async dispatch => {
     try {
-        console.log(conn);
+        console.log(conn.trades_contract);
 
         const headers = {
             'Content-Type': 'application/json'
@@ -136,15 +136,15 @@ export const finalUpload = ({ data, ipfsData, conn }) => async dispatch => {
         console.log(res);
         // Put data on ipfs from res.data.TradeId
         console.log(res.data.trade1.TradeId);
+        console.log(conn.trades_contract.methods);
+        console.log(conn.current_account);
         console.log("IPFS starts here");
 
-        var tradeId = "asdaqweqweqq";
+        var tradeId = res.data.trade1.TradeId;
         //var tId = conn.trades_contracts.method.setTrade(res.data.trade1.TradeId, )
         var x = JSON.stringify(ipfsData['sellerInfo']) + "\n\n" + JSON.stringify(ipfsData['receiverInfo']) + "\n\n" + JSON.stringify(ipfsData['logisticsInfo']) + "\n\n" + JSON.stringify(ipfsData["descOfConsign"]) + "\n\n" + JSON.stringify(ipfsData['finalBill']);
 
         console.log(x);
-
-
 
         ipfs.add(x, (error, result) => {
             if (error) {
@@ -152,14 +152,15 @@ export const finalUpload = ({ data, ipfsData, conn }) => async dispatch => {
                 return
             }
             console.log('Ipfs string x result', result)
-            var tId = conn.trades_contracts.method.setTrade(res.data.trade1.TradeId, result).call();
-            conn.trades_contracts.methods.setTrade(res.data.trade1.TradeId, result)
-                .send().on('transactionHash', (hash) => {
-                    console.log("Successfull transacation");
+            //var tId = conn.trades_contract.methods.setTrade(res.data.trade1.TradeId, result).send();
+            conn.trades_contract.methods.setTrade(res.data.trade1.TradeId, result)
+                .send({ from: conn.current_account }).on('transactionHash', (hash) => {
+                    console.log("Successfull transacation");                    
                 })
         })
 
-        console.log("its done");
+        //var d = await conn.trades_contract.methods.getTrade(res.data.trade1.TradeId).call();
+        console.log("its done... ");
 
     } catch (e) {
 

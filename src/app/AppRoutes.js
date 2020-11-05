@@ -30,6 +30,7 @@ const TradeForm4 = lazy(() => import('./components/tradeForm/TradeForm4'));
 const TradeForm5 = lazy(() => import('./components/tradeForm/TradeForm5'));
 const TradeDeal = lazy(() => import('./components/tradeForm/TradeDeal'));
 const TestForm = lazy(() => import('./components/tradeForm/TestForm'));
+const UserProfile = lazy(() => import('./components/user/user-profile'));
 
 const AppRoutes = () => {
   return (
@@ -55,7 +56,8 @@ const AppRoutes = () => {
         <PrivateRouter path='/tradeform5' component={TradeForm5} />
         <PrivateRouter path='/tradedeal' component={TradeDeal} />
         <PrivateRouter path='/testform' component={TestForm} />
-        
+        <PrivateRouter path='/user-profile' component={UserProfile} />
+
         <PublicRouter path='/activate/:token' component={ActivateForm} />
 
         <PublicRouter path='/error-404' component={Error404} />

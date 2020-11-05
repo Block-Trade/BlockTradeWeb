@@ -71,11 +71,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-    return ['Documents Uploaded', 'Documents Verified', 'Goods Laided','Goods Received','Payment complete'];
+  return [
+    'Documents Uploaded',
+    'Documents Verified',
+    'Goods Laided',
+    'Goods Received',
+    'Payment complete',
+  ];
 }
+
 
 const TradeCard = ({trade, user, statusUpdate, conn}) => {
     const classes = useStyles();
+    var d;
+    useEffect(async () => {
+      d = await conn.trades_contract.methods.getTrade(trade.TradeId).call();
+      d = 'https://ipfs.infura.io/ipfs/' + d; 
+      console.log(d);
+    },[]);
     const bull = <span className={classes.bullet}>•</span>;
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
@@ -109,15 +122,13 @@ const TradeCard = ({trade, user, statusUpdate, conn}) => {
                 break;
         }
     }
+  };
 
-    const handleStatusClick = ({tradeStatus}) => {
-        setStep(tradeStatus);
-        setStatus(true);
-    }
-    useEffect(() => {
-      setStep(trade.tradeStatus);
-      setStatus(true);
-    },[]);
+  const handleStatusClick = ({ tradeStatus }) => {
+    setStep(tradeStatus);
+    setStatus(true);
+  };
+
 
     return (
         <div className='col-lg-6 col-md-6 col-sm-6 grid-margin stretch-card'>
@@ -149,6 +160,33 @@ const TradeCard = ({trade, user, statusUpdate, conn}) => {
             Amount: <span style={{ color: 'white' }}>{trade.amount}</span>
           </Typography>
         </CardContent>
+        <CardActions style={{ color: 'ffffff' }}>
+          <Button size='small' style={{ color: 'ffffff' }}>
+            View Details
+          </Button>
+          {trade.importerUserName === user.username &&
+            trade.tradeStatus === 'DU' && (
+              <Button
+                size='small'
+                style={{ backgroundColor: 'ffffff' }}
+                onClick={() => {
+                  statusUpdate({ tradeId: trade.TradeId, status: 'IV' });
+                }}
+              >
+                Verify document
+              </Button>
+            )}
+          {!status && (
+            <Button
+              size='small'
+              style={{ color: 'ffffff' }}
+              onClick={() =>
+                handleStatusClick({ tradeStatus: trade.tradeStatus })
+              }
+            >
+              Check Status
+            </Button>
+          )}
         <CardActions>
           <Button size="small">View Details</Button>
           <Button size="small" onClick={handleOpen}>Check Status</Button>
@@ -265,6 +303,6 @@ const TradeCard = ({trade, user, statusUpdate, conn}) => {
     )
 }
 
-const mapStateToProps = state => ({conn: state.conn});
+const mapStateToProps = (state) => ({ conn: state.conn });
 
-export default connect(mapStateToProps,{ statusUpdate })(TradeCard);
+export default connect(mapStateToProps, { statusUpdate })(TradeCard);
