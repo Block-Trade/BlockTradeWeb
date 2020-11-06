@@ -24,6 +24,7 @@ const Register = ({
   const [password, setPass] = useState('');
   const [show, setShow] = useState(false);
   const [mobileNo, setMobileNo] = useState('');
+  const [walletAddr,setWalletAddr] = useState('');
   const [open, setOpen] = React.useState(false);
   const [variant, setVariant] = React.useState('error');
   const [message, setMessage] = React.useState('');
@@ -47,11 +48,12 @@ const Register = ({
         email,
         password,
         mobileNo,
+        walletAddr
       };
       setMessage('Registration Successful');
       setVariant('success');
       setOpen(true);
-      await signup(formData);
+      await signup({formData});
       history.push('/blank-page');
       if (error) {
         setMessage('Something went wrong !');
@@ -155,6 +157,17 @@ const Register = ({
                     className='form-control form-control-lg'
                     id='exampleInputPassword1'
                     placeholder='Password'
+                    required={true}
+                  />
+                </div>
+                <div className='form-group'>
+                  <input
+                    type='text'
+                    value={walletAddr}
+                    onChange={(e) => setWalletAddr(e.target.value)}
+                    className='form-control form-control-lg'
+                    id='exampleInputPassword1'
+                    placeholder='Wallet Address'
                     required={true}
                   />
                 </div>
