@@ -24,11 +24,12 @@ const Dashboard = ({ trade,loadUser, auth,getAllTrades, getAllConn,conn,checkSta
   },[auth.user]);
 
   useEffect(() => {
-    if(trade.trades){
+    if(trade.trades&&conn){
+      console.log(conn);
       checkStatus({conn, trades: trade.trades});
     }    
     
-  },[trade.trades]);
+  },[trade.trades,conn]);
   
   const {trades} = trade;
   return (
