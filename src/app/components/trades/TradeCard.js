@@ -133,10 +133,10 @@ const TradeCard = ({ auth, trade, user, statusUpdate, conn }) => {
   };
 
   const handleDataFetch = async e => {
-    //d = await conn.trades_contract.methods.getTrade(trade.TradeId).call();
-    //d = 'https://ipfs.infura.io/ipfs/' + d;
+    d = await conn.trades_contract.methods.getTrade(trade.TradeId).call();
+    d = 'https://ipfs.infura.io/ipfs/' + d;
     //console.log(d);
-    window.open("https://www.laddhaagro.com");
+    window.open(d);
   }
 
   const setStep = (status) => {

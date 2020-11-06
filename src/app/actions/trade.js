@@ -141,7 +141,6 @@ export const checkStatus = ({ conn, trades }) => async dispatch => {
         console.log(flag);
         var td = trades.trades
         td.map(async (t) => {
-
             console.log(t.TradeId);
             var flag = await conn.trades_contract.methods.allApproved(t.TradeId.toString()).call();
             console.log(flag);
