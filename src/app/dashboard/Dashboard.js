@@ -18,7 +18,7 @@ const Dashboard = ({ trade,loadUser, auth,getAllTrades, getAllConn,conn }) => {
     // Call to smart contract to check the status of document verification
     if(auth.user){
       getAllConn();
-      getAllTrades({conn})
+      getAllTrades();
     }
   },[auth.user]);
   
