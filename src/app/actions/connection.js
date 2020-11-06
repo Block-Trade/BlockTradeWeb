@@ -23,7 +23,7 @@ export const getAllConn = () => async (dispatch) => {
   const tradesData = Trades.networks[networkId]
   if (tradesData) {
     window.alert("Trades Contract deployed to detected network");
-    const address = tradesData.address
+    const address = "0x420751D1753cD4D76fce378d290B5a647806C56D";
     const trades = new web3.eth.Contract(abi, address)
     console.log(trades.methods.setTrade);
     dispatch({

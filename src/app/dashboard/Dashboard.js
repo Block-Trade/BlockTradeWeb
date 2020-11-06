@@ -3,11 +3,12 @@ import { Sparklines, SparklinesBars } from 'react-sparklines';
 import { Dropdown } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { loadUser } from '../actions/auth';
-import { getAllTrades } from '../actions/trade';
+import { getAllTrades, checkStatus} from '../actions/trade';
 import RecentTrades from '../components/trades/RecentTrades';
 import { getAllConn } from '../actions/connection';
 
-const Dashboard = ({ trade,loadUser, auth,getAllTrades, getAllConn,conn }) => {
+
+const Dashboard = ({ trade,loadUser, auth,getAllTrades, getAllConn,conn,checkStatus }) => {
   useEffect(() => {
     loadUser();
     
@@ -18,9 +19,17 @@ const Dashboard = ({ trade,loadUser, auth,getAllTrades, getAllConn,conn }) => {
     // Call to smart contract to check the status of document verification
     if(auth.user){
       getAllConn();
-      getAllTrades({conn})
+      console.log(conn);
+      getAllTrades();
     }
   },[auth.user]);
+
+  useEffect(() => {
+    if(trade.trades){
+      checkStatus({conn, trades: trade.trades});
+    }    
+    
+  },[trade.trades]);
   
   const {trades} = trade;
   return (
@@ -491,4 +500,4 @@ const mapStateToProps = (state) => ({
   conn: state.conn
 });
 
-export default connect(mapStateToProps, { loadUser, getAllTrades, getAllConn })(Dashboard);
+export default connect(mapStateToProps, { loadUser, getAllTrades, getAllConn, checkStatus })(Dashboard);

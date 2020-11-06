@@ -85,11 +85,12 @@ function getSteps() {
 const TradeCard = ({ trade, user, statusUpdate, conn }) => {
   const classes = useStyles();
   var d;
-  useEffect(async () => {
+  //console.log(conn);
+  /*useEffect(async () => {
     d = await conn.trades_contract.methods.getTrade(trade.TradeId).call();
     d = 'https://ipfs.infura.io/ipfs/' + d;
     console.log(d);
-  }, []);
+  }, []);*/
   const bull = <span className={classes.bullet}>•</span>;
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();

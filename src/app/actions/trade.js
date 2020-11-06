@@ -1,14 +1,13 @@
 import axios from 'axios';
+import Web3 from 'web3';
 
-export const getAllTrades = ({conn}) => async dispatch => {
+export const getAllTrades = () => async dispatch => {
     try {
         const trades = await axios.get('/trade');
         console.log(trades.data.trades[2]);
         const td = trades.data.trades;
         //dateChecker({trade: trades.data.trades[1]});
-        td.map(async t => {
-            //Write ur code here
-        });
+    
         td.map(async t => {
             if(t.paymentType==='PA' && t.rf===false){
                 var date1 = new Date(t.invoiceDate);
@@ -50,17 +49,18 @@ Date.prototype.addDays = function(days) {
     date.setDate(date.getDate() + days);
     return date;
 }
-const dateChecker = ({trade}) => async dispatch => {
-    
-    try {
-        console.log("In date checker")
-        if(trade.paymentType==='PA'){
-            var date = new Date(trade.invoiceDate);
-        
-            console.log(date.addDays(trade.creditPeriod));
-        }
-    } catch (e) {
-    
+
+export const checkStatus = ({conn, trades}) => async dispatch => {
+    try{
+        console.log(conn);
+        console.log(trades);
+        console.log(trades[0].TradeId);
+        var flag = await conn.trades_contract.methods.allApproved("eU0hlwXZtG85gPrwT3ZhY6w1eqhCUmQgXkNbV/2QtOQ=").call();
+        console.log(flag);
+        flag = await conn.trades_contract.methods.allApproved("4I2AYjWWj0+S2HBHBIyyKgZ1SLk+fgW5RVPmVnOv8tQ=").call();
+        console.log(flag);
+    }catch (e){
+
     }
 }
 
@@ -75,7 +75,7 @@ export const statusUpdate = ({tradeId, status}) => async dispatch => {
         });
         console.log(res);
     } catch (e) {
-
+        console.log(e);
     }
 }
 //Get ipfs doc through trade id
