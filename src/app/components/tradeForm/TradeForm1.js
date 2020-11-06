@@ -84,10 +84,11 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
     };
   }, []);
 
-  const handleButtonClick = (e) => {
+  const handleButtonClick = async (e) => {
     e.preventDefault();
 
     if (!loading) {
+      console.log(invoiceDate)
       nextForm();
       setSuccess(false);
       setLoading(true);
@@ -132,6 +133,7 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
   }, []);
 
   const nextForm = () => {
+
     const sellerInfo = {
       sellerFirm,
       invoiceNo,
@@ -147,6 +149,7 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
     };
     setSellerInfo(sellerInfo);
     console.log(sellerInfo);
+    
     //history.push('/tradeform2')
   };
 
@@ -232,7 +235,11 @@ const TradeForm1 = ({ history, setSellerInfo, tradeDeal }) => {
                 label='Invoice Date'
                 value={invoiceDate}
                 onChange={(e) => {
-                  setInvoiceDate(e);
+                  const d = new Date(e);
+                  const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d);
+                  const mo = new Intl.DateTimeFormat('en', { month: 'numeric' }).format(d);
+                  const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d);
+                  setInvoiceDate(`${ye}/${mo}/${da}`);
                   checkCondition();
                 }}
                 KeyboardButtonProps={{
