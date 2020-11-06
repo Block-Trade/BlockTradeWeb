@@ -140,6 +140,8 @@ const TradeCard = ({ auth, trade, user, statusUpdate, conn }) => {
   }
 
   const handleTransfer = async e => {
+    const am = trade.amount.slice(3);
+    console.log(am);
     //console.log(conn.main_contract);
     //conn.main_contract.methods.transfer30()
   }
