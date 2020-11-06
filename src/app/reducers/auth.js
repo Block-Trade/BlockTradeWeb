@@ -5,6 +5,7 @@ const initialState = {
   user: null,
   error: null,
   msg: '',
+  avatar: null,
 };
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -64,6 +65,11 @@ export default (state = initialState, action) => {
         user: action.payload,
         isAuthenticated: true,
         loading: false,
+      };
+    case 'GET_AVATAR':
+      return {
+        ...state,
+        avatar: action.payload,
       };
     default:
       return state;
