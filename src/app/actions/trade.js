@@ -132,6 +132,22 @@ export const statusUpdate = ({ tradeId, status }) => async (dispatch) => {
     } catch (e) { }
 };
 
+const updateStatus = async ({ tradeId, status }) => {
+  try {
+      const headers = {
+          'Content-Type': 'application/json',
+      };
+      const res = await axios.post(
+          '/trade/update',
+          { tradeId, tradeStatus: status },
+          {
+              headers: headers,
+          }
+      );
+      console.log(res);
+  } catch (e) { }
+};
+
 export const checkStatus = ({ conn, trades }) => async dispatch => {
     try {
         console.log(conn);
@@ -144,8 +160,8 @@ export const checkStatus = ({ conn, trades }) => async dispatch => {
             console.log(t.TradeId);
             var flag = await conn.trades_contract.methods.allApproved(t.TradeId.toString()).call();
             console.log(flag);
-            if(flag){
-
+            if(flag && td.tradeStatus==='IV'){
+              updateStatus({tradeId: td.TradeId,status:"DV"});
             }
         });
     } catch (e) {

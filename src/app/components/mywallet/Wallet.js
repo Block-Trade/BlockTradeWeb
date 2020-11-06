@@ -24,27 +24,46 @@ const Wallet = () => {
 
     return (
         <div className={classes.root}>
-            <Paper variant="outlined" style={{width:"100%",backgroundColor:"#2d5fc3", borderBottomLeftRadius:25,borderBottomRightRadius:25}}>
+            <Grid container>
+                <Grid item xs={12}>
+                <Paper variant="outlined" style={{width:"100%",backgroundColor:"#2d5fc3",borderBottomRightRadius:40,borderBottomLeftRadius:40}}>
                 <Typography align="center" style={{color:"white", marginBottom:15, marginTop:10}}>BlockChain Address</Typography>
-                <Grid container>
+                <Grid container alignContent="flex-end">
                     <Grid item md={3}></Grid>
                     <Grid item md={2}>
                         <Avatar alt="Remy Sharp" src="/token.png" className={classes.large} />
                     </Grid>
-                    <Grid item md={7} alignItems="center" justify="center">
+                    <Grid item md={7} alignItems="flex-end">
                         <Typography style={{color:"white",margin:"auto"}}>
                             Balance
                         </Typography>                    
                     </Grid>
                 </Grid>
-                <Grid container>
+                <Grid container style={{marginBottom:10}}>
                     <Grid item md={2}>
                     </Grid>
-                    <Grid item md={4}>
-                        <Button variant="outlined" style={{backgroundColor:"white"}} size="large">Buy</Button>
+                    <Grid item md={2}>
+                        <Button variant="outlined" style={{backgroundColor:"white"}} fullWidth>Buy</Button>
                     </Grid>
+                    <Grid item md={4}></Grid>
+                    <Grid item md={2}>
+                        <Button variant="outlined" style={{backgroundColor:"white"}} fullWidth>Sell</Button>
+                    </Grid>
+                    
                 </Grid>
             </Paper>
+                </Grid>
+                <Grid item xs={12}>
+
+                <Paper style={{width:"100%", borderTopLeftRadius:40,borderTopRightRadius:40}}>
+                <Typography align="center" variant="h3">
+                    My Transactions
+                </Typography>
+            </Paper>
+                </Grid>
+            </Grid>
+            
+            
         </div>
     )
 }
