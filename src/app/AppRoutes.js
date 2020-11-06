@@ -17,7 +17,7 @@ const Register1 = lazy(() => import('./user-pages/Register'));
 
 const Setting = lazy(() => import('./components/settings/settings'));
 const MyTrade = lazy(() => import('./components/mytrade/MyTrade'));
-const MyWallet = lazy(() => import('./components/mywallet/MyWallet'));
+const Wallet = lazy(() => import('./components/mywallet/Wallet'));
 const ActivateForm = lazy(() => import('./components/auth/Activate'));
 const CompanyInfo = lazy(() => import('./user-pages/CompanyInfo'));
 const Kyc = lazy(() => import('./components/kyc/Kyc'));
@@ -38,7 +38,7 @@ const AppRoutes = () => {
       <Switch>
         <PrivateRouter exact path='/dashboard' component={Dashboard} />
         <PrivateRouter exact path='/settings' component={Setting} />
-        <PrivateRouter exact path='/my-wallet' component={MyWallet} />
+        <PrivateRouter exact path='/my-wallet' component={Wallet} />
         <PrivateRouter exact path='/my-trade' component={MyTrade} />
         <PublicRouter
           path='/form-Elements/basic-elements'
