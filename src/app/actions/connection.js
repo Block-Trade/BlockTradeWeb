@@ -1,4 +1,5 @@
 import Trades from '../../abis/Trades.json';
+import Main from '../../abis/Main.json';
 import Web3 from 'web3';
 
 export const getAllConn = () => async (dispatch) => {
@@ -25,13 +26,28 @@ export const getAllConn = () => async (dispatch) => {
     window.alert("Trades Contract deployed to detected network");
     const address = "0x420751D1753cD4D76fce378d290B5a647806C56D";
     const trades = new web3.eth.Contract(abi, address)
-    console.log(trades.methods.setTrade);
     dispatch({
       type: 'SET_TRADES_CONTRACT',
       payload: trades,
     });
   } else {
     // window.alert('Trades contract not deployed to detected network')
+  }
+
+  const abi2 = Main.abi;
+  //console.log(Main);
+  //const networkId = await web3.eth.net.getId();
+  const mainData = Main.networks[networkId];
+  if (mainData) {
+    window.alert("Token(Main) Contract deployed to detected network");
+    const address = "0x00a711296646D0c55dE84D6Df8969190B7551231";
+    const main = new web3.eth.Contract(abi2, address)
+    dispatch({
+      type: 'SET_MAIN_CONTRACT',
+      payload: main,
+    });
+  } else {
+    window.alert('Token(Main) contract not deployed to detected network')
   }
 
   //loadBlockchainData();

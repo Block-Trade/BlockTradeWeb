@@ -133,10 +133,15 @@ const TradeCard = ({ auth, trade, user, statusUpdate, conn }) => {
   };
 
   const handleDataFetch = async e => {
-    d = await conn.trades_contract.methods.getTrade(trade.TradeId).call();
+    let d = await conn.trades_contract.methods.getTrade(trade.TradeId).call();
     d = 'https://ipfs.infura.io/ipfs/' + d;
     //console.log(d);
     window.open(d);
+  }
+
+  const handleTransfer = async e => {
+    //console.log(conn.main_contract);
+    //conn.main_contract.methods.transfer30()
   }
 
   const setStep = (status) => {
@@ -257,6 +262,7 @@ const TradeCard = ({ auth, trade, user, statusUpdate, conn }) => {
               <Button
                 className={classes.btn}
                 onClick={() => {
+                  handleTransfer();
                   statusUpdate({ tradeId: trade.TradeId, status: 'IV' });
                 }}
               >

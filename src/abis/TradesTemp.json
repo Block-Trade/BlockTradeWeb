@@ -1,0 +1,2213 @@
+{
+  "contractName": "TradesTemp",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "count",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "tradeId",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_id",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_tHash",
+          "type": "string"
+        }
+      ],
+      "name": "setTrade",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_id",
+          "type": "string"
+        }
+      ],
+      "name": "getTrade",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "_name",
+          "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_id",
+          "type": "string"
+        }
+      ],
+      "name": "getStatus",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "_confirmation",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"count\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"string\",\"name\":\"_id\",\"type\":\"string\"}],\"name\":\"getStatus\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"_confirmation\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"string\",\"name\":\"_id\",\"type\":\"string\"}],\"name\":\"getTrade\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"string\",\"name\":\"_id\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_tHash\",\"type\":\"string\"}],\"name\":\"setTrade\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"tradeId\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/ajinkya/Documents/Dapps/BlockTrade-UserApp/src/contracts/TradesTemp.sol\":\"TradesTemp\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/ajinkya/Documents/Dapps/BlockTrade-UserApp/src/contracts/TradesTemp.sol\":{\"keccak256\":\"0xa5bb759b2c497d61356c2f1fefbc261e8ddc6dfa524dfa6ee57142a601b24e62\",\"urls\":[\"bzz-raw://90d2bb0486618ca8e0720718edd67add2ab5ea69cbba53466ec00eab14b603ec\",\"dweb:/ipfs/QmaxBZqVUQVWqWpjwprSwFUWA3igrUDvVbzATWEvqNPxD8\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506109bf806100206000396000f3fe608060405234801561001057600080fd5b50600436106100575760003560e01c806306661abd1461005c57806322b05ed21461007a57806365f53d621461014d5780639fa637a81461029f578063d64612a3146103d3575b600080fd5b61006461047a565b6040518082815260200191505060405180910390f35b6101336004803603602081101561009057600080fd5b81019080803590602001906401000000008111156100ad57600080fd5b8201836020820111156100bf57600080fd5b803590602001918460018302840111640100000000831117156100e157600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f820116905080830192505050505050509192919290505050610480565b604051808215151515815260200191505060405180910390f35b61029d6004803603604081101561016357600080fd5b810190808035906020019064010000000081111561018057600080fd5b82018360208201111561019257600080fd5b803590602001918460018302840111640100000000831117156101b457600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f8201169050808301925050505050505091929192908035906020019064010000000081111561021757600080fd5b82018360208201111561022957600080fd5b8035906020019184600183028401116401000000008311171561024b57600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f820116905080830192505050505050509192919290505050610503565b005b610358600480360360208110156102b557600080fd5b81019080803590602001906401000000008111156102d257600080fd5b8201836020820111156102e457600080fd5b8035906020019184600183028401116401000000008311171561030657600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f82011690508083019250505050505050919291929050505061069e565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561039857808201518184015260208101905061037d565b50505050905090810190601f1680156103c55780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b6103ff600480360360208110156103e957600080fd5b81019080803590602001909291905050506107ac565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561043f578082015181840152602081019050610424565b50505050905090810190601f16801561046c5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b60015481565b60006003826040518082805190602001908083835b602083106104b85780518252602082019150602081019050602083039250610495565b6001836020036101000a038019825116818451168082178552505050505050905001915050908152602001604051809103902060010160009054906101000a900460ff169050919050565b6000829080600181540180825580915050906001820390600052602060002001600090919290919091509080519060200190610540929190610865565b505060026040518060400160405280838152602001600015158152509080600181540180825580915050906001820390600052602060002090600202016000909192909190915060008201518160000190805190602001906105a39291906108e5565b5060208201518160010160006101000a81548160ff0219169083151502179055505050506040518060400160405280828152602001600015158152506003836040518082805190602001908083835b6020831061061557805182526020820191506020810190506020830392506105f2565b6001836020036101000a038019825116818451168082178552505050505050905001915050908152602001604051809103902060008201518160000190805190602001906106649291906108e5565b5060208201518160010160006101000a81548160ff0219169083151502179055509050506001600081548092919060010191905055505050565b60606003826040518082805190602001908083835b602083106106d657805182526020820191506020810190506020830392506106b3565b6001836020036101000a03801982511681845116808217855250505050505090500191505090815260200160405180910390206000018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156107a05780601f10610775576101008083540402835291602001916107a0565b820191906000526020600020905b81548152906001019060200180831161078357829003601f168201915b50505050509050919050565b600081815481106107b957fe5b906000526020600020016000915090508054600181600116156101000203166002900480601f01602080910402602001604051908101604052809291908181526020018280546001816001161561010002031660029004801561085d5780601f106108325761010080835404028352916020019161085d565b820191906000526020600020905b81548152906001019060200180831161084057829003601f168201915b505050505081565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106108a657805160ff19168380011785556108d4565b828001600101855582156108d4579182015b828111156108d35782518255916020019190600101906108b8565b5b5090506108e19190610965565b5090565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061092657805160ff1916838001178555610954565b82800160010185558215610954579182015b82811115610953578251825591602001919060010190610938565b5b5090506109619190610965565b5090565b61098791905b8082111561098357600081600090555060010161096b565b5090565b9056fea265627a7a7231582055068096f3e7f67ce2fe9f23308ce4de764c77087b37d10de3716fefbb11fdc764736f6c63430005100032",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106100575760003560e01c806306661abd1461005c57806322b05ed21461007a57806365f53d621461014d5780639fa637a81461029f578063d64612a3146103d3575b600080fd5b61006461047a565b6040518082815260200191505060405180910390f35b6101336004803603602081101561009057600080fd5b81019080803590602001906401000000008111156100ad57600080fd5b8201836020820111156100bf57600080fd5b803590602001918460018302840111640100000000831117156100e157600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f820116905080830192505050505050509192919290505050610480565b604051808215151515815260200191505060405180910390f35b61029d6004803603604081101561016357600080fd5b810190808035906020019064010000000081111561018057600080fd5b82018360208201111561019257600080fd5b803590602001918460018302840111640100000000831117156101b457600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f8201169050808301925050505050505091929192908035906020019064010000000081111561021757600080fd5b82018360208201111561022957600080fd5b8035906020019184600183028401116401000000008311171561024b57600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f820116905080830192505050505050509192919290505050610503565b005b610358600480360360208110156102b557600080fd5b81019080803590602001906401000000008111156102d257600080fd5b8201836020820111156102e457600080fd5b8035906020019184600183028401116401000000008311171561030657600080fd5b91908080601f016020809104026020016040519081016040528093929190818152602001838380828437600081840152601f19601f82011690508083019250505050505050919291929050505061069e565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561039857808201518184015260208101905061037d565b50505050905090810190601f1680156103c55780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b6103ff600480360360208110156103e957600080fd5b81019080803590602001909291905050506107ac565b6040518080602001828103825283818151815260200191508051906020019080838360005b8381101561043f578082015181840152602081019050610424565b50505050905090810190601f16801561046c5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b60015481565b60006003826040518082805190602001908083835b602083106104b85780518252602082019150602081019050602083039250610495565b6001836020036101000a038019825116818451168082178552505050505050905001915050908152602001604051809103902060010160009054906101000a900460ff169050919050565b6000829080600181540180825580915050906001820390600052602060002001600090919290919091509080519060200190610540929190610865565b505060026040518060400160405280838152602001600015158152509080600181540180825580915050906001820390600052602060002090600202016000909192909190915060008201518160000190805190602001906105a39291906108e5565b5060208201518160010160006101000a81548160ff0219169083151502179055505050506040518060400160405280828152602001600015158152506003836040518082805190602001908083835b6020831061061557805182526020820191506020810190506020830392506105f2565b6001836020036101000a038019825116818451168082178552505050505050905001915050908152602001604051809103902060008201518160000190805190602001906106649291906108e5565b5060208201518160010160006101000a81548160ff0219169083151502179055509050506001600081548092919060010191905055505050565b60606003826040518082805190602001908083835b602083106106d657805182526020820191506020810190506020830392506106b3565b6001836020036101000a03801982511681845116808217855250505050505090500191505090815260200160405180910390206000018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156107a05780601f10610775576101008083540402835291602001916107a0565b820191906000526020600020905b81548152906001019060200180831161078357829003601f168201915b50505050509050919050565b600081815481106107b957fe5b906000526020600020016000915090508054600181600116156101000203166002900480601f01602080910402602001604051908101604052809291908181526020018280546001816001161561010002031660029004801561085d5780601f106108325761010080835404028352916020019161085d565b820191906000526020600020905b81548152906001019060200180831161084057829003601f168201915b505050505081565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106108a657805160ff19168380011785556108d4565b828001600101855582156108d4579182015b828111156108d35782518255916020019190600101906108b8565b5b5090506108e19190610965565b5090565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061092657805160ff1916838001178555610954565b82800160010185558215610954579182015b82811115610953578251825591602001919060010190610938565b5b5090506109619190610965565b5090565b61098791905b8082111561098357600081600090555060010161096b565b5090565b9056fea265627a7a7231582055068096f3e7f67ce2fe9f23308ce4de764c77087b37d10de3716fefbb11fdc764736f6c63430005100032",
+  "sourceMap": "68:871:7:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;68:871:7;;;;;;;",
+  "deployedSourceMap": "68:871:7:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;68:871:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;124:17;;;:::i;:::-;;;;;;;;;;;;;;;;;;;805:131;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;805:131:7;;;;;;;;;;21:11:-1;8;5:28;2:2;;;46:1;43;36:12;2:2;805:131:7;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;805:131:7;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;805:131:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;805:131:7;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;288:360;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;288:360:7;;;;;;;;;;21:11:-1;8;5:28;2:2;;;46:1;43;36:12;2:2;288:360:7;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;288:360:7;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;288:360:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;288:360:7;;;;;;;;;;;;;;;;;21:11:-1;8;5:28;2:2;;;46:1;43;36:12;2:2;288:360:7;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;288:360:7;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;288:360:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;288:360:7;;;;;;;;;;;;;;;:::i;:::-;;657:137;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;657:137:7;;;;;;;;;;21:11:-1;8;5:28;2:2;;;46:1;43;36:12;2:2;657:137:7;;35:9:-1;28:4;12:14;8:25;5:40;2:2;;;58:1;55;48:12;2:2;657:137:7;;;;;;100:9:-1;95:1;81:12;77:20;67:8;63:35;60:50;39:11;25:12;22:29;11:107;8:2;;;131:1;128;121:12;8:2;657:137:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;30:3:-1;22:6;14;1:33;99:1;93:3;85:6;81:16;74:27;137:4;133:9;126:4;121:3;117:14;113:30;106:37;;169:3;161:6;157:16;147:26;;657:137:7;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;657:137:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;95:23;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;95:23:7;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;95:23:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;124:17;;;;:::o;805:131::-;863:18;902:9;912:3;902:14;;;;;;;;;;;;;36:153:-1;66:2;61:3;58:11;36:153;;182:3;176:10;171:3;164:23;98:2;93:3;89:12;82:19;;123:2;118:3;114:12;107:19;;148:2;143:3;139:12;132:19;;36:153;;;274:1;267:3;263:2;259:12;254:3;250:22;246:30;315:4;311:9;305:3;299:10;295:26;356:4;350:3;344:10;340:21;389:7;380;377:20;372:3;365:33;3:399;;;902:14:7;;;;;;;;;;;;;;;;;;;;;:26;;;;;;;;;;;;894:35;;805:131;;;:::o;288:360::-;373:7;386:3;373:17;;39:1:-1;33:3;27:10;23:18;57:10;52:3;45:23;79:10;72:17;;0:93;373:17:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;409:5;420:79;;;;;;;;450:6;420:79;;;;483:5;420:79;;;;;409:91;;39:1:-1;33:3;27:10;23:18;57:10;52:3;45:23;79:10;72:17;;0:93;409:91:7;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;536:79;;;;;;;;566:6;536:79;;;;599:5;536:79;;;;;519:9;529:3;519:14;;;;;;;;;;;;;36:153:-1;66:2;61:3;58:11;36:153;;182:3;176:10;171:3;164:23;98:2;93:3;89:12;82:19;;123:2;118:3;114:12;107:19;;148:2;143:3;139:12;132:19;;36:153;;;274:1;267:3;263:2;259:12;254:3;250:22;246:30;315:4;311:9;305:3;299:10;295:26;356:4;350:3;344:10;340:21;389:7;380;377:20;372:3;365:33;3:399;;;519:14:7;;;;;;;;;;;;;;;;;;;;;:96;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;634:5;;:7;;;;;;;;;;;;;288:360;;:::o;657:137::-;714:19;762:9;772:3;762:14;;;;;;;;;;;;;36:153:-1;66:2;61:3;58:11;36:153;;182:3;176:10;171:3;164:23;98:2;93:3;89:12;82:19;;123:2;118:3;114:12;107:19;;148:2;143:3;139:12;132:19;;36:153;;;274:1;267:3;263:2;259:12;254:3;250:22;246:30;315:4;311:9;305:3;299:10;295:26;356:4;350:3;344:10;340:21;389:7;380;377:20;372:3;365:33;3:399;;;762:14:7;;;;;;;;;;;;;;;;;;;;;:24;;754:33;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;657:137;;;:::o;95:23::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;68:871::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "//// SPDX-License-Identifier: MIT\npragma solidity >=0.5.0 <0.7.0;\n\n\ncontract TradesTemp {\n\n    string[] public tradeId;\n    uint public count;\n\n    struct Deal {\n        string tradeHash;\n        bool isConfirmed;    \n    }\n\n    Deal[] deals;\n\n    mapping(string => Deal) tradeList;\n\n    function setTrade(string memory _id, string memory _tHash) public {\n        \n        tradeId.push(_id);\n        \n        deals.push(Deal({\n            tradeHash: _tHash,\n            isConfirmed: false\n        }));\n        \n        tradeList[_id] = Deal({\n            tradeHash: _tHash,\n            isConfirmed: false\n        });\n        \n        count++;\n    }   \n\n    function getTrade(string memory _id) public view returns(string memory _name){ \n        \n        return (tradeList[_id].tradeHash);\n    } \n    \n    function getStatus(string memory _id) public view returns(bool _confirmation){\n    \n    \treturn (tradeList[_id].isConfirmed);\n    }\n\n}\n",
+  "sourcePath": "/home/ajinkya/Documents/Dapps/BlockTrade-UserApp/src/contracts/TradesTemp.sol",
+  "ast": {
+    "absolutePath": "/home/ajinkya/Documents/Dapps/BlockTrade-UserApp/src/contracts/TradesTemp.sol",
+    "exportedSymbols": {
+      "TradesTemp": [
+        1650
+      ]
+    },
+    "id": 1651,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1569,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.5",
+          ".0",
+          "<",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "34:31:7"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1650,
+        "linearizedBaseContracts": [
+          1650
+        ],
+        "name": "TradesTemp",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 1572,
+            "name": "tradeId",
+            "nodeType": "VariableDeclaration",
+            "scope": 1650,
+            "src": "95:23:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_string_storage_$dyn_storage",
+              "typeString": "string[]"
+            },
+            "typeName": {
+              "baseType": {
+                "id": 1570,
+                "name": "string",
+                "nodeType": "ElementaryTypeName",
+                "src": "95:6:7",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                }
+              },
+              "id": 1571,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "95:8:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                "typeString": "string[]"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 1574,
+            "name": "count",
+            "nodeType": "VariableDeclaration",
+            "scope": 1650,
+            "src": "124:17:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 1573,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "124:4:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "TradesTemp.Deal",
+            "id": 1579,
+            "members": [
+              {
+                "constant": false,
+                "id": 1576,
+                "name": "tradeHash",
+                "nodeType": "VariableDeclaration",
+                "scope": 1579,
+                "src": "170:16:7",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 1575,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "170:6:7",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1578,
+                "name": "isConfirmed",
+                "nodeType": "VariableDeclaration",
+                "scope": 1579,
+                "src": "196:16:7",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 1577,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "196:4:7",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Deal",
+            "nodeType": "StructDefinition",
+            "scope": 1650,
+            "src": "148:75:7",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 1582,
+            "name": "deals",
+            "nodeType": "VariableDeclaration",
+            "scope": 1650,
+            "src": "229:12:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_struct$_Deal_$1579_storage_$dyn_storage",
+              "typeString": "struct TradesTemp.Deal[]"
+            },
+            "typeName": {
+              "baseType": {
+                "contractScope": null,
+                "id": 1580,
+                "name": "Deal",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 1579,
+                "src": "229:4:7",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Deal_$1579_storage_ptr",
+                  "typeString": "struct TradesTemp.Deal"
+                }
+              },
+              "id": 1581,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "229:6:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_struct$_Deal_$1579_storage_$dyn_storage_ptr",
+                "typeString": "struct TradesTemp.Deal[]"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1586,
+            "name": "tradeList",
+            "nodeType": "VariableDeclaration",
+            "scope": 1650,
+            "src": "248:33:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Deal_$1579_storage_$",
+              "typeString": "mapping(string => struct TradesTemp.Deal)"
+            },
+            "typeName": {
+              "id": 1585,
+              "keyType": {
+                "id": 1583,
+                "name": "string",
+                "nodeType": "ElementaryTypeName",
+                "src": "256:6:7",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "248:23:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Deal_$1579_storage_$",
+                "typeString": "mapping(string => struct TradesTemp.Deal)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 1584,
+                "name": "Deal",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 1579,
+                "src": "266:4:7",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Deal_$1579_storage_ptr",
+                  "typeString": "struct TradesTemp.Deal"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 1620,
+              "nodeType": "Block",
+              "src": "354:294:7",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1596,
+                        "name": "_id",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1588,
+                        "src": "386:3:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1593,
+                        "name": "tradeId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1572,
+                        "src": "373:7:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_string_storage_$dyn_storage",
+                          "typeString": "string storage ref[] storage ref"
+                        }
+                      },
+                      "id": 1595,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "push",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "373:12:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_string_storage_$returns$_t_uint256_$",
+                        "typeString": "function (string storage ref) returns (uint256)"
+                      }
+                    },
+                    "id": 1597,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "373:17:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 1598,
+                  "nodeType": "ExpressionStatement",
+                  "src": "373:17:7"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 1603,
+                            "name": "_tHash",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1590,
+                            "src": "450:6:7",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "hexValue": "66616c7365",
+                            "id": 1604,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "bool",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "483:5:7",
+                            "subdenomination": null,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bool",
+                              "typeString": "bool"
+                            },
+                            "value": "false"
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            },
+                            {
+                              "typeIdentifier": "t_bool",
+                              "typeString": "bool"
+                            }
+                          ],
+                          "id": 1602,
+                          "name": "Deal",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1579,
+                          "src": "420:4:7",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_struct$_Deal_$1579_storage_ptr_$",
+                            "typeString": "type(struct TradesTemp.Deal storage pointer)"
+                          }
+                        },
+                        "id": 1605,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "structConstructorCall",
+                        "lValueRequested": false,
+                        "names": [
+                          "tradeHash",
+                          "isConfirmed"
+                        ],
+                        "nodeType": "FunctionCall",
+                        "src": "420:79:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Deal_$1579_memory",
+                          "typeString": "struct TradesTemp.Deal memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Deal_$1579_memory",
+                          "typeString": "struct TradesTemp.Deal memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1599,
+                        "name": "deals",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1582,
+                        "src": "409:5:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_Deal_$1579_storage_$dyn_storage",
+                          "typeString": "struct TradesTemp.Deal storage ref[] storage ref"
+                        }
+                      },
+                      "id": 1601,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "push",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "409:10:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_struct$_Deal_$1579_storage_$returns$_t_uint256_$",
+                        "typeString": "function (struct TradesTemp.Deal storage ref) returns (uint256)"
+                      }
+                    },
+                    "id": 1606,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "409:91:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 1607,
+                  "nodeType": "ExpressionStatement",
+                  "src": "409:91:7"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1615,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 1608,
+                        "name": "tradeList",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1586,
+                        "src": "519:9:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Deal_$1579_storage_$",
+                          "typeString": "mapping(string memory => struct TradesTemp.Deal storage ref)"
+                        }
+                      },
+                      "id": 1610,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 1609,
+                        "name": "_id",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1588,
+                        "src": "529:3:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "519:14:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Deal_$1579_storage",
+                        "typeString": "struct TradesTemp.Deal storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 1612,
+                          "name": "_tHash",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1590,
+                          "src": "566:6:7",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_string_memory_ptr",
+                            "typeString": "string memory"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "hexValue": "66616c7365",
+                          "id": 1613,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "bool",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "599:5:7",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          },
+                          "value": "false"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_string_memory_ptr",
+                            "typeString": "string memory"
+                          },
+                          {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        ],
+                        "id": 1611,
+                        "name": "Deal",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1579,
+                        "src": "536:4:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_Deal_$1579_storage_ptr_$",
+                          "typeString": "type(struct TradesTemp.Deal storage pointer)"
+                        }
+                      },
+                      "id": 1614,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "names": [
+                        "tradeHash",
+                        "isConfirmed"
+                      ],
+                      "nodeType": "FunctionCall",
+                      "src": "536:79:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Deal_$1579_memory",
+                        "typeString": "struct TradesTemp.Deal memory"
+                      }
+                    },
+                    "src": "519:96:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Deal_$1579_storage",
+                      "typeString": "struct TradesTemp.Deal storage ref"
+                    }
+                  },
+                  "id": 1616,
+                  "nodeType": "ExpressionStatement",
+                  "src": "519:96:7"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1618,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "UnaryOperation",
+                    "operator": "++",
+                    "prefix": false,
+                    "src": "634:7:7",
+                    "subExpression": {
+                      "argumentTypes": null,
+                      "id": 1617,
+                      "name": "count",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1574,
+                      "src": "634:5:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 1619,
+                  "nodeType": "ExpressionStatement",
+                  "src": "634:7:7"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1621,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setTrade",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1591,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1588,
+                  "name": "_id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1621,
+                  "src": "306:17:7",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1587,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "306:6:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1590,
+                  "name": "_tHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1621,
+                  "src": "325:20:7",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1589,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "325:6:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "305:41:7"
+            },
+            "returnParameters": {
+              "id": 1592,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "354:0:7"
+            },
+            "scope": 1650,
+            "src": "288:360:7",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1634,
+              "nodeType": "Block",
+              "src": "734:60:7",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "components": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "baseExpression": {
+                            "argumentTypes": null,
+                            "id": 1628,
+                            "name": "tradeList",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1586,
+                            "src": "762:9:7",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Deal_$1579_storage_$",
+                              "typeString": "mapping(string memory => struct TradesTemp.Deal storage ref)"
+                            }
+                          },
+                          "id": 1630,
+                          "indexExpression": {
+                            "argumentTypes": null,
+                            "id": 1629,
+                            "name": "_id",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1623,
+                            "src": "772:3:7",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          },
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "IndexAccess",
+                          "src": "762:14:7",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Deal_$1579_storage",
+                            "typeString": "struct TradesTemp.Deal storage ref"
+                          }
+                        },
+                        "id": 1631,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "tradeHash",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 1576,
+                        "src": "762:24:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_storage",
+                          "typeString": "string storage ref"
+                        }
+                      }
+                    ],
+                    "id": 1632,
+                    "isConstant": false,
+                    "isInlineArray": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "TupleExpression",
+                    "src": "761:26:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "functionReturnParameters": 1627,
+                  "id": 1633,
+                  "nodeType": "Return",
+                  "src": "754:33:7"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1635,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getTrade",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1624,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1623,
+                  "name": "_id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1635,
+                  "src": "675:17:7",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1622,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "675:6:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "674:19:7"
+            },
+            "returnParameters": {
+              "id": 1627,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1626,
+                  "name": "_name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1635,
+                  "src": "714:19:7",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1625,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "714:6:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "713:21:7"
+            },
+            "scope": 1650,
+            "src": "657:137:7",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1648,
+              "nodeType": "Block",
+              "src": "882:54:7",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "components": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "baseExpression": {
+                            "argumentTypes": null,
+                            "id": 1642,
+                            "name": "tradeList",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1586,
+                            "src": "902:9:7",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Deal_$1579_storage_$",
+                              "typeString": "mapping(string memory => struct TradesTemp.Deal storage ref)"
+                            }
+                          },
+                          "id": 1644,
+                          "indexExpression": {
+                            "argumentTypes": null,
+                            "id": 1643,
+                            "name": "_id",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1637,
+                            "src": "912:3:7",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          },
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "IndexAccess",
+                          "src": "902:14:7",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Deal_$1579_storage",
+                            "typeString": "struct TradesTemp.Deal storage ref"
+                          }
+                        },
+                        "id": 1645,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "isConfirmed",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 1578,
+                        "src": "902:26:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "id": 1646,
+                    "isConstant": false,
+                    "isInlineArray": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "TupleExpression",
+                    "src": "901:28:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 1641,
+                  "id": 1647,
+                  "nodeType": "Return",
+                  "src": "894:35:7"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1649,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getStatus",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1638,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1637,
+                  "name": "_id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1649,
+                  "src": "824:17:7",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1636,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "824:6:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "823:19:7"
+            },
+            "returnParameters": {
+              "id": 1641,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1640,
+                  "name": "_confirmation",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1649,
+                  "src": "863:18:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1639,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "863:4:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "862:20:7"
+            },
+            "scope": 1650,
+            "src": "805:131:7",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1651,
+        "src": "68:871:7"
+      }
+    ],
+    "src": "34:906:7"
+  },
+  "legacyAST": {
+    "absolutePath": "/home/ajinkya/Documents/Dapps/BlockTrade-UserApp/src/contracts/TradesTemp.sol",
+    "exportedSymbols": {
+      "TradesTemp": [
+        1650
+      ]
+    },
+    "id": 1651,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1569,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.5",
+          ".0",
+          "<",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "34:31:7"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1650,
+        "linearizedBaseContracts": [
+          1650
+        ],
+        "name": "TradesTemp",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 1572,
+            "name": "tradeId",
+            "nodeType": "VariableDeclaration",
+            "scope": 1650,
+            "src": "95:23:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_string_storage_$dyn_storage",
+              "typeString": "string[]"
+            },
+            "typeName": {
+              "baseType": {
+                "id": 1570,
+                "name": "string",
+                "nodeType": "ElementaryTypeName",
+                "src": "95:6:7",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                }
+              },
+              "id": 1571,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "95:8:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+                "typeString": "string[]"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 1574,
+            "name": "count",
+            "nodeType": "VariableDeclaration",
+            "scope": 1650,
+            "src": "124:17:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 1573,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "124:4:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": null,
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "TradesTemp.Deal",
+            "id": 1579,
+            "members": [
+              {
+                "constant": false,
+                "id": 1576,
+                "name": "tradeHash",
+                "nodeType": "VariableDeclaration",
+                "scope": 1579,
+                "src": "170:16:7",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 1575,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "170:6:7",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 1578,
+                "name": "isConfirmed",
+                "nodeType": "VariableDeclaration",
+                "scope": 1579,
+                "src": "196:16:7",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_bool",
+                  "typeString": "bool"
+                },
+                "typeName": {
+                  "id": 1577,
+                  "name": "bool",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "196:4:7",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Deal",
+            "nodeType": "StructDefinition",
+            "scope": 1650,
+            "src": "148:75:7",
+            "visibility": "public"
+          },
+          {
+            "constant": false,
+            "id": 1582,
+            "name": "deals",
+            "nodeType": "VariableDeclaration",
+            "scope": 1650,
+            "src": "229:12:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_array$_t_struct$_Deal_$1579_storage_$dyn_storage",
+              "typeString": "struct TradesTemp.Deal[]"
+            },
+            "typeName": {
+              "baseType": {
+                "contractScope": null,
+                "id": 1580,
+                "name": "Deal",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 1579,
+                "src": "229:4:7",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Deal_$1579_storage_ptr",
+                  "typeString": "struct TradesTemp.Deal"
+                }
+              },
+              "id": 1581,
+              "length": null,
+              "nodeType": "ArrayTypeName",
+              "src": "229:6:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_array$_t_struct$_Deal_$1579_storage_$dyn_storage_ptr",
+                "typeString": "struct TradesTemp.Deal[]"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1586,
+            "name": "tradeList",
+            "nodeType": "VariableDeclaration",
+            "scope": 1650,
+            "src": "248:33:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Deal_$1579_storage_$",
+              "typeString": "mapping(string => struct TradesTemp.Deal)"
+            },
+            "typeName": {
+              "id": 1585,
+              "keyType": {
+                "id": 1583,
+                "name": "string",
+                "nodeType": "ElementaryTypeName",
+                "src": "256:6:7",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "248:23:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Deal_$1579_storage_$",
+                "typeString": "mapping(string => struct TradesTemp.Deal)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 1584,
+                "name": "Deal",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 1579,
+                "src": "266:4:7",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Deal_$1579_storage_ptr",
+                  "typeString": "struct TradesTemp.Deal"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 1620,
+              "nodeType": "Block",
+              "src": "354:294:7",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1596,
+                        "name": "_id",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1588,
+                        "src": "386:3:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1593,
+                        "name": "tradeId",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1572,
+                        "src": "373:7:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_string_storage_$dyn_storage",
+                          "typeString": "string storage ref[] storage ref"
+                        }
+                      },
+                      "id": 1595,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "push",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "373:12:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_string_storage_$returns$_t_uint256_$",
+                        "typeString": "function (string storage ref) returns (uint256)"
+                      }
+                    },
+                    "id": 1597,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "373:17:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 1598,
+                  "nodeType": "ExpressionStatement",
+                  "src": "373:17:7"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "id": 1603,
+                            "name": "_tHash",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1590,
+                            "src": "450:6:7",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "hexValue": "66616c7365",
+                            "id": 1604,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "bool",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "483:5:7",
+                            "subdenomination": null,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bool",
+                              "typeString": "bool"
+                            },
+                            "value": "false"
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            },
+                            {
+                              "typeIdentifier": "t_bool",
+                              "typeString": "bool"
+                            }
+                          ],
+                          "id": 1602,
+                          "name": "Deal",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1579,
+                          "src": "420:4:7",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_struct$_Deal_$1579_storage_ptr_$",
+                            "typeString": "type(struct TradesTemp.Deal storage pointer)"
+                          }
+                        },
+                        "id": 1605,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "kind": "structConstructorCall",
+                        "lValueRequested": false,
+                        "names": [
+                          "tradeHash",
+                          "isConfirmed"
+                        ],
+                        "nodeType": "FunctionCall",
+                        "src": "420:79:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_Deal_$1579_memory",
+                          "typeString": "struct TradesTemp.Deal memory"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_struct$_Deal_$1579_memory",
+                          "typeString": "struct TradesTemp.Deal memory"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 1599,
+                        "name": "deals",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1582,
+                        "src": "409:5:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_array$_t_struct$_Deal_$1579_storage_$dyn_storage",
+                          "typeString": "struct TradesTemp.Deal storage ref[] storage ref"
+                        }
+                      },
+                      "id": 1601,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "push",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": null,
+                      "src": "409:10:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_arraypush_nonpayable$_t_struct$_Deal_$1579_storage_$returns$_t_uint256_$",
+                        "typeString": "function (struct TradesTemp.Deal storage ref) returns (uint256)"
+                      }
+                    },
+                    "id": 1606,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "409:91:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 1607,
+                  "nodeType": "ExpressionStatement",
+                  "src": "409:91:7"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1615,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 1608,
+                        "name": "tradeList",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1586,
+                        "src": "519:9:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Deal_$1579_storage_$",
+                          "typeString": "mapping(string memory => struct TradesTemp.Deal storage ref)"
+                        }
+                      },
+                      "id": 1610,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "id": 1609,
+                        "name": "_id",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1588,
+                        "src": "529:3:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_memory_ptr",
+                          "typeString": "string memory"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "519:14:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Deal_$1579_storage",
+                        "typeString": "struct TradesTemp.Deal storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 1612,
+                          "name": "_tHash",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1590,
+                          "src": "566:6:7",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_string_memory_ptr",
+                            "typeString": "string memory"
+                          }
+                        },
+                        {
+                          "argumentTypes": null,
+                          "hexValue": "66616c7365",
+                          "id": 1613,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "kind": "bool",
+                          "lValueRequested": false,
+                          "nodeType": "Literal",
+                          "src": "599:5:7",
+                          "subdenomination": null,
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          },
+                          "value": "false"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_string_memory_ptr",
+                            "typeString": "string memory"
+                          },
+                          {
+                            "typeIdentifier": "t_bool",
+                            "typeString": "bool"
+                          }
+                        ],
+                        "id": 1611,
+                        "name": "Deal",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1579,
+                        "src": "536:4:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_struct$_Deal_$1579_storage_ptr_$",
+                          "typeString": "type(struct TradesTemp.Deal storage pointer)"
+                        }
+                      },
+                      "id": 1614,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "structConstructorCall",
+                      "lValueRequested": false,
+                      "names": [
+                        "tradeHash",
+                        "isConfirmed"
+                      ],
+                      "nodeType": "FunctionCall",
+                      "src": "536:79:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Deal_$1579_memory",
+                        "typeString": "struct TradesTemp.Deal memory"
+                      }
+                    },
+                    "src": "519:96:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Deal_$1579_storage",
+                      "typeString": "struct TradesTemp.Deal storage ref"
+                    }
+                  },
+                  "id": 1616,
+                  "nodeType": "ExpressionStatement",
+                  "src": "519:96:7"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1618,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "UnaryOperation",
+                    "operator": "++",
+                    "prefix": false,
+                    "src": "634:7:7",
+                    "subExpression": {
+                      "argumentTypes": null,
+                      "id": 1617,
+                      "name": "count",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1574,
+                      "src": "634:5:7",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      }
+                    },
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "id": 1619,
+                  "nodeType": "ExpressionStatement",
+                  "src": "634:7:7"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1621,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "setTrade",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1591,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1588,
+                  "name": "_id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1621,
+                  "src": "306:17:7",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1587,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "306:6:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 1590,
+                  "name": "_tHash",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1621,
+                  "src": "325:20:7",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1589,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "325:6:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "305:41:7"
+            },
+            "returnParameters": {
+              "id": 1592,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "354:0:7"
+            },
+            "scope": 1650,
+            "src": "288:360:7",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1634,
+              "nodeType": "Block",
+              "src": "734:60:7",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "components": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "baseExpression": {
+                            "argumentTypes": null,
+                            "id": 1628,
+                            "name": "tradeList",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1586,
+                            "src": "762:9:7",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Deal_$1579_storage_$",
+                              "typeString": "mapping(string memory => struct TradesTemp.Deal storage ref)"
+                            }
+                          },
+                          "id": 1630,
+                          "indexExpression": {
+                            "argumentTypes": null,
+                            "id": 1629,
+                            "name": "_id",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1623,
+                            "src": "772:3:7",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          },
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "IndexAccess",
+                          "src": "762:14:7",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Deal_$1579_storage",
+                            "typeString": "struct TradesTemp.Deal storage ref"
+                          }
+                        },
+                        "id": 1631,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "tradeHash",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 1576,
+                        "src": "762:24:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_string_storage",
+                          "typeString": "string storage ref"
+                        }
+                      }
+                    ],
+                    "id": 1632,
+                    "isConstant": false,
+                    "isInlineArray": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "TupleExpression",
+                    "src": "761:26:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage",
+                      "typeString": "string storage ref"
+                    }
+                  },
+                  "functionReturnParameters": 1627,
+                  "id": 1633,
+                  "nodeType": "Return",
+                  "src": "754:33:7"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1635,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getTrade",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1624,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1623,
+                  "name": "_id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1635,
+                  "src": "675:17:7",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1622,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "675:6:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "674:19:7"
+            },
+            "returnParameters": {
+              "id": 1627,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1626,
+                  "name": "_name",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1635,
+                  "src": "714:19:7",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1625,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "714:6:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "713:21:7"
+            },
+            "scope": 1650,
+            "src": "657:137:7",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1648,
+              "nodeType": "Block",
+              "src": "882:54:7",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "components": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "baseExpression": {
+                            "argumentTypes": null,
+                            "id": 1642,
+                            "name": "tradeList",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1586,
+                            "src": "902:9:7",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_mapping$_t_string_memory_$_t_struct$_Deal_$1579_storage_$",
+                              "typeString": "mapping(string memory => struct TradesTemp.Deal storage ref)"
+                            }
+                          },
+                          "id": 1644,
+                          "indexExpression": {
+                            "argumentTypes": null,
+                            "id": 1643,
+                            "name": "_id",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 1637,
+                            "src": "912:3:7",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_string_memory_ptr",
+                              "typeString": "string memory"
+                            }
+                          },
+                          "isConstant": false,
+                          "isLValue": true,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "nodeType": "IndexAccess",
+                          "src": "902:14:7",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_struct$_Deal_$1579_storage",
+                            "typeString": "struct TradesTemp.Deal storage ref"
+                          }
+                        },
+                        "id": 1645,
+                        "isConstant": false,
+                        "isLValue": true,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "isConfirmed",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 1578,
+                        "src": "902:26:7",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      }
+                    ],
+                    "id": 1646,
+                    "isConstant": false,
+                    "isInlineArray": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "nodeType": "TupleExpression",
+                    "src": "901:28:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "functionReturnParameters": 1641,
+                  "id": 1647,
+                  "nodeType": "Return",
+                  "src": "894:35:7"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 1649,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "getStatus",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1638,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1637,
+                  "name": "_id",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1649,
+                  "src": "824:17:7",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_memory_ptr",
+                    "typeString": "string"
+                  },
+                  "typeName": {
+                    "id": 1636,
+                    "name": "string",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "824:6:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_string_storage_ptr",
+                      "typeString": "string"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "823:19:7"
+            },
+            "returnParameters": {
+              "id": 1641,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1640,
+                  "name": "_confirmation",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 1649,
+                  "src": "863:18:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 1639,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "863:4:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "862:20:7"
+            },
+            "scope": 1650,
+            "src": "805:131:7",
+            "stateMutability": "view",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1651,
+        "src": "68:871:7"
+      }
+    ],
+    "src": "34:906:7"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
+  },
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0x34FA0a3a046DB94871fF1d84476547c5ee80ab41",
+      "transactionHash": "0xb926f28a584bf0bf2e51258920820d4b483318d71533750ee5868f17ffadfe2b"
+    }
+  },
+  "schemaVersion": "3.2.0",
+  "updatedAt": "2020-11-06T10:02:58.602Z",
+  "networkType": "ethereum",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
