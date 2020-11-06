@@ -1,7 +1,7 @@
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 
-export const signup = (formData) => async (dispatch) => {
+export const signup = ({formData}) => async (dispatch) => {
   try {
     const headers = {
       'Content-Type': 'application/json',
