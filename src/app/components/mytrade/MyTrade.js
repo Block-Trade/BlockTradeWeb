@@ -1,4 +1,4 @@
-import React, { Component, useEffect,Fragment, useState } from 'react';
+import React, { Component, useEffect, Fragment, useState } from 'react';
 import { Line, Doughnut, Bar } from 'react-chartjs-2';
 import { Sparklines, SparklinesBars } from 'react-sparklines';
 import { ProgressBar, Dropdown } from 'react-bootstrap';
@@ -10,7 +10,7 @@ import RecentTrades from '../trades/RecentTrades';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { makeStyles,useTheme  } from '@material-ui/core/styles';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
@@ -22,17 +22,13 @@ function TabPanel(props) {
 
   return (
     <div
-      role="tabpanel"
+      role='tabpanel'
       hidden={value !== index}
       id={`full-width-tabpanel-${index}`}
       aria-labelledby={`full-width-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box>
-          {children}
-        </Box>
-      )}
+      {value === index && <Box>{children}</Box>}
     </div>
   );
 }
@@ -56,12 +52,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MyTrade = ({ loadUser, auth,trade,getAllTrades }) => {
+const MyTrade = ({ loadUser, auth, trade, getAllTrades }) => {
   var trades;
   const classes = useStyles();
-  const [compTrades,setCompTrades] =  useState([]);
-  const [onTrades,setOnTrades] = useState([]);
-  const [canTrades,setCanTrades] = useState([]);
+  const [compTrades, setCompTrades] = useState([]);
+  const [onTrades, setOnTrades] = useState([]);
+  const [canTrades, setCanTrades] = useState([]);
   const theme = useTheme();
 
   const [value, setValue] = React.useState(2);
@@ -75,81 +71,112 @@ const MyTrade = ({ loadUser, auth,trade,getAllTrades }) => {
   };
 
   useEffect(() => {
-    if(!auth.user){
+    if (!auth.user) {
       loadUser();
-    
     }
-    
-  },[]);
+  }, []);
   useEffect(() => {
     // Get all connections
-    
+
     // Call to smart contract to check the status of document verification
-    if(auth.user && !trade.trades){
+    if (auth.user && !trade.trades) {
       getAllTrades();
-      
     }
-  },[auth.user]);
- 
+  }, [auth.user]);
+
   useEffect(() => {
-    if(trade.trades){
+    if (trade.trades) {
       trades = trade.trades.trades;
       console.log(trades);
-      setOnTrades(trades.filter(t => (t.tradeStatus!=='PD')));
-      setCompTrades(trades.filter(t => (t.tradeStatus==='PD')));
-      setCanTrades(trades.filter(t => (t.tradeStatus==='CA')));
+      setOnTrades(trades.filter((t) => t.tradeStatus !== 'PD'));
+      setCompTrades(trades.filter((t) => t.tradeStatus === 'PD'));
+      setCanTrades(trades.filter((t) => t.tradeStatus === 'CA'));
     }
-
-  },[trade.trades]);
+  }, [trade.trades]);
   return (
     <div className={classes.root}>
-      <AppBar position="static" color="default" style={{width:"100%", marginBottom:25}}>
+      <AppBar
+        position='static'
+        color='default'
+        style={{ width: '100%', marginBottom: 25 }}
+      >
         <Tabs
           value={value}
           onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          variant="fullWidth"
-          aria-label="full width tabs example"
+          indicatorColor='primary'
+          textColor='primary'
+          variant='fullWidth'
+          aria-label='full width tabs example'
         >
-          <Tab label="Ongoing Trades" {...a11yProps(0)} />
-          <Tab label="Completed Trades" {...a11yProps(1)} />
-          <Tab label="Cancelled Trades" {...a11yProps(2)} />
+          <Tab label='Ongoing Trades' {...a11yProps(0)} />
+          <Tab label='Completed Trades' {...a11yProps(1)} />
+          <Tab label='Cancelled Trades' {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-      
-          {value===0 && <div className='row'>
-          {trade.trades &&
-            onTrades.length===0?(<Typography>
+
+      {value === 0 && (
+        <div className='row'>
+          {trade.trades && onTrades.length === 0 ? (
+            <Typography style={{ left: '50%', position: 'absolute' }}>
               No trades to show
-              </Typography>):onTrades.map((trad) => (
-              <TradeCard style={{ color: 'ffffff' }} trade={trad} user={auth.user} />
-            ))}
-          </div>}
-          {value===1 && <div className='row'>
-          {trade.trades &&
-            compTrades.length===0?(<Typography>
+            </Typography>
+          ) : (
+            onTrades.map((trad) => (
+              <TradeCard
+                style={{ color: 'ffffff' }}
+                trade={trad}
+                user={auth.user}
+              />
+            ))
+          )}
+        </div>
+      )}
+      {value === 1 && (
+        <div className='row'>
+          {trade.trades && compTrades.length === 0 ? (
+            <Typography style={{ left: '50%', position: 'absolute' }}>
               No trades to show
-              </Typography>):compTrades.map((trad) => (
-              <TradeCard style={{ color: 'ffffff' }} trade={trad} user={auth.user} />
-            ))}
-          </div>}
-          {value===2 && <div className='row'>
-          {trade.trades &&
-            canTrades.length===0?(<Typography align="center" variant="body1">
+            </Typography>
+          ) : (
+            compTrades.map((trad) => (
+              <TradeCard
+                style={{ color: 'ffffff' }}
+                trade={trad}
+                user={auth.user}
+              />
+            ))
+          )}
+        </div>
+      )}
+      {value === 2 && (
+        <div className='row'>
+          {trade.trades && canTrades.length === 0 ? (
+            <Typography
+              align='center'
+              variant='body1'
+              style={{ left: '50%', position: 'absolute' }}
+            >
               No trades to show
-              </Typography>):canTrades.map((trad) => (
-              <TradeCard style={{ color: 'ffffff' }} trade={trad} user={auth.user} />
-            ))}
-          </div>}
-          {console.log(onTrades)}
+            </Typography>
+          ) : (
+            canTrades.map((trad) => (
+              <TradeCard
+                style={{ color: 'ffffff' }}
+                trade={trad}
+                user={auth.user}
+              />
+            ))
+          )}
+        </div>
+      )}
+      {console.log(onTrades)}
     </div>
   );
-}
+};
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  trade: state.trade
-})
+  trade: state.trade,
+});
 
-export default connect(mapStateToProps,{ loadUser, getAllTrades })(MyTrade);
+export default connect(mapStateToProps, { loadUser, getAllTrades })(MyTrade);
