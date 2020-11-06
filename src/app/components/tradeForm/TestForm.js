@@ -74,7 +74,7 @@ const TestFrom = ({ history, tradeDeal, finalUpload, auth,conn }) => {
         expUser: auth.user.username,
         impUser: tradeDeal.selectedImpId,
         inco: tradeDeal.receiverInfo.inco,
-        amount: `${tradeDeal.finalBill.curr}.${tradeDeal.finalBill.tradeTotal}`,
+        amount: `${tradeDeal.finalBill.curr}${tradeDeal.finalBill.tradeTotal}`,
         creditPeriod: tradeDeal.sellerInfo.creditP,
         paymentType: tradeDeal.sellerInfo.paymentType,
         invoiceDate: tradeDeal.sellerInfo.invoiceDate
