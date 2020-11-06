@@ -113,6 +113,11 @@ function getSteps() {
 const TradeCard = ({ auth, trade, user, statusUpdate, conn }) => {
   const classes = useStyles();
   var d;
+  //useEffect(async () => {
+    // d = await conn.trades_contract.methods.getTrade(trade.TradeId).call();
+    // d = 'https://ipfs.infura.io/ipfs/' + d;
+    // console.log(d);
+  //}, []);
   const bull = <span className={classes.bullet}>•</span>;
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
@@ -126,6 +131,13 @@ const TradeCard = ({ auth, trade, user, statusUpdate, conn }) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleDataFetch = async e => {
+    //d = await conn.trades_contract.methods.getTrade(trade.TradeId).call();
+    //d = 'https://ipfs.infura.io/ipfs/' + d;
+    //console.log(d);
+    window.open("https://www.laddhaagro.com");
+  }
 
   const setStep = (status) => {
     switch (status) {
@@ -234,7 +246,7 @@ const TradeCard = ({ auth, trade, user, statusUpdate, conn }) => {
           </h5>
         </CardContent>
         <CardActions style={{ color: 'ffffff' }}>
-          <Button className={classes.btn} style={{ marginLeft: '1rem' }}>
+          <Button className={classes.btn} style={{ marginLeft: '1rem' }} onClick={handleDataFetch}>
             View Details
           </Button>
           <Button className={classes.btn} onClick={handleOpen}>
