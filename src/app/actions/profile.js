@@ -35,7 +35,7 @@ export const editProfile = ({ profile }) => async (dispatch) => {
     const headers = {
       'Content-Type': 'application/json',
     };
-    const res = await axios.post('/trade/update', profile, {
+    const res = await axios.post('/profile/edit-profile', profile, {
       headers: headers,
     });
     console.log(res);
