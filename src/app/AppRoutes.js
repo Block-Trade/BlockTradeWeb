@@ -7,8 +7,6 @@ import PublicRouter from './routers/PublicRouter';
 
 const Dashboard = lazy(() => import('./dashboard/Dashboard'));
 
-const BasicElements = lazy(() => import('./form-elements/BasicElements'));
-
 const Error404 = lazy(() => import('./user-pages/Error404'));
 const Error500 = lazy(() => import('./user-pages/Error500'));
 
@@ -40,10 +38,6 @@ const AppRoutes = () => {
         <PrivateRouter exact path='/settings' component={Setting} />
         <PrivateRouter exact path='/my-wallet' component={Wallet} />
         <PrivateRouter exact path='/my-trade' component={MyTrade} />
-        <PublicRouter
-          path='/form-Elements/basic-elements'
-          component={BasicElements}
-        />
 
         <PublicRouter path='/login' component={Login} />
         <PublicRouter path='/register' component={Register1} />

@@ -350,16 +350,6 @@ const Sidebar = ({
             </span>
           </Link>
         </li>
-        <li
-          className={
-            isPathActive('/form-elements') ? 'nav-item active' : 'nav-item'
-          }
-        >
-          <Link className='nav-link' to='/form-elements/basic-elements'>
-            <i className='mdi mdi-format-list-bulleted menu-icon'></i>
-            <span className='menu-title'>Form Elements</span>
-          </Link>
-        </li>
       </ul>
     </nav>
   );
