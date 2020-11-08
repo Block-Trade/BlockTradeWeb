@@ -18,13 +18,14 @@ export const getAvatar = ({ fileName }) => async (dispatch) => {
   try {
     const res = await axios.get(`/profileimage/${fileName}`);
     const data = res.data;
+    console.log('aaaa', data);
     var binary = '';
     var bytes = new TextDecoder('utf-8').decode(new Uint8Array(res.data));
     console.log(bytes);
     bytes.forEach((b) => (binary += String.fromCharCode(b)));
     var base64Flag = 'data:image/jpeg;base64,';
     var imageStr = window.btoa(binary);
-    console.log(imageStr);
+    console.log('abcd', imageStr);
     dispatch({ type: 'GET_AVATAR', payload: data });
   } catch (e) {}
 };
