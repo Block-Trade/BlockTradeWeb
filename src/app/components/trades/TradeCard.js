@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable default-case */
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 import React, { useState, useEffect, Fragment } from 'react';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -12,7 +13,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { connect } from 'react-redux';
 import Paper from '@material-ui/core/Paper';
-import { statusUpdate } from '../../actions/trade';
+import { statusUpdate, getWalletAddr, clearAddr } from '../../actions/trade';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -21,18 +22,13 @@ import TimelineItem from '@material-ui/lab/TimelineItem';
 import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
 import TimelineConnector from '@material-ui/lab/TimelineConnector';
 import TimelineContent from '@material-ui/lab/TimelineContent';
-import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
-import FastfoodIcon from '@material-ui/icons/Fastfood';
-import LaptopMacIcon from '@material-ui/icons/LaptopMac';
-import HotelIcon from '@material-ui/icons/Hotel';
-import RepeatIcon from '@material-ui/icons/Repeat';
-import InsertDriveFile from '@material-ui/icons/InsertDriveFile';
 import VerifiedUser from '@material-ui/icons/VerifiedUser';
 import LocalShipping from '@material-ui/icons/LocalShipping';
 import ConfirmationNumberIcon from '@material-ui/icons/ConfirmationNumber';
 import PaymentIcon from '@material-ui/icons/Payment';
 import CheckCircle from '@material-ui/icons/CheckCircle';
+//import AssignmentIndIcon from '@material-ui/icons/AssignmentIndIcon';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -110,14 +106,19 @@ function getSteps() {
   ];
 }
 
-const TradeCard = ({ auth, trade, user, statusUpdate, conn }) => {
+const TradeCard = ({
+  auth,
+  trade,
+  user,
+  statusUpdate,
+  conn,
+  getWalletAddr,
+  clearAddr,
+  tradeAddr,
+}) => {
   const classes = useStyles();
   var d;
-  //useEffect(async () => {
-    // d = await conn.trades_contract.methods.getTrade(trade.TradeId).call();
-    // d = 'https://ipfs.infura.io/ipfs/' + d;
-    // console.log(d);
-  //}, []);
+  
   const bull = <span className={classes.bullet}>•</span>;
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
@@ -132,19 +133,37 @@ const TradeCard = ({ auth, trade, user, statusUpdate, conn }) => {
     setOpen(false);
   };
 
-  const handleDataFetch = async e => {
+  const handleDataFetch = async (e) => {
     let d = await conn.trades_contract.methods.getTrade(trade.TradeId).call();
     d = 'https://ipfs.infura.io/ipfs/' + d;
     //console.log(d);
     window.open(d);
-  }
+  };
 
-  const handleTransfer = async e => {
-    const am = trade.amount.slice(3);
+  const handleTransfer = async (e) => {
+    const am = trade.amount;
     console.log(am);
+    //user.walletAddr;
+    var receiverAddr = trade.selectedAddr;
+    //conn.main_contract.methods.transfer30(am, trade.TradeId, "123").send({from : conn.cuurent_account}).on;
+    conn.main_contract.methods
+      .transfer30(am, trade.TradeId, receiverAddr)
+      .send({ from: conn.current_account })
+      .on('transactionHash', (hash) => {
+        window.alert('30% transferred');
+      });
     //console.log(conn.main_contract);
     //conn.main_contract.methods.transfer30()
-  }
+  };
+
+  const handle70Transfer = async (e) => {
+    conn.main_contract.methods
+      .transfer70(trade.TradeId)
+      .send({ from: conn.current_account })
+      .on('transactionHash', (hash) => {
+        window.alert('70% transferred');
+      });
+  };
 
   const setStep = (status) => {
     switch (status) {
@@ -237,11 +256,12 @@ const TradeCard = ({ auth, trade, user, statusUpdate, conn }) => {
               &nbsp;&nbsp;&nbsp;{trade.paymentType}
             </span>
           </h5>
-          {trade.paymentType==='PA' && trade.creditPeriod !== 0 && (
+          {trade.paymentType === 'PA' && trade.creditPeriod !== 0 && (
             <h5 style={{ color: 'black' }}>
               Credit Period :
               <span style={{ color: 'white' }}>
-                &nbsp;&nbsp;&nbsp;{(trade.creditPeriod !== 0) && `${trade.creditPeriod}`}
+                &nbsp;&nbsp;&nbsp;
+                {trade.creditPeriod !== 0 && `${trade.creditPeriod}`}
               </span>
             </h5>
           )}
@@ -253,7 +273,11 @@ const TradeCard = ({ auth, trade, user, statusUpdate, conn }) => {
           </h5>
         </CardContent>
         <CardActions style={{ color: 'ffffff' }}>
-          <Button className={classes.btn} style={{ marginLeft: '1rem' }} onClick={handleDataFetch}>
+          <Button
+            className={classes.btn}
+            style={{ marginLeft: '1rem' }}
+            onClick={handleDataFetch}
+          >
             View Details
           </Button>
           <Button className={classes.btn} onClick={handleOpen}>
@@ -264,6 +288,8 @@ const TradeCard = ({ auth, trade, user, statusUpdate, conn }) => {
               <Button
                 className={classes.btn}
                 onClick={() => {
+                  console.log(trade.exporterUserName);
+                  getWalletAddr({ username: trade.exporterUserName });
                   handleTransfer();
                   statusUpdate({ tradeId: trade.TradeId, status: 'IV' });
                 }}
@@ -291,6 +317,18 @@ const TradeCard = ({ auth, trade, user, statusUpdate, conn }) => {
                 }}
               >
                 Goods Recieved
+              </Button>
+            )}
+          {trade.tradeStatus === 'GD' &&
+            trade.importerUserName === user.username && (
+              <Button
+                className={classes.btn}
+                onClick={() => {
+                  handle70Transfer();
+                  statusUpdate({ tradeId: trade.TradeId, status: 'PD' });
+                }}
+              >
+                Pay
               </Button>
             )}
         </CardActions>
@@ -331,6 +369,49 @@ const TradeCard = ({ auth, trade, user, statusUpdate, conn }) => {
                     >
                       <Typography variant='h6' component='h1' align='center'>
                         Documents Uploaded
+                      </Typography>
+                    </Paper>
+                  </TimelineContent>
+                </TimelineItem>
+                <TimelineItem>
+                  <TimelineSeparator>
+                    <TimelineDot color='primary'>
+                      {trade.tradeStatus === 'IV' ||
+                      trade.tradeStatus === 'DV' ||
+                      trade.tradeStatus === 'GL' ||
+                      trade.tradeStatus === 'GD' ||
+                      trade.tradeStatus === 'PD' ? (
+                        <CheckCircle />
+                      ) : (
+                        <AssignmentIndIcon />
+                      )}
+                    </TimelineDot>
+                    <TimelineConnector />
+                  </TimelineSeparator>
+                  <TimelineContent>
+                    <Paper
+                      elevation={3}
+                      className={classes.paper1}
+                      style={{
+                        backgroundColor:
+                          (trade.tradeStatus === 'IV' ||
+                            trade.tradeStatus === 'DV' ||
+                            trade.tradeStatus === 'GL' ||
+                            trade.tradeStatus === 'GD' ||
+                            trade.tradeStatus === 'PD') &&
+                          'green',
+                        color:
+                          (trade.tradeStatus === 'IV' ||
+                            trade.tradeStatus === 'DV' ||
+                            trade.tradeStatus === 'GL' ||
+                            trade.tradeStatus === 'GD' ||
+                            trade.tradeStatus === 'PD') &&
+                          'white',
+                        borderRadius: 20,
+                      }}
+                    >
+                      <Typography variant='h6' component='h1' align='center'>
+                        Importer Verified
                       </Typography>
                     </Paper>
                   </TimelineContent>
@@ -481,6 +562,14 @@ const TradeCard = ({ auth, trade, user, statusUpdate, conn }) => {
   );
 };
 
-const mapStateToProps = (state) => ({ conn: state.conn, auth: state.auth });
+const mapStateToProps = (state) => ({
+  conn: state.conn,
+  auth: state.auth,
+  tradeAddr: state.trade,
+});
 
-export default connect(mapStateToProps, { statusUpdate })(TradeCard);
+export default connect(mapStateToProps, {
+  statusUpdate,
+  getWalletAddr,
+  clearAddr,
+})(TradeCard);

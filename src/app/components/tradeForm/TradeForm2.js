@@ -68,8 +68,6 @@ const TradeForm2 = ({ history, setReceiverInfo, tradeDeal }) => {
   const [receiverTel, setReceiverTel] = useState('');
   const [receiverEmail, setReceiverEmail] = useState('');
   const [dutyPay, setDutyPay] = useState('');
-  const [payMeth, setPayMeth] = useState('');
-  const [incurr, setIncurr] = useState('');
   const [inco, setInco] = useState('');
   const [success, setSuccess] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
@@ -103,9 +101,7 @@ const TradeForm2 = ({ history, setReceiverInfo, tradeDeal }) => {
       setReceiverTel(receiverInfo.receiverTel);
       setReceiverEmail(receiverInfo.receiverTel);
       setDutyPay(receiverInfo.dutyPay);
-      setPayMeth(receiverInfo.payMeth);
       setInco(receiverInfo.inco);
-      setIncurr(receiverInfo.incurr);
     }
     checkCondition();
   }, []);
@@ -118,8 +114,6 @@ const TradeForm2 = ({ history, setReceiverInfo, tradeDeal }) => {
       receiverTel,
       receiverEmail,
       dutyPay,
-      payMeth,
-      incurr,
       inco,
     };
     console.log(receiverInfo);
@@ -134,8 +128,6 @@ const TradeForm2 = ({ history, setReceiverInfo, tradeDeal }) => {
       receiverTel &&
       receiverEmail &&
       dutyPay &&
-      payMeth &&
-      incurr &&
       inco
     ) {
       setFlag(false);
@@ -270,135 +262,6 @@ const TradeForm2 = ({ history, setReceiverInfo, tradeDeal }) => {
               >
                 <MenuItem value={'exporter'}>Exporter</MenuItem>
                 <MenuItem value={'importer'}>Importer</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12}>
-            <FormControl
-              variant='outlined'
-              className={classes.formControl}
-              style={{ width: '100%' }}
-            >
-              <InputLabel id='payMethod'>Payment Method</InputLabel>
-              <Select
-                value={payMeth}
-                onChange={(e) => {
-                  setPayMeth(e.target.value);
-                  checkCondition();
-                }}
-                label='Payment Method'
-                error={payMeth === '' ? true : false}
-                helperText={payMeth === '' ? 'Payment Method is required' : ''}
-                required
-              >
-                <MenuItem value={'adtk'}>Advanced Token</MenuItem>
-                <MenuItem value={'asse'}>Assests</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12}>
-            <FormControl
-              variant='outlined'
-              className={classes.formControl}
-              style={{ width: '100%' }}
-            >
-              <InputLabel id='curr'>Currency</InputLabel>
-              <Select
-                name='incurr'
-                value={incurr}
-                onChange={(e) => {
-                  setIncurr(e.target.value);
-                  checkCondition();
-                }}
-                label='Currency'
-                error={incurr === '' ? true : false}
-                helperText={incurr === '' ? 'Currency is required' : ''}
-                required
-              >
-                <MenuItem value='' disabled selected>
-                  Invoice Currency
-                </MenuItem>
-                <MenuItem value='USD' selected='selected'>
-                  United States Dollars
-                </MenuItem>
-                <MenuItem value='EUR'>Euro</MenuItem>
-                <MenuItem value='GBP'>United Kingdom Pounds</MenuItem>
-                <MenuItem value='DZD'>Algeria Dinars</MenuItem>
-                <MenuItem value='ARP'>Argentina Pesos</MenuItem>
-                <MenuItem value='AUD'>Australia Dollars</MenuItem>
-                <MenuItem value='ATS'>Austria Schillings</MenuItem>
-                <MenuItem value='BSD'>Bahamas Dollars</MenuItem>
-                <MenuItem value='BBD'>Barbados Dollars</MenuItem>
-                <MenuItem value='BEF'>Belgium Francs</MenuItem>
-                <MenuItem value='BMD'>Bermuda Dollars</MenuItem>
-                <MenuItem value='BRR'>Brazil Real</MenuItem>
-                <MenuItem value='BGL'>Bulgaria Lev</MenuItem>
-                <MenuItem value='CAD'>Canada Dollars</MenuItem>
-                <MenuItem value='CLP'>Chile Pesos</MenuItem>
-                <MenuItem value='CNY'>China Yuan Renmimbi</MenuItem>
-                <MenuItem value='CYP'>Cyprus Pounds</MenuItem>
-                <MenuItem value='CSK'>Czech Republic Koruna</MenuItem>
-                <MenuItem value='DKK'>Denmark Kroner</MenuItem>
-                <MenuItem value='NLG'>Dutch Guilders</MenuItem>
-                <MenuItem value='XCD'>Eastern Caribbean Dollars</MenuItem>
-                <MenuItem value='EGP'>Egypt Pounds</MenuItem>
-                <MenuItem value='FJD'>Fiji Dollars</MenuItem>
-                <MenuItem value='FIM'>Finland Markka</MenuItem>
-                <MenuItem value='FRF'>France Francs</MenuItem>
-                <MenuItem value='DEM'>Germany Deutsche Marks</MenuItem>
-                <MenuItem value='XAU'>Gold Ounces</MenuItem>
-                <MenuItem value='GRD'>Greece Drachmas</MenuItem>
-                <MenuItem value='HKD'>Hong Kong Dollars</MenuItem>
-                <MenuItem value='HUF'>Hungary Forint</MenuItem>
-                <MenuItem value='ISK'>Iceland Krona</MenuItem>
-                <MenuItem value='INR'>India Rupees</MenuItem>
-                <MenuItem value='IDR'>Indonesia Rupiah</MenuItem>
-                <MenuItem value='IEP'>Ireland Punt</MenuItem>
-                <MenuItem value='ILS'>Israel New Shekels</MenuItem>
-                <MenuItem value='ITL'>Italy Lira</MenuItem>
-                <MenuItem value='JMD'>Jamaica Dollars</MenuItem>
-                <MenuItem value='JPY'>Japan Yen</MenuItem>
-                <MenuItem value='JOD'>Jordan Dinar</MenuItem>
-                <MenuItem value='KRW'>Korea (South) Won</MenuItem>
-                <MenuItem value='LBP'>Lebanon Pounds</MenuItem>
-                <MenuItem value='LUF'>Luxembourg Francs</MenuItem>
-                <MenuItem value='MYR'>Malaysia Ringgit</MenuItem>
-                <MenuItem value='MXP'>Mexico Pesos</MenuItem>
-                <MenuItem value='NLG'>Netherlands Guilders</MenuItem>
-                <MenuItem value='NZD'>New Zealand Dollars</MenuItem>
-                <MenuItem value='NOK'>Norway Kroner</MenuItem>
-                <MenuItem value='PKR'>Pakistan Rupees</MenuItem>
-                <MenuItem value='XPD'>Palladium Ounces</MenuItem>
-                <MenuItem value='PHP'>Philippines Pesos</MenuItem>
-                <MenuItem value='XPT'>Platinum Ounces</MenuItem>
-                <MenuItem value='PLZ'>Poland Zloty</MenuItem>
-                <MenuItem value='PTE'>Portugal Escudo</MenuItem>
-                <MenuItem value='ROL'>Romania Leu</MenuItem>
-                <MenuItem value='RUR'>Russia Rubles</MenuItem>
-                <MenuItem value='SAR'>Saudi Arabia Riyal</MenuItem>
-                <MenuItem value='XAG'>Silver Ounces</MenuItem>
-                <MenuItem value='SGD'>Singapore Dollars</MenuItem>
-                <MenuItem value='SKK'>Slovakia Koruna</MenuItem>
-                <MenuItem value='ZAR'>South Africa Rand</MenuItem>
-                <MenuItem value='KRW'>South Korea Won</MenuItem>
-                <MenuItem value='ESP'>Spain Pesetas</MenuItem>
-                <MenuItem value='XDR'>Special Drawing Right (IMF)</MenuItem>
-                <MenuItem value='SDD'>Sudan Dinar</MenuItem>
-                <MenuItem value='SEK'>Sweden Krona</MenuItem>
-                <MenuItem value='CHF'>Switzerland Francs</MenuItem>
-                <MenuItem value='TWD'>Taiwan Dollars</MenuItem>
-                <MenuItem value='THB'>Thailand Baht</MenuItem>
-                <MenuItem value='TTD'>Trinidad and Tobago Dollars</MenuItem>
-                <MenuItem value='TRL'>Turkey Lira</MenuItem>
-                <MenuItem value='VEB'>Venezuela Bolivar</MenuItem>
-                <MenuItem value='ZMK'>Zambia Kwacha</MenuItem>
-                <MenuItem value='EUR'>Euro</MenuItem>
-                <MenuItem value='XCD'>Eastern Caribbean Dollars</MenuItem>
-                <MenuItem value='XDR'>Special Drawing Right (IMF)</MenuItem>
-                <MenuItem value='XAG'>Silver Ounces</MenuItem>
-                <MenuItem value='XAU'>Gold Ounces</MenuItem>
-                <MenuItem value='XPD'>Palladium Ounces</MenuItem>
-                <MenuItem value='XPT'>Platinum Ounces</MenuItem>
               </Select>
             </FormControl>
           </Grid>

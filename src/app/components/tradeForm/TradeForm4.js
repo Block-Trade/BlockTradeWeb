@@ -166,28 +166,6 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
     setDescOfConsign(descOfConsign);
     //history.push('/tradeform5');
   };
-  const checkCondition = () => {
-    if (
-      products &&
-      totalAmount &&
-      totalCube &&
-      totalGross &&
-      totalNetWt &&
-      currDisc &&
-      pid &&
-      fxRate &&
-      description &&
-      sellPrice &&
-      tax &&
-      itemPrice &&
-      unitsPk &&
-      qty
-    ) {
-      setFlag(false);
-    } else {
-      setFlag(true);
-    }
-  };
   return (
     <div
       className={classes.root}
@@ -211,12 +189,8 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               value={pid}
               onChange={(e) => {
                 setPID(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={pid === '' ? true : false}
-              helperText={pid === '' ? 'Product ID is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -228,12 +202,8 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               value={fxRate}
               onChange={(e) => {
                 setFxRate(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={fxRate === '' ? true : false}
-              helperText={fxRate === '' ? 'Fix Rate is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -245,14 +215,10 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               value={description}
               onChange={(e) => {
                 setDescription(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
               multiline
               rows={3}
-              error={description === '' ? true : false}
-              helperText={description === '' ? 'Description is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -264,12 +230,8 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               value={sellPrice}
               onChange={(e) => {
                 setSellPrice(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={sellPrice === '' ? true : false}
-              helperText={sellPrice === '' ? 'Sell Price is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -281,12 +243,8 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               value={tax}
               onChange={(e) => {
                 setTax(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={tax === '' ? true : false}
-              helperText={tax === '' ? 'Tax is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -298,12 +256,8 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               value={itemPrice}
               onChange={(e) => {
                 setItemPrice(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={itemPrice === '' ? true : false}
-              helperText={itemPrice === '' ? 'Item Price is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -315,12 +269,8 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               value={unitsPk}
               onChange={(e) => {
                 setUnitsPk(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={unitsPk === '' ? true : false}
-              helperText={unitsPk === '' ? 'Units Packaged is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -332,12 +282,8 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               value={qty}
               onChange={(e) => {
                 setQty(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={qty === '' ? true : false}
-              helperText={qty === '' ? 'Quantity is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -349,12 +295,8 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               value={amount}
               onChange={(e) => {
                 setAmount(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={amount === '' ? true : false}
-              helperText={amount === '' ? 'Amount is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -384,12 +326,8 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               value={totalAmount}
               onChange={(e) => {
                 setTotalAmount(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={totalAmount === '' ? true : false}
-              helperText={totalAmount === '' ? 'Total Amount is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -401,12 +339,8 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               value={currDisc}
               onChange={(e) => {
                 setCurrDisc(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={currDisc === '' ? true : false}
-              helperText={currDisc === '' ? 'Current Discount is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -418,12 +352,8 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               value={totalNetWt}
               onChange={(e) => {
                 setTotalNetWt(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={totalNetWt === '' ? true : false}
-              helperText={totalNetWt === '' ? 'Total Net Wt. is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -435,12 +365,8 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               value={totalCube}
               onChange={(e) => {
                 setTotalCube(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={totalCube === '' ? true : false}
-              helperText={totalCube === '' ? 'Total Cube is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -452,12 +378,8 @@ const TradeForm4 = ({ history, setDescOfConsign, tradeDeal }) => {
               value={totalGross}
               onChange={(e) => {
                 setTotalGross(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={totalGross === '' ? true : false}
-              helperText={totalGross === '' ? 'Total Gross is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>

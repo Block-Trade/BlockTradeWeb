@@ -79,13 +79,14 @@ const RecentTrades = ({ trade, auth }) => {
   return (
     <div className='row'>
       {trades &&
-        trades.slice(0,5).map((trad) => (
-          <TradeCard style={{ color: 'ffffff' }} trade={trad} user={user} />
-        ))}
+        trades
+          .slice(0, 4)
+          .map((trad) => (
+            <TradeCard style={{ color: 'ffffff' }} trade={trad} user={user} />
+          ))}
     </div>
   );
 };
-
 
 const mapStateToProps = (state) => ({
   auth: state.auth,

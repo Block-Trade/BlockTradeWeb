@@ -1,134 +1,266 @@
-import React from 'react'
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import React, { useEffect, useState } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-
-
-const StyledTableCell = withStyles((theme) => ({
-    head: {
-      backgroundColor: "#2d5fc3",
-      color: theme.palette.common.white,
-    },
-    body: {
-      fontSize: 14,
-    },
-  }))(TableCell);
-  
-  const StyledTableRow = withStyles((theme) => ({
-    root: {
-      '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-      },
-    },
-  }))(TableRow);
-  
-  function createData(TradeId, blockedAmt, dueDate) {
-    return { TradeId, blockedAmt, dueDate };
-  }
-  
-  const rows = [
-    createData('eU0hlwXZtG85gPrwT3ZhY6w1eqhCUmQgXkNbV/2QtOQ=','50000000','2020-12-20'),
-    createData('4I2AYjWWj0+S2HBHBIyyKgZ1SLk+fgW5RVPmVnOv8tQ=','9000100','2021-01-21'),
-    createData('px7vQOaHfpf7kasjAFRKyGZXIbxjamuUtptgq6jCFro=','9810000','2020-11-15')
-  ];
-  
-  
-
+import { connect } from 'react-redux';
+import { getAllConn } from '../../actions/connection';
+import { loadUser } from '../../actions/auth';
+import { Modal } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    '& > *': {
-    },
+    minWidth: 275,
+    backgroundColor: '#2d5fc3',
+    borderRadius: '30px',
+    maxWidth: 1000,
+    textAlign: 'center',
+    margin: '0 auto',
   },
-  large: {
-    width: theme.spacing(20),
-    height: theme.spacing(20),
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
   },
-  table: {
-      minWidth:600
-  }
+  title: {
+    fontSize: 30,
+    marginTop: '3rem',
+  },
+  pos: {
+    marginBottom: 12,
+  },
 }));
 
-const Wallet = () => {
-    const classes = useStyles();
+const Wallet = ({ conn, loadUser, getAllConn, auth }) => {
+  const classes = useStyles();
+  const [state, setState] = useState({
+    isOpen: false,
+    value: 'defaultvalue',
+  });
+  const [selected, setSelected] = useState('');
+  const [amt, setAmt] = useState();
+  const [balance, setBalance] = useState();
 
+  useEffect(() => {
+    loadUser();
+  }, []);
+  useEffect(() => {
+    if (auth.user) {
+      getAllConn();
+    }
+  }, [auth.user]);
+  useEffect(() => {
+    if (conn.main_contract) {
+      fetchData();
+    }
+  }, [conn.main_contract]);
 
-    return (
-        <div className={classes.root}>
-            <Grid container>
-                <Grid item xs={12}>
-                <Paper variant="outlined" style={{width:"100%",backgroundColor:"#2d5fc3",borderBottomRightRadius:40,borderBottomLeftRadius:40}}>
-                <Typography align="center" style={{color:"white", marginBottom:15, marginTop:10}}>BlockChain Address:{" "}0x8C94d97243c86e22C14436148f4E0C43B1dcF264</Typography>
-                <Grid container alignContent="flex-end">
-                    <Grid item md={3}></Grid>
-                    <Grid item md={6} alignItems="flex-end">
-                        <Typography variant="h3" style={{color:"white", paddingTop:50}}>
-                            Amount :   19000
-                        </Typography>                    
-                    </Grid>
-                    <Grid item md={2}>
-                        <Avatar alt="Remy Sharp" src="/token.png" className={classes.large} />
-                    </Grid>
-                    
-                </Grid>
-                <Grid container style={{marginBottom:10}}>
-                    <Grid item md={2}>
-                    </Grid>
-                    <Grid item md={2}>
-                        <Button variant="outlined" style={{backgroundColor:"white"}} fullWidth>Buy</Button>
-                    </Grid>
-                    <Grid item md={4}></Grid>
-                    <Grid item md={2}>
-                        <Button variant="outlined" style={{backgroundColor:"white"}} fullWidth>Sell</Button>
-                    </Grid>
-                    
-                </Grid>
-            </Paper>
-                </Grid>
-                <Grid item xs={12} alignContent="center">
-                <Typography variant="h3" component="h2" align="center">
-                    Transactions
-                </Typography>
-                </Grid>
-                
-                <Grid item xs={12}>
-                <TableContainer component={Paper} style={{borderRadius:25}}>
-                <Table className={classes.table} aria-label="customized table">
-                  <TableHead>
-                    <TableRow>
-                      <StyledTableCell>Trade Id</StyledTableCell>
-                      <StyledTableCell align="center">Blocked Amount</StyledTableCell>
-                      <StyledTableCell align="center">Due Date</StyledTableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {rows.map((row) => (
-                      <StyledTableRow key={row.name}>
-                        <StyledTableCell component="th" scope="row">
-                          <strong>{row.TradeId}</strong>
-                        </StyledTableCell>
-                        <StyledTableCell align="center">{row.blockedAmt}</StyledTableCell>
-                        <StyledTableCell align="center">{row.dueDate}</StyledTableCell>
-                      </StyledTableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-                </Grid>
-            </Grid>
-            
-            
-        </div>
-    )
-}
+  const fetchData = async () => {
+    //e.preventDefault();
+    var bal = await conn.main_contract.methods
+      .balanceOf(conn.current_account)
+      .call();
+    setBalance(bal);
+    console.log(balance);
+  };
+  const toggleModal = () => {
+    setState({
+      isOpen: !state.isOpen,
+    });
+  };
 
-export default Wallet;
+  const buyTokens = async (etherAmount) => {
+    etherAmount = window.web3.utils.toWei(etherAmount, 'Ether');
+    conn.main_contract.methods
+      .buyTokens()
+      .send({ value: etherAmount, from: conn.current_account })
+      .on('transactionHash', (hash) => {
+        console.log('BuyTokens');
+      });
+
+    setSelected('');
+    setAmt(0);
+  };
+
+  const sellTokens = async (tokenAmount) => {
+      tokenAmount = tokenAmount / 100;
+      tokenAmount = window.web3.utils.toWei(tokenAmount, 'Ether')
+    conn.main_contract.methods
+      .sellToken(tokenAmount)
+      .send({ from: conn.current_account })
+      .on('transactionHash', (hash) => {
+        console.log('sellTokens');
+      });
+
+    setSelected('');
+    setAmt(0);
+  };
+
+  const toggleModalClose = () => {
+    setState({
+      isOpen: false,
+      value: 'defaultvalue',
+    });
+  };
+  return (
+    <div className={classes.root} style={{ marginTop: '10rem' }}>
+      <Card className={classes.root} raised>
+        <CardContent>
+          <Typography
+            className={classes.title}
+            color='textSecondary'
+            gutterBottom
+            style={{
+              textAlign: 'center',
+              color: '#ffffff',
+            }}
+          >
+            {conn.current_account}
+          </Typography>
+          <div
+            style={{
+              margin: '0 auto',
+              left: '50%',
+            }}
+          >
+            <Typography
+              variant='h5'
+              component='h2'
+              style={{
+                display: 'inline-block',
+                color: '#ffffff',
+                margin: '0 auto',
+                marginTop: '3rem',
+              }}
+            >
+              {balance}
+            </Typography>
+            <img
+              alt='bt token'
+              src={require('./token.png')}
+              style={{
+                maxWidth: '2rem',
+                maxWidth: '2rem',
+                marginLeft: '1rem',
+                display: 'inline-block',
+              }}
+            />
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Button
+              variant='outlined'
+              style={{
+                backgroundColor: 'white',
+                maxWidth: '10rem',
+                marginBottom: '2rem',
+                marginTop: '3rem',
+                textAlign: 'center',
+              }}
+              fullWidth
+              onClick={(e) => {
+                e.preventDefault();
+                setSelected('Buy');
+                toggleModal();
+              }}
+            >
+              Buy
+            </Button>
+            <br />
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <Button
+              variant='outlined'
+              style={{ backgroundColor: 'white', maxWidth: '10rem' }}
+              fullWidth
+              onClick={(e) => {
+                e.preventDefault();
+                setSelected('Sell');
+                toggleModal();
+              }}
+              size='sm'
+            >
+              Sell
+            </Button>
+          </div>
+        </CardContent>
+        <CardActions></CardActions>
+      </Card>
+      <Modal
+        show={state.isOpen}
+        onClose={toggleModalClose}
+        aria-labelledby='contained-modal-title-vcenter'
+        centered
+      >
+        <Modal.Header
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Modal.Title id='contained-modal-title-vcenter'>
+            {selected} Amount
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form className='pt-3'>
+            <Form.Group className='d-flex search-field'>
+              <Form.Control
+                type='number'
+                placeholder='Amount'
+                size='lg'
+                className='h-auto'
+                value={amt}
+                onChange={(e) => setAmt(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
+
+          <div className='mt-3'>
+            <button
+              className='btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn'
+              onClick={(e) => {
+                e.preventDefault();
+                if (selected === 'Buy') {
+                  buyTokens(amt);
+                } else {
+                  sellTokens(amt);
+                }
+                toggleModalClose();
+              }}
+            >
+              Submit
+            </button>
+          </div>
+        </Modal.Body>
+        <Modal.Footer
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Button
+            onClick={toggleModalClose}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </div>
+  );
+};
+
+const mapStateToProps = (state) => ({ conn: state.conn, auth: state.auth });
+
+export default connect(mapStateToProps, { loadUser, getAllConn })(Wallet);

@@ -24,8 +24,11 @@ const Login = ({
   const [variant, setVariant] = React.useState('error');
   const [message, setMessage] = React.useState('');
   useEffect(() => {
-    
     if (isAuthenticated && user) {
+      setMessage('Login Successful');
+      setVariant('success');
+      setOpen(true);
+      clearMsg();
       if (user) {
         if (user.companyName === '') {
           history.push('/company-info');
@@ -33,18 +36,15 @@ const Login = ({
           history.push('/kyc');
         } else {
           history.push('/dashboard');
-          setMessage('Login Successful');
-          setVariant('success');
-          setOpen(true);
         }
-      } else {
-        setMessage('Something went wrong !');
+      }
+    } else {
+      if (error) {
+        setMessage(error);
         setVariant('error');
         setOpen(true);
+        clearError();
       }
-    }
-    if (error === 'Invalid Credentials') {
-      clearError();
     }
     //eslint-disable-next-line
   }, [isAuthenticated]);
@@ -67,18 +67,18 @@ const Login = ({
       const formData = { username, password };
       await login({ formData, loadUser });
       if (isAuthenticated) {
+        setMessage('Login Successful');
+        setVariant('success');
+        setOpen(true);
         if (user.companyName === '') {
           history.push('/company-info');
         } else if (user.kycStatus === false) {
           history.push('/kyc');
         } else {
           history.push('/dashboard');
-          setMessage('Login Successful');
-          setVariant('success');
-          setOpen(true);
         }
       } else {
-        setMessage('Invalid Credentials !');
+        setMessage(error);
         setVariant('error');
         setOpen(true);
       }

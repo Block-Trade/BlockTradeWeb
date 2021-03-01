@@ -53,13 +53,22 @@ function getStepContent(stepIndex) {
   }
 }
 
-const TestFrom = ({ history, tradeDeal, finalUpload, auth,conn }) => {
+const TestFrom = ({
+  history,
+  tradeDeal,
+  loadUser,
+  finalUpload,
+  auth,
+  conn,
+}) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
+
   useEffect(() => {
     loadUser();
   }, []);
+
   const {
     sellerInfo,
     receiverInfo,
@@ -69,15 +78,15 @@ const TestFrom = ({ history, tradeDeal, finalUpload, auth,conn }) => {
   } = tradeDeal;
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
-      //history.push('/tradedeal');
+      // history.push('/tradedeal');
       const data = {
         expUser: auth.user.username,
         impUser: tradeDeal.selectedImpId,
         inco: tradeDeal.receiverInfo.inco,
-        amount: `${tradeDeal.finalBill.curr}${tradeDeal.finalBill.tradeTotal}`,
+        amount: tradeDeal.finalBill.tradeTotal,
         creditPeriod: tradeDeal.sellerInfo.creditP,
         paymentType: tradeDeal.sellerInfo.paymentType,
-        invoiceDate: tradeDeal.sellerInfo.invoiceDate
+        invoiceDate: tradeDeal.sellerInfo.invoiceDate,
       };
       const ipfsData = {
         sellerInfo,
@@ -87,7 +96,7 @@ const TestFrom = ({ history, tradeDeal, finalUpload, auth,conn }) => {
         finalBill,
       };
       console.log(conn);
-      finalUpload({ data, ipfsData,conn });
+      finalUpload({ data, ipfsData, conn });
     }
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
     localStorage.setItem('flag', true);
@@ -102,6 +111,7 @@ const TestFrom = ({ history, tradeDeal, finalUpload, auth,conn }) => {
 
   const handleReset = () => {
     setActiveStep(0);
+    history.push('/dashboard');
   };
 
   return (
@@ -122,10 +132,14 @@ const TestFrom = ({ history, tradeDeal, finalUpload, auth,conn }) => {
         {steps[activeStep]}
         {activeStep === steps.length ? (
           <div>
-            <Typography className={classes.instructions}>
-              All steps completed - you&apos;re finished
+            <Typography className={classes.instructions} align='center'>
+              All steps completed - Trade Initiated successfully
             </Typography>
-            <Button onClick={handleReset} className={classes.button}>
+            <Button
+              onClick={handleReset}
+              className={classes.button}
+              align='center'
+            >
               Finish
             </Button>
           </div>
@@ -165,7 +179,7 @@ const TestFrom = ({ history, tradeDeal, finalUpload, auth,conn }) => {
 const mapStateToProps = (state) => ({
   tradeDeal: state.tradeDeal,
   auth: state.auth,
-  conn: state.conn
+  conn: state.conn,
 });
 
-export default connect(mapStateToProps, { finalUpload })(TestFrom);
+export default connect(mapStateToProps, { finalUpload, loadUser })(TestFrom);

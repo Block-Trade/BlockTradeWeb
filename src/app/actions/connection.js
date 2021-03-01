@@ -23,9 +23,9 @@ export const getAllConn = () => async (dispatch) => {
   const networkId = await web3.eth.net.getId();
   const tradesData = Trades.networks[networkId];
   if (tradesData) {
-    window.alert("Trades Contract deployed to detected network");
-    const address = "0x420751D1753cD4D76fce378d290B5a647806C56D";
-    const trades = new web3.eth.Contract(abi, address)
+    // window.alert('Trades Contract deployed to detected network');
+    const address = tradesData.address;
+    const trades = new web3.eth.Contract(abi, address);
     dispatch({
       type: 'SET_TRADES_CONTRACT',
       payload: trades,
@@ -39,15 +39,16 @@ export const getAllConn = () => async (dispatch) => {
   //const networkId = await web3.eth.net.getId();
   const mainData = Main.networks[networkId];
   if (mainData) {
-    window.alert("Token(Main) Contract deployed to detected network");
-    const address = "0x00a711296646D0c55dE84D6Df8969190B7551231";
-    const main = new web3.eth.Contract(abi2, address)
+    // window.alert('Token(Main) Contract deployed to detected network');
+    console.log(mainData.address);
+    const address = mainData.address;
+    const main = new web3.eth.Contract(abi2, address);
     dispatch({
       type: 'SET_MAIN_CONTRACT',
       payload: main,
     });
   } else {
-    window.alert('Token(Main) contract not deployed to detected network')
+    window.alert('Token(Main) contract not deployed to detected network');
   }
 
   //loadBlockchainData();

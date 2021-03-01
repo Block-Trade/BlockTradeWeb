@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { kycDl, kycPass } from '../../actions/kyc';
 import { Card, Button, Form } from 'react-bootstrap';
-import { loadUser } from '../../actions/auth';
+import { loadUser,clearError,clearMsg } from '../../actions/auth';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
@@ -10,7 +10,7 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant='filled' {...props} />;
 }
 
-const Kyc = ({ kycDl, kycPass, kyc, history, loadUser }) => {
+const Kyc = ({ kycDl, kycPass, kyc, history, loadUser,auth:{ error,msg },clearError,clearMsg }) => {
   const [meth, setMeth] = useState('');
   const [toggler, setToggler] = useState(false);
   const [no, setNo] = useState('');
@@ -48,11 +48,24 @@ const Kyc = ({ kycDl, kycPass, kyc, history, loadUser }) => {
         };
         kycPass(formData);
       }
+    }
+  };
+
+  useEffect(() => {
+    if (error) {
+      setMessage(error);
+      setVariant('error');
+      setOpen(true);
+      clearError();
+    }else if(msg){
       setMessage('KYC Verified');
       setVariant('success');
       setOpen(true);
+      history.push('/dashboard');
+      clearMsg();
     }
-  };
+  },[error,msg]);
+
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') return;
     setOpen(false);
@@ -151,4 +164,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   kyc: state.kyc,
 });
-export default connect(mapStateToProps, { kycDl, kycPass, loadUser })(Kyc);
+export default connect(mapStateToProps, { kycDl, kycPass, loadUser, clearError, clearMsg })(Kyc);
