@@ -152,7 +152,6 @@ export const finalUpload = ({ data, ipfsData, conn }) => async dispatch => {
                 return
             }
             console.log('Ipfs string x result', result)
-            //var tId = conn.trades_contract.methods.setTrade(res.data.trade1.TradeId, result).send();
             conn.trades_contract.methods.setTrade(res.data.trade1.TradeId, result)
                 .send({ from: conn.current_account }).on('transactionHash', (hash) => {
                     console.log("Successfull transacation");                    

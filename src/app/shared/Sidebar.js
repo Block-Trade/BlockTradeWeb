@@ -76,12 +76,13 @@ const Sidebar = ({
 
   const onSubmit = (e) => {
     e.preventDefault();
-    tradeDeal.filtered.map((fil) => {
-      if (fil.username == username) {
-        setImpId({ username: fil.username });
-        history.push('/testform');
-      }
-    });
+    tradeDeal.filtered &&
+      tradeDeal.filtered.map((fil) => {
+        if (fil.username == username) {
+          setImpId({ username: fil.username });
+          history.push('/testform');
+        }
+      });
     clearFilter();
   };
 
@@ -230,19 +231,23 @@ const Sidebar = ({
                   </Form.Group>
                 </Form>
                 {tradeDeal.filtered &&
-                  tradeDeal.filtered.map((fil) => (
-                    <p>
-                      <Link
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setUsername(fil.username);
-                        }}
-                        key={fil.username}
-                      >
-                        {fil.username}
-                      </Link>
-                    </p>
-                  ))}
+                  tradeDeal.filtered.length > 0 &&
+                  tradeDeal.filtered.map(
+                    (fil) =>
+                      fil.username !== auth.user.username && (
+                        <p>
+                          <Link
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setUsername(fil.username);
+                            }}
+                            key={fil.username}
+                          >
+                            {fil.username}
+                          </Link>
+                        </p>
+                      )
+                  )}
                 <div className='mt-3'>
                   <button
                     className='btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn'
@@ -318,19 +323,6 @@ const Sidebar = ({
             <span className='menu-title'>
               &nbsp;&nbsp;&nbsp;&nbsp;My Wallet
             </span>
-          </Link>
-        </li>
-        <li
-          className={isPathActive('/settings') ? 'nav-item active' : 'nav-item'}
-        >
-          <Link className='nav-link' to='/settings'>
-            <Icon
-              icon={settingsSolid}
-              color='#979797'
-              width='1.5rem'
-              height='1.5rem'
-            />
-            <span className='menu-title'>&nbsp;&nbsp;&nbsp;&nbsp;Settings</span>
           </Link>
         </li>
         <li

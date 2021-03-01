@@ -77,7 +77,6 @@ const useStyles = makeStyles((theme) => ({
 
 const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
   const classes = useStyles();
-  const [curr, setCurr] = useState('');
   const [adjTotal, setAdjTotal] = useState('');
   const [devAmount, setDevAmount] = useState('');
   const [packingChg, setPackingChg] = useState('');
@@ -86,7 +85,7 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
   const [insurAmount, setInsurAmount] = useState('');
   const [taxAmount, setTaxAmount] = useState('');
   const [preTaxAmount, setPreTaxAmount] = useState('');
-  const [tradeTotal, setTradeTotal] = useState('');
+  const [tradeTotal, setTradeTotal] = useState(0);
   const [success, setSuccess] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [err, setErr] = useState(false);
@@ -103,7 +102,8 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
     e.preventDefault();
 
     if (!loading) {
-      nextForm();
+      console.log(history);
+      nextForm({ history });
       setSuccess(false);
       setLoading(true);
       timer.current = window.setTimeout(() => {
@@ -119,7 +119,6 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
   useEffect(() => {
     const { billDetails } = tradeDeal;
     if (billDetails) {
-      setCurr(billDetails.curr);
       setAdjTotal(billDetails.adjTotal);
       setDevAmount(billDetails.devAmount);
       setPackingChg(billDetails.packingChg);
@@ -131,9 +130,8 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
       setTradeTotal(billDetails.tradeTotal);
     }
   }, []);
-  const nextForm = () => {
+  const nextForm = ({ history }) => {
     const finalBill = {
-      curr,
       adjTotal,
       devAmount,
       packingChg,
@@ -141,28 +139,11 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
       otherChg,
       taxAmount,
       preTaxAmount,
-      tradeTotal,
+      tradeTotal: tradeTotal * 0.4,
     };
     console.log(finalBill);
     setFinalBill(finalBill);
-    //history.push('/tradedeal');
-  };
-  const checkCondition = () => {
-    if (
-      curr &&
-      adjTotal &&
-      devAmount &&
-      packingChg &&
-      handChg &&
-      otherChg &&
-      taxAmount &&
-      preTaxAmount &&
-      tradeTotal
-    ) {
-      setFlag(false);
-    } else {
-      setFlag(true);
-    }
+    // history.push('/tradedeal');
   };
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') return;
@@ -181,106 +162,6 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
         <h3 style={{ alignItems: 'center', fontSize: '2vw' }}>Bill Details</h3>
         <Grid container spacing={3}>
           <Grid item xs={12}>
-            <FormControl
-              variant='outlined'
-              className={classes.formControl}
-              style={{ width: '100%' }}
-            >
-              <InputLabel id='curr'>Currency</InputLabel>
-              <Select
-                name='curr'
-                value={curr}
-                onChange={(e) => setCurr(e.target.value)}
-                label='Currency'
-              >
-                <MenuItem value='' disabled selected>
-                  Currency
-                </MenuItem>
-                <MenuItem value='USD' selected='selected'>
-                  United States Dollars
-                </MenuItem>
-                <MenuItem value='EUR'>Euro</MenuItem>
-                <MenuItem value='GBP'>United Kingdom Pounds</MenuItem>
-                <MenuItem value='DZD'>Algeria Dinars</MenuItem>
-                <MenuItem value='ARP'>Argentina Pesos</MenuItem>
-                <MenuItem value='AUD'>Australia Dollars</MenuItem>
-                <MenuItem value='ATS'>Austria Schillings</MenuItem>
-                <MenuItem value='BSD'>Bahamas Dollars</MenuItem>
-                <MenuItem value='BBD'>Barbados Dollars</MenuItem>
-                <MenuItem value='BEF'>Belgium Francs</MenuItem>
-                <MenuItem value='BMD'>Bermuda Dollars</MenuItem>
-                <MenuItem value='BRR'>Brazil Real</MenuItem>
-                <MenuItem value='BGL'>Bulgaria Lev</MenuItem>
-                <MenuItem value='CAD'>Canada Dollars</MenuItem>
-                <MenuItem value='CLP'>Chile Pesos</MenuItem>
-                <MenuItem value='CNY'>China Yuan Renmimbi</MenuItem>
-                <MenuItem value='CYP'>Cyprus Pounds</MenuItem>
-                <MenuItem value='CSK'>Czech Republic Koruna</MenuItem>
-                <MenuItem value='DKK'>Denmark Kroner</MenuItem>
-                <MenuItem value='NLG'>Dutch Guilders</MenuItem>
-                <MenuItem value='XCD'>Eastern Caribbean Dollars</MenuItem>
-                <MenuItem value='EGP'>Egypt Pounds</MenuItem>
-                <MenuItem value='FJD'>Fiji Dollars</MenuItem>
-                <MenuItem value='FIM'>Finland Markka</MenuItem>
-                <MenuItem value='FRF'>France Francs</MenuItem>
-                <MenuItem value='DEM'>Germany Deutsche Marks</MenuItem>
-                <MenuItem value='XAU'>Gold Ounces</MenuItem>
-                <MenuItem value='GRD'>Greece Drachmas</MenuItem>
-                <MenuItem value='HKD'>Hong Kong Dollars</MenuItem>
-                <MenuItem value='HUF'>Hungary Forint</MenuItem>
-                <MenuItem value='ISK'>Iceland Krona</MenuItem>
-                <MenuItem value='INR'>India Rupees</MenuItem>
-                <MenuItem value='IDR'>Indonesia Rupiah</MenuItem>
-                <MenuItem value='IEP'>Ireland Punt</MenuItem>
-                <MenuItem value='ILS'>Israel New Shekels</MenuItem>
-                <MenuItem value='ITL'>Italy Lira</MenuItem>
-                <MenuItem value='JMD'>Jamaica Dollars</MenuItem>
-                <MenuItem value='JPY'>Japan Yen</MenuItem>
-                <MenuItem value='JOD'>Jordan Dinar</MenuItem>
-                <MenuItem value='KRW'>Korea (South) Won</MenuItem>
-                <MenuItem value='LBP'>Lebanon Pounds</MenuItem>
-                <MenuItem value='LUF'>Luxembourg Francs</MenuItem>
-                <MenuItem value='MYR'>Malaysia Ringgit</MenuItem>
-                <MenuItem value='MXP'>Mexico Pesos</MenuItem>
-                <MenuItem value='NLG'>Netherlands Guilders</MenuItem>
-                <MenuItem value='NZD'>New Zealand Dollars</MenuItem>
-                <MenuItem value='NOK'>Norway Kroner</MenuItem>
-                <MenuItem value='PKR'>Pakistan Rupees</MenuItem>
-                <MenuItem value='XPD'>Palladium Ounces</MenuItem>
-                <MenuItem value='PHP'>Philippines Pesos</MenuItem>
-                <MenuItem value='XPT'>Platinum Ounces</MenuItem>
-                <MenuItem value='PLZ'>Poland Zloty</MenuItem>
-                <MenuItem value='PTE'>Portugal Escudo</MenuItem>
-                <MenuItem value='ROL'>Romania Leu</MenuItem>
-                <MenuItem value='RUR'>Russia Rubles</MenuItem>
-                <MenuItem value='SAR'>Saudi Arabia Riyal</MenuItem>
-                <MenuItem value='XAG'>Silver Ounces</MenuItem>
-                <MenuItem value='SGD'>Singapore Dollars</MenuItem>
-                <MenuItem value='SKK'>Slovakia Koruna</MenuItem>
-                <MenuItem value='ZAR'>South Africa Rand</MenuItem>
-                <MenuItem value='KRW'>South Korea Won</MenuItem>
-                <MenuItem value='ESP'>Spain Pesetas</MenuItem>
-                <MenuItem value='XDR'>Special Drawing Right (IMF)</MenuItem>
-                <MenuItem value='SDD'>Sudan Dinar</MenuItem>
-                <MenuItem value='SEK'>Sweden Krona</MenuItem>
-                <MenuItem value='CHF'>Switzerland Francs</MenuItem>
-                <MenuItem value='TWD'>Taiwan Dollars</MenuItem>
-                <MenuItem value='THB'>Thailand Baht</MenuItem>
-                <MenuItem value='TTD'>Trinidad and Tobago Dollars</MenuItem>
-                <MenuItem value='TRL'>Turkey Lira</MenuItem>
-                <MenuItem value='VEB'>Venezuela Bolivar</MenuItem>
-                <MenuItem value='ZMK'>Zambia Kwacha</MenuItem>
-                <MenuItem value='EUR'>Euro</MenuItem>
-                <MenuItem value='XCD'>Eastern Caribbean Dollars</MenuItem>
-                <MenuItem value='XDR'>Special Drawing Right (IMF)</MenuItem>
-                <MenuItem value='XAG'>Silver Ounces</MenuItem>
-                <MenuItem value='XAU'>Gold Ounces</MenuItem>
-                <MenuItem value='XPD'>Palladium Ounces</MenuItem>
-                <MenuItem value='XPT'>Platinum Ounces</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12}>
             <TextField
               id='adjTotal'
               label='Adjusted Total'
@@ -289,12 +170,8 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
               value={adjTotal}
               onChange={(e) => {
                 setAdjTotal(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={adjTotal === '' ? true : false}
-              helperText={adjTotal === '' ? 'Adjusted Total is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -306,12 +183,8 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
               value={devAmount}
               onChange={(e) => {
                 setDevAmount(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={devAmount === '' ? true : false}
-              helperText={devAmount === '' ? 'Dev Amount is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -323,14 +196,8 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
               value={packingChg}
               onChange={(e) => {
                 setPackingChg(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={packingChg === '' ? true : false}
-              helperText={
-                packingChg === '' ? 'Packaging Charges is required' : ''
-              }
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -342,12 +209,8 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
               value={handChg}
               onChange={(e) => {
                 setHandChg(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={handChg === '' ? true : false}
-              helperText={handChg === '' ? 'Handling Charges is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -359,12 +222,8 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
               value={otherChg}
               onChange={(e) => {
                 setOtherChg(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={otherChg === '' ? true : false}
-              helperText={otherChg === '' ? 'Other Charges is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -376,14 +235,8 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
               value={insurAmount}
               onChange={(e) => {
                 setInsurAmount(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={insurAmount === '' ? true : false}
-              helperText={
-                insurAmount === '' ? 'Insurance Amount is required' : ''
-              }
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -395,12 +248,8 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
               value={taxAmount}
               onChange={(e) => {
                 setTaxAmount(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={taxAmount === '' ? true : false}
-              helperText={taxAmount === '' ? 'Tax Amount is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>
@@ -412,31 +261,21 @@ const TradeForm5 = ({ history, setFinalBill, tradeDeal }) => {
               value={preTaxAmount}
               onChange={(e) => {
                 setPreTaxAmount(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={preTaxAmount === '' ? true : false}
-              helperText={
-                preTaxAmount === '' ? 'Pre Tax Amount is required' : ''
-              }
-              required
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
               id='tradeTotal'
               label='Trade Total'
-              type='text'
+              type='number'
               variant='outlined'
               value={tradeTotal}
               onChange={(e) => {
                 setTradeTotal(e.target.value);
-                checkCondition();
               }}
               style={{ width: '100%' }}
-              error={tradeTotal === '' ? true : false}
-              helperText={tradeTotal === '' ? 'Trade Total is required' : ''}
-              required
             />
           </Grid>
           <Grid item xs={12}>

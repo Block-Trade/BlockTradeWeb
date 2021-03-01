@@ -1,7 +1,7 @@
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 
-export const signup = ({formData}) => async (dispatch) => {
+export const signup = ({ formData }) => async (dispatch) => {
   try {
     const headers = {
       'Content-Type': 'application/json',
@@ -9,7 +9,7 @@ export const signup = ({formData}) => async (dispatch) => {
     const res = await axios.post('/signup', formData, {
       headers: headers,
     });
-    console.log(res);
+    console.log(res.data.message);
 
     dispatch({
       type: 'SIGNUP_SUCCESS',
@@ -23,7 +23,7 @@ export const signup = ({formData}) => async (dispatch) => {
   }
 };
 
-export const activateUser = ({token}) => async (dispatch) => {
+export const activateUser = ({ token }) => async (dispatch) => {
   const headers = {
     'Content-Type': 'application/json',
   };
@@ -35,10 +35,10 @@ export const activateUser = ({token}) => async (dispatch) => {
     const res = await axios.post('/activate', body, {
       headers: headers,
     });
-    console.log(res);
+    console.log(res.data.msg);
     dispatch({
       type: 'ACTIVATE_SUCCESS',
-      payload: res.data,
+      payload: res.data.msg,
     });
   } catch (err) {
     dispatch({
@@ -84,7 +84,13 @@ export const login = ({ formData, loadUser }) => async (dispatch) => {
       payload: res.data,
     });
     await loadUser();
-  } catch (err) {}
+  } catch (err) {
+    console.log(err.response.data.msg);
+    dispatch({
+      type: 'LOGIN_ERROR',
+      payload: err.response.data.msg,
+    });
+  }
 };
 
 export const companyInfo = (companyFormData) => async (dispatch) => {

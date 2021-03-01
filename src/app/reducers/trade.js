@@ -1,5 +1,6 @@
 const initialState = {
-    trades: null
+    trades: null,
+    selectedAddr: null
 };
 
 export default (state = initialState,action) => {
@@ -9,6 +10,16 @@ export default (state = initialState,action) => {
                 ...state,
                 trades:action.payload
             }
+        case 'SELECT_ADDR':
+            return {
+                ...state,
+                selectedAddr: action.payload
+            }
+        case 'CLEAR_ADDR':
+            return {
+                ...state,
+                selectedAddr: null
+            };
         default:
             return state;
     }

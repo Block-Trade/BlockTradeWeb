@@ -19,9 +19,8 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
-import { editProfile } from '../../actions/profile';
 
-const UserAccountDetails = ({ loadUser, auth, editProfile }) => {
+const UserAccountDetails = ({ loadUser, auth }) => {
   const [disabled, setDisabled] = useState(true);
   const [name, setName] = useState('');
   const [mobileNo, setMobileNo] = useState('');
@@ -39,25 +38,7 @@ const UserAccountDetails = ({ loadUser, auth, editProfile }) => {
     loadUser();
   }, []);
 
-  useEffect(() => {
-    if(auth.user){
-      setName(auth.user.name);
-      setMobileNo(auth.user.mobileNo);
-      setCity(auth.user.city);
-      setCountry(auth.user.country);
-      setCompanyAddress(auth.user.companyAddress);
-      setCompanyEmail(auth.user.companyEmail);
-      setCompanyTelNo(auth.user.companyTelNo);
-    }
-  },[auth.user]);
-
-  const handleSubmit = () => {
-    const profile = {
-      name,mobileNo,city,country,companyAddress,companyEmail,companyTelNo
-    };
-    editProfile({profile});
-    
-  };
+  const handleSubmit = () => {};
   return (
     <Fragment>
       {auth.user && (
@@ -91,7 +72,7 @@ const UserAccountDetails = ({ loadUser, auth, editProfile }) => {
                         <FormInput
                           id='feName'
                           placeholder='Name'
-                          value={name}
+                          value={auth.user.name}
                           onChange={(e) => setName(e.target.value)}
                           disabled={disabled}
                         />
@@ -102,7 +83,7 @@ const UserAccountDetails = ({ loadUser, auth, editProfile }) => {
                         <FormInput
                           id='feMobileNo'
                           placeholder='MobileNo'
-                          value={mobileNo}
+                          value={auth.user.mobileNo}
                           onChange={(e) => setMobileNo(e.target.value)}
                           disabled={disabled}
                         />
@@ -116,7 +97,7 @@ const UserAccountDetails = ({ loadUser, auth, editProfile }) => {
                           type='text'
                           id='feCity'
                           placeholder='City'
-                          value={city}
+                          value={auth.user.city}
                           onChange={(e) => setCity(e.target.value)}
                           disabled={disabled}
                         />
@@ -128,7 +109,7 @@ const UserAccountDetails = ({ loadUser, auth, editProfile }) => {
                           type='text'
                           id='feCountry'
                           placeholder='Country'
-                          value={country}
+                          value={auth.user.country}
                           onChange={(e) => setCountry(e.target.value)}
                           disabled={disabled}
                         />
@@ -141,7 +122,7 @@ const UserAccountDetails = ({ loadUser, auth, editProfile }) => {
                           type='text'
                           id='feCompanyName'
                           placeholder='Company Name'
-                          value={companyName}
+                          value={auth.user.companyName}
                           onChange={(e) => setCompanyName(e.target.value)}
                           disabled={disabled}
                         />
@@ -152,7 +133,7 @@ const UserAccountDetails = ({ loadUser, auth, editProfile }) => {
                           type='email'
                           id='feCompanyEmail'
                           placeholder='CompanyEmail'
-                          value={companyEmail}
+                          value={auth.user.companyEmail}
                           onChange={(e) => setCompanyEmail(e.target.value)}
                           disabled={disabled}
                         />
@@ -165,7 +146,7 @@ const UserAccountDetails = ({ loadUser, auth, editProfile }) => {
                           type='text'
                           id='feCompanyTelNo'
                           placeholder='Company TelNo'
-                          value={companyTelNo}
+                          value={auth.user.companyTelNo}
                           onChange={(e) => setCompanyTelNo(e.target.value)}
                           disabled={disabled}
                         />
@@ -176,7 +157,7 @@ const UserAccountDetails = ({ loadUser, auth, editProfile }) => {
                       <FormTextarea
                         id='feCompanyAddress'
                         placeholder='Company Address'
-                        value={companyAddress}
+                        value={auth.user.companyAddress}
                         onChange={(e) => setCompanyAddress(e.target.value)}
                         disabled={disabled}
                         rows='3'
@@ -230,6 +211,5 @@ const mapStateToProps = (state) => ({
 export default withRouter(
   connect(mapStateToProps, {
     loadUser,
-    editProfile
   })(UserAccountDetails)
 );

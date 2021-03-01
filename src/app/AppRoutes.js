@@ -13,7 +13,6 @@ const Error500 = lazy(() => import('./user-pages/Error500'));
 const Login = lazy(() => import('./user-pages/Login'));
 const Register1 = lazy(() => import('./user-pages/Register'));
 
-const Setting = lazy(() => import('./components/settings/settings'));
 const MyTrade = lazy(() => import('./components/mytrade/MyTrade'));
 const Wallet = lazy(() => import('./components/mywallet/Wallet'));
 const ActivateForm = lazy(() => import('./components/auth/Activate'));
@@ -35,7 +34,6 @@ const AppRoutes = () => {
     <Suspense fallback={<Spinner />}>
       <Switch>
         <PrivateRouter exact path='/dashboard' component={Dashboard} />
-        <PrivateRouter exact path='/settings' component={Setting} />
         <PrivateRouter exact path='/my-wallet' component={Wallet} />
         <PrivateRouter exact path='/my-trade' component={MyTrade} />
 

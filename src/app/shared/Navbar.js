@@ -163,7 +163,7 @@ const Navbar = ({
                   className='dropdown-item preview-item d-flex align-items-center border-0'
                   onClick={() => {
                     localStorage.clear();
-                    window.location.href = '/';
+                    window.location.href = '/login';
                   }}
                 >
                   Sign Out
