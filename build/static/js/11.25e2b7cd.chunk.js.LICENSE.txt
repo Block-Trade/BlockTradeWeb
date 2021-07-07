@@ -1,0 +1,7 @@
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+/*! nouislider - 12.1.0 - 10/25/2018 */
