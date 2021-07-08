@@ -1,7 +1,6 @@
 {
   "name": "block-trade",
   "version": "0.1.0",
-  "homepage": "https://bootstrapdash.com/demo/star-admin-free/react/template/demo_1/preview",
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "v1",
